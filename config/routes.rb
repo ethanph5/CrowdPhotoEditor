@@ -4,6 +4,7 @@ Crowd::Application.routes.draw do
   get "session/failure"
 
   get "dashboard/index"
+  post "/dashboard/index"
 
   get "account/signup"
   
@@ -19,6 +20,8 @@ Crowd::Application.routes.draw do
   match 'dashboard/uploadPhotoToNew'
   match 'dashboard/selectPhoto'
   match 'dashboard/selectAlbum'
+  
+  match 'dashboard/uploadPhotoToExisting'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

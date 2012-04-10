@@ -14,7 +14,9 @@
     </div>
 
     <div class="bottom">
-      <h3 id="selectPhoto">0 Photo(s) Selected</h3><br/>
+      <!--<h3 id="selectPhoto">0 Photo(s) Selected</h3>-->
+      	
+      <br/>
       <h2 id="myAlbum">My Album:</h2>
       <div class="facebookAlbum">
       	<% if @albums.nil?%>
@@ -40,15 +42,17 @@
       <%end%>
       <%end%>
       
+      <hr />
       <div class="localAlbum">
-      <% if @albumList != nil %>
+      <% if @crowdAlbums.length != 0 %>
+      	<h2 id="crowdAlbum">You have the following crowd album(s).</h2>
         <ul>
-          <% @albumList.each do |album| %>
-          <li type=disc id="album1"><%= link_to "#{album.name}", :action => 'selectPhoto', :id => album.id %></li>
+          <% @crowdAlbums.each do |album| %>
+          <li type=disc id="album1"><%= link_to "#{album.name}", :action => 'selectPhoto', :album_id => album.id %></li>
           <% end %>
         </ul>
       <% else %>
-        <h2 id="myAlbum">You have 0 album.</h2>
+        <h2 id="myAlbum">You have 0 crowd album.</h2>
       <% end %>
       </div>
       
