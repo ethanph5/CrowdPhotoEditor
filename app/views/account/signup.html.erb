@@ -1,0 +1,33 @@
+ <div class="bottom">
+      <div class="square">
+      	
+      	<div class="flash message">
+      	  
+      	  <% if flash[:notice] %>
+      		<p class="notice"><%= flash[:notice] %></p>
+      	  <% end %>
+      	  </div>
+      	  
+      	<%= form_tag({:controller => "account", :action => "signup"}, :method => :post, :class => "authentication") do %>
+          <%= label_tag "User name" %>
+          <%= text_field_tag :username, @username, :placeholder=>"Enter your new username" %><br/><br/>
+          <%= label_tag "Email" %>
+          <%= text_field_tag :email, @email, :placeholder=>"Enter your E-mail" %><br/><br/>
+          <%= label_tag "Password" %>
+          <%= password_field_tag :password, nil, :placeholder=>"Enter your password" %><br/><br/>
+          <%= label_tag "Password confirm" %>
+          <%= password_field_tag :password_confirm, nil, :placeholder=>"Re-enter your password" %>
+          
+          <% if @token%>
+          	<%= hidden_field_tag :token, @token%>
+          	<%= hidden_field_tag :uid, @uid%>
+          	<%= hidden_field_tag :provider, @provider%>
+          <%end%>
+          <div class="signup">
+            <!-- <input type="submit" class="signup buttom" value="Sign Up" tabindex="0"> -->
+            <%= submit_tag "Sign Up", :class => "signup bottom" %>
+          </div>
+        <% end%>
+            
+      </div>
+    </div>   
