@@ -2,14 +2,19 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="wholeword"/>
-		<item value="@user" key="selection"/>
+		<item value="album name" key="selection"/>
 		<list key="findhistory">
-			<item value="@user"/>
-			<item value="data"/>
-			<item value="uid"/>
+			<item value="album name"/>
+			<item value="fill in"/>
+			<item value="attach"/>
+			<item value="select"/>
+			<item value="follow"/>
+			<item value="dashboard"/>
+			<item value="should be on"/>
+			<item value="am on"/>
 		</list>
 	</section>
 </section>
