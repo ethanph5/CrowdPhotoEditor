@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <link rel="stylesheet" href="./static/css/style.css" type="text/css" />
+	  <title>MobileWorks Web Albums</title>
+	
+	  <!-- based on picasa, start from here -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+
+    <script> 
+
+    </script>
+	  
+	  <!-- based on piacasa, end here -->	
+  </head>
+  
+  <body>
+  	<h1>Select an album</h1>
+  	
+  	
+  	<div class="container">
+	    
+	    <div class="mainContent">
+	      <div class="uploadPhotoSection">
+	      
+	      <%= form_tag({:controller => "dashboard", :action => "uploadPhotoToExisting"}, :method => :post, :class => "uploadPhoto", :multipart => true) do %>
+	      		      	
+          <%= select_tag(:album_id, options_for_select(@lol)) %> or <%= link_to "create a new album", :controller => "dashboard", :action => "uploadPhotoToNew" %>
+   		  <hr />
+
+   		  <p id="selectPhotoGuide">Select photos from your computer:</p><br />
+          
+          <%= file_field 'upload', 'datafile', :id => "selectPhotoButton" %>
+          
+          
+          <%= submit_tag "Upload", :id => "uploadButton" %>
+          <% end %>
+	 
+					
+			<form name="cancel" action="index">
+				<input type="submit" id="cancelButton" value="Cancel" /> 
+	  		</form>
+			
+			<!--<form name="ok" action="/home/homepage">
+				<input type="submit" id="okButton" value="Ok" />
+	  		</form>-->
+	  	
+	        
+	      </div>
+	    </div>
+	  </div>
+    
+  </body>
+</html>

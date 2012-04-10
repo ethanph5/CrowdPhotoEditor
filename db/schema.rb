@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20120410043743) do
   end
 
   create_table "pictures", :force => true do |t|
+    t.string   "name"
     t.string   "internal_link"
     t.integer  "user_id"
     t.integer  "album_id"
