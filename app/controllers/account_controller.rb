@@ -9,7 +9,7 @@ class AccountController < ApplicationController
     #Attempts to create a new user
     if session[:user_id] or session[:token]
       session[:user_id] = nil
-      session[:token] =nil
+      session[:token] = nil
     end
     if session[:user_id] or session[:token]
       flash[:notice] = "You are already log in, please log out first."
@@ -27,31 +27,29 @@ class AccountController < ApplicationController
       redirect_to :action => "signup" and return
     end
     
-    if params[:token] and not params[:password]
-      @username = params[:username]
-      @email = params[:email]
-      #session[:temp_token] = params[:token]
-      @token = params[:token]
-      @uid = params[:uid]
-      @provider = params[:provider]
+    if session[:auth_hash]
+    #if params[:token] and not params[:password]
+      @username = session[:auth_hash][:info][:name]
+      @email = session[:auth_hash][:info][:email]
     end
       #creates a new instance of the user model
      
     
     if request.post? #checks if the user clicked the "submit" button on the form
       if user.save #if they have submitted the form attempts to save the user
-        #auth_hash = request.env['omniauth.auth']
-        if params[:token]
-          auth_hash = {:token => params[:token], :provider => params[:provider], :uid => params[:uid]}
-          auth = Authorization.find_or_create(user, auth_hash)
-          session[:token] = auth.token
+        
+        if session[:auth_hash]
+          #auth_hash = {:token => params[:token], :provider => params[:provider], :uid => params[:uid]}
+          #auth_hash = request.env['omniauth.auth']
+          auth = Authorization.find_or_create(user, session[:auth_hash])
+          session[:token] = auth.token        
         end
         session[:user_id] = user.id #Logs in the new user automatically
-        #debugger
-        redirect_to :controller => "dashboard", :action => "index"
+        session[:auth_hash] = nil
+        redirect_to :controller => :dashboard, :action => :index
       else #This will happen if one of the validations define in /app/models/user.rb fail for this instance.
         flash[:notice] = user.errors.full_messages #Return the error message from validation check
-        redirect_to :action => "signup"#Ask them to sign up again
+        redirect_to :action => :signup #Ask them to sign up again
       end
     end
     
@@ -77,8 +75,8 @@ class AccountController < ApplicationController
   end
   
   def create
-    auth_hash = request.env['omniauth.auth']
-    
+    #auth_hash = request.env['omniauth.auth']
+    auth_hash
     if session[:user_id] and not session[:token]
       # Means our user is signed in. Add the authorization to the user
       #User.find(session[:user_id]).add_provider(auth_hash)
@@ -86,7 +84,7 @@ class AccountController < ApplicationController
       #render :text => "You can now login using #{auth_hash["provider"].capitalize} too!"
     elsif session[:token]
       flash[:notice] = "You are already log in, please log out first."
-      redirect_to :controller => "dashboard", :action => "index"
+      redirect_to :controller => :dashboard, :action => :index
     else
       # Log him in or sign him up
       #auth = Authorization.find_or_create(auth_hash)
@@ -94,10 +92,11 @@ class AccountController < ApplicationController
       #session[:user_id] = auth.user_id
       # Create the session
       #render :text => auth_hash["info"]["email"]
-      #redirect_to :controller => :account, :action => :signupfb, :user_id => auth.user_id
       
-      redirect_to :action => :signup, :username => auth_hash["info"]["name"], :email => auth_hash["info"]["email"], 
-                  :provider => auth_hash["provider"], :uid => auth_hash["uid"], :token => auth_hash['credentials']['token']
+      #redirect_to :action => :signup, :username => auth_hash["info"]["name"], :email => auth_hash["info"]["email"], 
+                  #:provider => auth_hash["provider"], :uid => auth_hash["uid"], :token => auth_hash['credentials']['token']
+      session[:auth_hash] = auth_hash
+      redirect_to :action => :signup
     end
   end
   
@@ -115,4 +114,8 @@ class AccountController < ApplicationController
     end
   end
   
+  protected
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 end

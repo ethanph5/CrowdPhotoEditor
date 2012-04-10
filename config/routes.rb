@@ -10,8 +10,10 @@ Crowd::Application.routes.draw do
   match "account/login"
   match "account/signup"
   match "account/logout"
+  match 'account/something'
   match '/auth/:provider/callback', :to => 'account#create'
   match '/auth/facebook' => 'account#create'
+
   
   
   match 'dashboard/uploadPhotoToNew'
