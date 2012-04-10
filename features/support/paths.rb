@@ -15,6 +15,12 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+    when /^the welcome page$/
+      '/'
+    when /^the signup page$/
+      '/account/signup'
+    when /^the Albums display page$/
+      '/dashboard/index'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
