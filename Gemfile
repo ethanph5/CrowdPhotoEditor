@@ -22,6 +22,7 @@ group :development, :test do
   gem 'omniauth'
   gem 'omniauth-facebook'
   gem 'fb_graph'
+  gem 'factory_girl','2.2.0'
 end
 
 group :production do
