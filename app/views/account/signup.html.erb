@@ -18,11 +18,7 @@
           <%= label_tag "Password confirm" %>
           <%= password_field_tag :password_confirm, nil, :placeholder=>"Re-enter your password" %>
           
-          <% if @token%>
-          	<%= hidden_field_tag :token, @token%>
-          	<%= hidden_field_tag :uid, @uid%>
-          	<%= hidden_field_tag :provider, @provider%>
-          <%end%>
+          
           <div class="signup">
             <!-- <input type="submit" class="signup buttom" value="Sign Up" tabindex="0"> -->
             <%= submit_tag "Sign Up", :class => "signup bottom" %>
