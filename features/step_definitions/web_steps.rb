@@ -252,3 +252,10 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+
+Then /^I should be redirected to (.+?)$/ do |page_name|
+  page.driver.request.env['HTTP_REFERER'].should_not be_nil
+  page.driver.request.env['HTTP_REFERER'].should_not == page.current_url
+  step %Q(I should be on #{page_name})
+end
