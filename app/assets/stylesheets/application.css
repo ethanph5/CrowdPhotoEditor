@@ -5,3 +5,63 @@
  *= require_self
  *= require_tree . 
 */
+
+#header-logo{
+	margin-right: 150px;
+	width: auto;
+	height: 80px;
+	background: black;
+	float:left;
+}
+
+.login{
+	background: black;
+	height: 80px;
+}
+
+#login-table{
+	position:fixed;
+	top:25px;
+	right:20px;
+	color: white;
+	font-size: 15px;
+	font-weight : bold;
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+.signup-square{
+	width: 450px;
+	height: 300px;
+	background: grey;
+	margin-top: 10px;
+	padding-top: 5px;
+	/*border: 1px solid blue;*/
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+.flash-message{
+	margin-left: 80px;
+}
+
+.signup{
+	display: block;
+	
+}
+
+.signup-button{
+	margin-left: 100px;
+	margin-right: 50px;
+	float: left;
+}
+
+
+
+label{
+	font-size: 16px;
+    width: 160px;
+    float: left;
+    margin: 2px 6px 6px 4px;
+    text-align: right;
+}
+
+

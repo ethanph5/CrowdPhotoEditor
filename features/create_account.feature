@@ -12,12 +12,14 @@ Background:
   And I am on the welcome page
 
 Scenario: new user sign up on signup page 
-  When I fill in "username" with "Rocky" 
-  When I fill in "email" with "rocky@houston.com"
-  When I fill in "password" with "countdown"
-  When I fill in "password_confirm" with "countdown"
+  Given I am on the home page
+  When I fill in "username" with "ethan" 
+  When I fill in "email" with "yylolxx@gmail.com"
+  When I fill in "password" with "222"
+  When I fill in "password_confirm" with "222"
   Then I press "Sign Up"
   Then I should be on the signup page
+  #Then I should be on the dashboard page
 
 Scenario: new user cannot sign up with incorrect format information
   When I fill in "username" with "Rocky" 
@@ -33,7 +35,7 @@ Scenario: user can log in after sign up
   When I fill in "email" with "rocky@houston.com"
   When I fill in "password" with "countdown"
   Then I press "Log In"
-  Then I should be on the Albums display page
+  Then I should be on the dashboard page
   
 Scenario: user cannot log in if password is wrong
   When I fill in "email" with "batman@nowhere.com"
@@ -43,6 +45,13 @@ Scenario: user cannot log in if password is wrong
   Then I should see "Invalid email or password."
   
 
-#Scenario: new user authenticate via Facebook
-  #Then I press "Facebook"
-  #Then I should be on the welcome page
+Scenario: new user authenticate via Facebook
+  When I press "Facebook"
+  Then I should be on the signup page
+  When I fill in "username" with "Rocky" 
+  When I fill in "email" with "rocky@houston.com"
+  When I fill in "password" with "countdown"
+  When I fill in "password_confirm" with "countdown"
+  Then I press "Sign Up"
+  Then I should be on the signup page
+  #Then I should be redirected to the Albums display page

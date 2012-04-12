@@ -1,3 +1,73 @@
+
+<div class= "header">
+	<div id= "header-logo">
+		<%= link_to image_tag('logo.png'), :action=>"welcome" %>
+	</div>
+	
+	<div class= "login">
+	<%= form_tag( {:controller => "account", :action => "login"}, :method => :post, :class => "signin") do %>
+		<div class="flash message">
+			<% if flash[:error] %>
+    		<td class="notice"><%= flash[:error] %></td>
+    		<% end %>
+		</div>
+      	
+	<table id="login-table";>
+		<tr class="table-title">
+			<td class="label">Email</td>
+      		<td class="label">Password</td>
+     	</tr>
+     	<tr>
+     		<td class="input-box"><%= text_field_tag :email, nil, :placeholder=>"Enter your email" %></td>
+     		<td class="input-box"><%= password_field_tag :password, nil, :placeholder=>"Enter your password" %></td>
+     		<td><%= submit_tag "Log In", :class => "signin button" %></td>    			
+     	</tr>     		
+	</table>
+    <% end %>
+	</div>
+</div>
+
+<div class="bottom">
+	<div class="signup-square">
+		
+      	<div class="flash-message">
+      	  <h3>New Here? Sign up first.</h3>
+      	  <% if flash[:notice] %>
+      		<p class="notice"><%= flash[:notice] %></p>
+      	  <% end %>
+      	</div>
+      	  
+      	<div class="signup">  
+      	<%= form_tag({:controller => "account", :action => "signup"}, :method => :post, :class => "authentication") do %>
+          <%= label_tag "User name:" %>
+          <%= text_field_tag :username, nil, :placeholder=>"Enter your new username" %><br/><br/>
+          <%= label_tag "Email:" %>
+          <%= text_field_tag :email, nil, :placeholder=>"Enter your E-mail" %><br/><br/>
+          <%= label_tag "Password:" %>
+          <%= password_field_tag :password, nil, :placeholder=>"Enter your password" %><br/><br/>
+          <%= label_tag "Re-enter Password:" %>
+          <%= password_field_tag :password_confirm, nil, :placeholder=>"Re-enter your password" %><br/><br/>
+          
+          
+          <%= submit_tag "Sign Up", :class => "signup-button" %>
+          
+        <% end%>
+        </div>
+        <%= form_tag("/auth/facebook", :method => :get, :class => "authentication") do %>  
+          <div class="facebook">
+          	<%= submit_tag "Facebook", :class => "fbConnect button" %>
+          </div>
+        <% end%>
+            
+    </div>
+</div>
+
+
+
+
+
+<!--
+
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +96,7 @@
       		<tr>
       			<td><%= text_field_tag :email, nil, :placeholder=>"Enter your email" %></td>
       			<td><%= password_field_tag :password, nil, :placeholder=>"Enter your password" %></td>
-      			<td><%= submit_tag "Log In", :class => "signin bottom" %></td>    			
+      			<td><%= submit_tag "Log In", :class => "signin button" %></td>    			
       		</tr>     		
       	</table>
       	  
@@ -54,14 +124,14 @@
           <%= password_field_tag :password_confirm, nil, :placeholder=>"Re-enter your password" %>
           
           <div class="signup">
-            <!-- <input type="submit" class="signup buttom" value="Sign Up" tabindex="0"> -->
-            <%= submit_tag "Sign Up", :class => "signup bottom" %>
+           
+            <%= submit_tag "Sign Up", :class => "signup button" %>
           </div>
         <% end%>
         
         <%= form_tag("/auth/facebook", :method => :get, :class => "authentication") do %>  
           <div class="facebook">
-          	<%= submit_tag "Facebook", :class => "fbConnect bottom" %>
+          	<%= submit_tag "Facebook", :class => "fbConnect button" %>
           </div>
           <% end%>
             
@@ -70,3 +140,5 @@
   </div>
 </body>
 </html>
+
+-->

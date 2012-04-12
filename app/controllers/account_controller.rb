@@ -28,7 +28,6 @@ class AccountController < ApplicationController
     end
     
     if session[:auth_hash]
-    #if params[:token] and not params[:password]
       @username = session[:auth_hash][:info][:name]
       @email = session[:auth_hash][:info][:email]
     end

@@ -19,7 +19,7 @@ module NavigationHelpers
       '/'
     when /^the signup page$/
       '/account/signup'
-    when /^the Albums display page$/
+    when /^the dashboard page$/
       '/dashboard/index'
 
     # Add more mappings here.
