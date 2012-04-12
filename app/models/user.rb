@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
     :message => "format incorrect." } #DEBUG: email reusing is not allowed?
   
   has_many :authorizations
-  #has_many :queries
   has_many :pictures
   has_many :albums
   #has_and_belongs_to_many :facebook_accounts  #DEBUG: facebookAccounts or facebook_accounts??

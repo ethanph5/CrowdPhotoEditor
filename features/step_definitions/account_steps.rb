@@ -7,10 +7,6 @@ Given /the following users exist/ do |users_table|
   #assert false, "Unimplmemented"
 end
 
-When /^Facebook authorizes me$/ do
-  visit facebook_authorize_path
-end
-
 
 Then /I should see "(.*)" is already filled with "(.*)"/ do |field, username|
   regexp = Regexp.new ".*#{field}.*#{username}"
