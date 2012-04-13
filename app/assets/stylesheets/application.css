@@ -54,8 +54,6 @@
 	float: left;
 }
 
-
-
 label{
 	font-size: 16px;
     width: 160px;
@@ -64,4 +62,53 @@ label{
     text-align: right;
 }
 
+.logout{
+	background: black;
+	height: 80px;
+}
+.logout-button{
+	position: absolute;
+	top:50px;
+	right:50px;
+}
 
+
+.facebook-photos{
+	background: #3B5998;
+  	padding-top: 50px;
+  	padding-right: 20px;
+  	padding-left: 20px;
+  	margin-left: 100px;
+  	width: 750px;
+  	height: auto;
+  	float: left;
+  	border-radius:10px;
+}
+
+
+.facebook-album{
+	float: left;
+  	width: 150px;
+  	height: 220px;
+  	margin: 5px 15px;
+  	font-size: 70%;
+  	color: white;
+  	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+.facebook-album img{
+	border: 3px solid white;
+	border-radius:5px;
+}
+
+.album-name {
+	font-weight: bold;
+	color: white;
+}
+
+div.upload-action{
+	clear: both;
+	padding-top: 15px;
+	padding-left: 20px;
+	
+}

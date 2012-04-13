@@ -9,7 +9,6 @@ class DashboardController < ApplicationController
     # facebook albums part
     @albums = nil
     token = session[:token]
-    #debugger
     @user = User.find_by_id(user_id)
     @user_name = User.find_by_id(user_id).name
     if session[:token]

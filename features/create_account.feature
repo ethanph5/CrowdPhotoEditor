@@ -11,15 +11,26 @@ Background:
   |Batman     |shaco        |250    |batman@nowhere.com |
   And I am on the welcome page
 
-Scenario: new user sign up on signup page 
-  Given I am on the home page
-  When I fill in "username" with "ethan" 
+Scenario: new user sign up on home page 
+  When I fill in "username" with "yylolxx" 
   When I fill in "email" with "yylolxx@gmail.com"
-  When I fill in "password" with "222"
-  When I fill in "password_confirm" with "222"
+  When I fill in "password" with "12345"
+  When I fill in "password_confirm" with "12345"
   Then I press "Sign Up"
   Then I should be on the signup page
+  Then I should see "Password need to be matched."
   #Then I should be on the dashboard page
+  
+Scenario: new user sign up on signup page
+  Given I am on the signup page 
+  When I fill in "username" with "yylolxx" 
+  When I fill in "email" with "yylolxx@gmail.com"
+  When I fill in "password" with "12345"
+  When I fill in "password_confirm" with "12345"
+  Then I press "Sign Up"
+  #Then I should be on the signup page
+  #Then I should see "Password need to be matched."
+  Then I should be on the dashboard page
 
 Scenario: new user cannot sign up with incorrect format information
   When I fill in "username" with "Rocky" 

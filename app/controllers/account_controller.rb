@@ -3,18 +3,19 @@
 class AccountController < ApplicationController
   
   def welcome
+    if session[:user_id] or session[:token]
+      flash[:notice] = "You are already log in, please log out first."
+      redirect_to :controller => :dashboard, :action => :index
+    end
   end
   
   def signup
     #Attempts to create a new user
     if session[:user_id] or session[:token]
-      session[:user_id] = nil
-      session[:token] = nil
-    end
-    if session[:user_id] or session[:token]
       flash[:notice] = "You are already log in, please log out first."
-      redirect_to :controller => "dashboard", :action => "index"
+      redirect_to :controller => :dashboard, :action => :index
     end
+    
     if params[:password] == params[:password_confirm]
       user = User.new do |u| 
         u.name = params[:username]
@@ -30,13 +31,13 @@ class AccountController < ApplicationController
     if session[:auth_hash]
       @username = session[:auth_hash][:info][:name]
       @email = session[:auth_hash][:info][:email]
+      @auth = true
     end
       #creates a new instance of the user model
      
     
     if request.post? #checks if the user clicked the "submit" button on the form
-      if user.save #if they have submitted the form attempts to save the user
-        
+      if user.save #if they have submitted the form attempts to save the user      
         if session[:auth_hash]
           #auth_hash = {:token => params[:token], :provider => params[:provider], :uid => params[:uid]}
           #auth_hash = request.env['omniauth.auth']
@@ -51,7 +52,6 @@ class AccountController < ApplicationController
         redirect_to :action => :signup #Ask them to sign up again
       end
     end
-    
   end
 
   def login

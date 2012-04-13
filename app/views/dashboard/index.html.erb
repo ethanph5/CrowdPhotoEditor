@@ -1,20 +1,61 @@
+<div class= "header">
+	<div id= "header-logo">
+		<%= link_to image_tag('logo.png'), :controller => :account, :action=>:welcome %>
+	</div>
+	<div class= "logout">	
+    	<!--<%= link_to "Log Out", :controller => :account, :action => :logout %>-->
+    	<%= button_to "Log Out", {:controller => :account, :action => :logout}, {:class => "logout-button"} %>
+    </div>
+</div> 
+    
+<div class = "body">
+    <h3 id="greet" >Hello, <%= @user_name%></h3>
+    <div class= "albums-list">
+    	<h4 id="myAlbum">Your Photos:</h4>
+    	
+    	<div class="facebook-photos">
+      	<% if @albums.nil?%>
+      		<p>Welcome to Crowd Photo Editor</p>
+      	<% else%>
+      	<% @albums.each do |album|%>
+      	<div class = "facebook-album">
+      		<a href=<%= album.link%>>
+      		<img src=<%= album.picture%> alt=<%= album.name%> width="150" height="120" border="0" />
+      		</a>
+      		<p><%= link_to album.name, album.link,  :class => "album-name"%></p>
+      		<p><%= album.count%> Photos</p><br/>  		
+      	</div>
+      	
+      <%end%>
+      <%end%>
+      </div>
+    </div>   
+</div>
+
+<div class="foot">
+	<div class="upload-action">
+		  <form name="upload" action="/dashboard/uploadPhotoToNew">
+			Upload new photos:
+			<input type="submit" value="Upload" width="70px"/>
+		  </form>
+	</div>
+</div>
+
+
+
+<!--
 <!DOCTYPE html>
 <html>
 <body>
   <div class="container">
     <div class="header">
       <h2 id="header-icon"></h2>
-      <!--get the current username from user login info or database-->
 
       <h4 id="username_text" >Hello, <%= @user_name%></h4>
       <%= link_to "Log Out", :controller => :account, :action => :logout %> 
-      <!-- <form name="logoutPage" action="/">
-        <input class="logout" class="logout buttom" id="logout-text" type="submit" value="Logout" />
-      </form> -->
     </div>
 
     <div class="bottom">
-      <!--<h3 id="selectPhoto">0 Photo(s) Selected</h3>-->
       	
       <br/>
       <h2 id="myAlbum">My Album:</h2>
@@ -25,7 +66,7 @@
       	<p>Facebook Albums</p>
       	<% @albums.each do |album|%>
       	<table class ="ablumTable">
-      	<!-- <%= link_to album.name, album.link%><br/> -->
+      	
       		<tr>
       		<td><a href=<%= album.link%>>
       		<img src=<%= album.picture%> alt=<%= album.name%> width="100" height="100" border="0" />
@@ -71,3 +112,4 @@
   </div>
 </body>
 </html>
+-->
