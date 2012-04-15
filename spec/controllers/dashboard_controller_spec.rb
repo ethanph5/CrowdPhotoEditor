@@ -82,5 +82,46 @@ describe DashboardController do
       assigns(:picture_list).should == @fake_pic_list #picture_list is all the photos in the album
       assigns(:album_title).should == @fake_picture1.album
     end 
-  end  
+  end
+  
+  
+  #the following part is for specify_result
+  describe 'specify result for a given picture' do
+    before :each do
+      @fake_picture1 = mock('Picture')
+      @fake_picture1.stub(:id).and_return(1)
+      
+      @fake_picture2 = mock('Picture')
+      @fake_picture2.stub(:id).and_return(2)
+      #@fake_picture1.stub(:album).and_return('Graduation Commencement')
+      @fake_picID_list = [@fake_picture1.id, @fake_picture2.id]
+      @fake_pic_list = [@fake_picture1, @fake_picture2]
+    end
+    
+    it 'should render the specifyTask page' do
+      post :specifyTask, {:selectedPictureList => @fake_picID_list, :contentPictureList => []}  #pass list of ID as argument
+      response.should render_template('/dashboard/specifyTask')
+    end
+    
+    describe 'we are in specify task page' do
+      it 'should go back to index when go back button is pressed' do
+        get :index
+        response.should render_template('/dashboard/index')
+      end
+      it 'should render review task page after we click "task review"' do
+        post :reviewTask, {:reviewList => [[1,"remove red eye", 10], [2, "blur", 20]]}
+        response.should render_template('/dashboard/reviewTask')
+      end
+      describe 'we are in review task page' do
+        it 'should go back to specify task page and edit some tasks' do
+          post :specifyTask, {:selectedPictureList => @fake_picID_list, :contentPictureList => [[1,"remove red eye", 10], [2, "blur", 20]]}
+          response.should render_template('/dashboard/specifyTask')
+        end
+        it 'should send information to MobileWorks API and go back to index' do
+          to be continued....
+        end
+      end
+    end 
+  end
+  
 end

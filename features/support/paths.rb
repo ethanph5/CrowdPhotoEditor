@@ -21,6 +21,20 @@ module NavigationHelpers
       '/account/signup'
     when /^the dashboard page$/
       '/dashboard/index'
+    when /^the select photo page$/
+      '/dashboard/selectPhoto' 
+    when /^the specify task page$/
+      '/dashboard/specifyTask'   
+    when /^the review task page$/
+      '/dashboard/reviewTask'
+    when /^the upload photo to new album page$/
+      '/dashboard/uploadPhotoToNew'
+    when /^the select album page$/
+      '/dashboard/selectAlbum'
+      
+      
+      
+      
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

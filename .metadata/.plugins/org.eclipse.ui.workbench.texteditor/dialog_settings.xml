@@ -5,16 +5,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="wholeword"/>
-		<item value="album name" key="selection"/>
+		<item value="index" key="selection"/>
 		<list key="findhistory">
+			<item value="index"/>
+			<item value="select"/>
+			<item value="fill"/>
 			<item value="album name"/>
 			<item value="fill in"/>
 			<item value="attach"/>
-			<item value="select"/>
 			<item value="follow"/>
 			<item value="dashboard"/>
-			<item value="should be on"/>
-			<item value="am on"/>
 		</list>
 	</section>
 </section>

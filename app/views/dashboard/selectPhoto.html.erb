@@ -17,7 +17,7 @@
       <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
         <% @picture_list.each do |picture| %>
         
-        <%= check_box_tag "picture[#{picture.id}]", 1 %>
+        <%= check_box_tag "#{picture.name}", "picture[#{picture.id}]", 1 %>
         <%= picture.name %>
         <% end %>
         <%= submit_tag 'Continue', :id => "pic_submit" %>
