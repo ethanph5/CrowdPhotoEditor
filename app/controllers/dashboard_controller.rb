@@ -2,6 +2,8 @@ class DashboardController < ApplicationController
   
   
   def index  #displaying facebook albums
+    @selected_picture = params[:picture] || session[:picture] || {}
+    session[:picture] = @selected_picture
     user_id = session[:user_id]
     # crowd albums part
     @crowdAlbums = User.find_by_id(user_id).albums
@@ -16,6 +18,7 @@ class DashboardController < ApplicationController
       @albums = result
     else
     end
+    @pictureSelected = Picture.find(@selected_picture.keys)
   end
   
   def selectPhoto  #checkboxes page

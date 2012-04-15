@@ -10,8 +10,21 @@
     
 <div class = "body">
     <h3 id="greet" >Hello, <%= @user_name%></h3>
+    <div class= "picture-select">
+      <h4>Your Picture:</h4>
+      <BLOCKQUOTE>
+      <% if @selected_picture == {} %>
+        <h5>0 Picture(s) selected</h5>
+      <% else %>
+        <h5><%= @pictureSelected.length %> Picture(s) selected</h5>
+        <% @pictureSelected.each do |pic| %>
+          <li><%= pic.name %></li>
+        <% end %>  
+      <% end %>
+      <BLOCKQUOTE>
+    </div>
     <div class= "albums-list">
-    	<h4 id="myAlbum">Your Photos:</h4>
+    	<h4 id="myAlbum">Facebook Album:</h4>
     	
     	<div class="facebook-photos">
       	<% if @albums.nil?%>
@@ -28,10 +41,14 @@
       	
       <%end%>
       <%end%>
-      </div>
-    </div>   
+      </div> 
+  <br/><br/><br/><br/><br/><br/><br/>
+  <h4>Crowd Album:</h4>
+  <% Album.all.each do |item|%>
+    <li><%= link_to item.name, :action => "selectPhoto" , :album_id => item.id %></li>
+  <% end %>
+  </div>
 </div>
-
 <div class="foot">
 	<div class="upload-action">
 		  <form name="upload" action="/dashboard/uploadPhotoToNew">
