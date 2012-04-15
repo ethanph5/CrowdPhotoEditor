@@ -17,7 +17,7 @@ class AccountController < ApplicationController
     end
     
     if params[:password] == params[:password_confirm]
-      user = User.new do |u| 
+      User.new do |u| 
         u.name = params[:username]
         u.password = params[:password]
         u.credit = 100
