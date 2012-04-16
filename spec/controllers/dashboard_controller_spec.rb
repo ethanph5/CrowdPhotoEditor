@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe DashboardController do
-
+  
+=begin
   describe 'select the existing photo' do
     before :each do
       @fake_results = [mock('Home'), mock('Home')]
@@ -45,7 +46,8 @@ describe DashboardController do
       assigns(:home).should == @fake_results
     end
   end
-  
+=end
+
   describe 'upload a new photo to a new album' do
     before :each do
       @fake_picture1 = mock('Picture')
@@ -117,8 +119,17 @@ describe DashboardController do
           post :specifyTask, {:selectedPictureList => @fake_picID_list, :contentPictureList => [[1,"remove red eye", 10], [2, "blur", 20]]}
           response.should render_template('/dashboard/specifyTask')
         end
-        it 'should send information to MobileWorks API and go back to index' do
-          to be continued....
+        it 'should send the tasks to MobileWorks API and go back to index' do
+          url = URI("https://sandbox.mobileworks.com/api/v1/tasks/")
+          fake_http = mock(Net::HTTP)
+          new_http = mock("new_http").should_receive(:request).and_return(Net::HTTPSuccess)
+          
+          fake_http.should_receive(:new).with(url.host,443).and_return(fake_http)
+          Net::HTTP.should_receive(:new)
+          Net::HTTP::Post.should_receive(:new)
+          
+          post :submit
+          response.should render_template('/dashboard/index')
         end
       end
     end 
