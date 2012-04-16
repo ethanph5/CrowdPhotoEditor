@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2 id="header-icon"></h2>
+      <h4 id="username_text">Hello, <%= @user_name %></h4>
+      <form name="logoutPage" action="/">
+        <input class="logout" class="logout button" id="logout-text" type="submit" value="Logout" />
+      </form>
+    </div>
+    <div class="bottom">
+      <p id="inst">Here is a list of task you specified. Click Edit to go back to specify tasks page to make changes, or click Submit to send out your requests.</p>
+      <table border="2" class="listPicture">
+        <tr>
+          <th>Picture</th>
+          <th>Task</th>
+          <th># Results</th>
+        </tr>
+        <tr>
+          <td>test</td>
+          <td>test</td>
+          <td>test</td>
+        </tr>
+      </table>
+      <br/>
+      <form name="goBack" action="specifyTask">
+        <input class="backButton" type="submit" value="Edit" />
+      </form>
+      <br/>
+      <form name="goBack" action="index">
+        <input class="continueButton" type="submit" value="Submit" />
+      </form>
+    </div>
+  </div>
+</body>
+</html>

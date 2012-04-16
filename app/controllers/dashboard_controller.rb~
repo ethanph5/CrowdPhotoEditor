@@ -85,6 +85,5 @@ class DashboardController < ApplicationController
     end
   end
 
-  def specifyTask
-  end
+
 end

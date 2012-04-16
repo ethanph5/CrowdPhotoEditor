@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2 id="header-icon"></h2>
+      <h4 id="username_text">Hello, <%= @user_name %></h4>
+      <form name="logoutPage" action="/">
+        <input class="logout" class="logout button" id="logout-text" type="submit" value="Logout" />
+      </form>
+    </div>
+    <div class="bottom">
+      <p id="inst">Here is a list of photo you selected. Please specify what task you want to request. You can also select how many results you want to get back.</p>
+      <table border="2" class="listPicture">
+        <tr>
+          <th>Picture</th>
+          <th>Task</th>
+          <th># Results</th>
+        </tr>
+        <tr>
+          <td>test</td>
+          <td>test</td>
+          <td>test</td>
+        </tr>
+      </table>
+      <br/>
+      <form name="goBack" action="index">
+        <input class="backButton" type="submit" value="Go Back to Select Photo" />
+      </form>
+      <br/>
+      <form name="taskReview" action="reviewTask">
+        <input class="continueButton" type="submit" value="Tasks Review" />
+      </form>
+    </div>
+  </div>
+</body>
+</html>
