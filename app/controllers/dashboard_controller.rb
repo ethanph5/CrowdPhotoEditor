@@ -86,5 +86,7 @@ class DashboardController < ApplicationController
   end
 
   def specifyTask
+    @selected_picture = session[:picture]
+    @pictureSelected = Picture.find(@selected_picture.keys)
   end
 end

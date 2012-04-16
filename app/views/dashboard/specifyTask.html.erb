@@ -11,25 +11,27 @@
     </div>
     <div class="bottom">
       <p id="inst">Here is a list of photo you selected. Please specify what task you want to request. You can also select how many results you want to get back.</p>
-      <table border="2" class="listPicture">
-        <tr>
-          <th>Picture</th>
-          <th>Task</th>
-          <th># Results</th>
-        </tr>
-        <tr>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-        </tr>
-      </table>
-      <br/>
+      <%= form_tag :action => 'reviewTask', :method => :get, :id => 'pictureTable' do %>
+        <table border="2" width="300" class="listPicture">
+          <tr>
+            <th>Picture</th>
+            <th>Task</th>
+            <th># Results</th>
+          </tr>
+          <% @pictureSelected.each do |pic| %>
+            <tr>
+              <td height="100"><%= pic.name %></td>
+              <td height="100"><%= text_area_tag "tasks[#{pic.id}]", nil, :size => '50x5' %></td>
+              <td height="100"><%= text_field_tag "results[#{pic.id}]", nil, :size => '10' %></td>
+            </tr>
+          <% end %>
+        </table>
+        <br/>
+        <%= submit_tag 'Tasks Review', :id => "continueButton" %>
+      <% end %>
+      <br/><br/>
       <form name="goBack" action="index">
         <input class="backButton" type="submit" value="Go Back to Select Photo" />
-      </form>
-      <br/>
-      <form name="taskReview" action="reviewTask">
-        <input class="continueButton" type="submit" value="Tasks Review" />
       </form>
     </div>
   </div>
