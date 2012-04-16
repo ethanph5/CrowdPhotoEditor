@@ -21,8 +21,16 @@
           <% @pictureSelected.each do |pic| %>
             <tr>
               <td height="100"><%= pic.name %></td>
-              <td height="100"><%= text_area_tag "tasks[#{pic.id}]", nil, :size => '50x5' %></td>
-              <td height="100"><%= text_field_tag "results[#{pic.id}]", nil, :size => '10' %></td>
+              <% if @specify_task == {} %>
+                <td height="100"><%= text_area_tag "tasks[#{pic.id}]", '', :size => '50x5' %></td>
+              <% else %>
+                <td height="100"><%= text_area_tag "tasks[#{pic.id}]", @specify_task["#{pic.id}"], :size => '50x5' %></td>
+              <% end %>
+              <% if @specify_result == {} %>
+                <td height="100"><%= text_field_tag "results[#{pic.id}]", '', :size => '10' %></td>
+              <% else %>
+                <td height="100"><%= text_field_tag "results[#{pic.id}]", @specify_result["#{pic.id}"], :size => '10' %></td>
+              <% end %>
             </tr>
           <% end %>
         </table>

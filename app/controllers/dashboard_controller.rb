@@ -1,7 +1,8 @@
 class DashboardController < ApplicationController
-  
-  
   def index  #displaying facebook albums
+    session.delete(:tasks)
+    session.delete(:results)
+
     @selected_picture = params[:picture] || session[:picture] || {}
     session[:picture] = @selected_picture
     user_id = session[:user_id]
@@ -88,5 +89,16 @@ class DashboardController < ApplicationController
   def specifyTask
     @selected_picture = session[:picture]
     @pictureSelected = Picture.find(@selected_picture.keys)
+    @specify_task = params[:tasks] || session[:tasks] || {}
+    @specify_result = params[:results] || session[:results] || {}
+  end
+
+  def reviewTask
+    @selected_picture = session[:picture]
+    @pictureSelected = Picture.find(@selected_picture.keys)
+    @specify_task = params[:tasks] || session[:tasks]
+    session[:tasks] = @specify_task
+    @specify_result = params[:results] || session[:results]
+    session[:results] = @specify_result
   end
 end
