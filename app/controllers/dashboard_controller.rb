@@ -18,7 +18,7 @@ class DashboardController < ApplicationController
       @albums = result
     else
     end
-    @pictureSelected = Picture.find(@selected_picture.keys)
+    @pictureSelected = Picture.find(@selected_picture.keys) 
   end
   
   def selectPhoto  #checkboxes page

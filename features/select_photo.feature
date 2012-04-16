@@ -16,10 +16,12 @@ Scenario: select the existing photo
   Then I should be on the select photo page
   Then I should see "college_1.png"
 
-  When I check "college_1.png"
+  When I check "picture[1]"
 
   Then I press "Continue"
   Then I should be on the dashboard page
+  And I should see "1 Picture(s) selected"
+  And I should see "college_1.png"
   
   
 Scenario: Upload a new photo and add to an existing album  
