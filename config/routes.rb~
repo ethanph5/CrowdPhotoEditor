@@ -22,7 +22,6 @@ Crowd::Application.routes.draw do
   match 'dashboard/selectPhoto'
   match 'dashboard/selectAlbum'
   match 'dashboard/specifyTask'
-  match 'dashboard/reviewTask'
   
   match 'dashboard/uploadPhotoToExisting'
 
