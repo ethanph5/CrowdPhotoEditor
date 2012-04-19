@@ -1,20 +1,28 @@
 class DashboardController < ApplicationController
+  
+  def welcome
+  end
+  
   def index  #displaying facebook albums
     session.delete(:tasks)
     session.delete(:results)
 
     @selected_picture = params[:picture] || session[:picture] || {}
     session[:picture] = @selected_picture
-    user_id = session[:user_id]
+    #user_id = session[:user_id]
+    user_id = current_user
     # crowd albums part
     @crowdAlbums = User.find_by_id(user_id).albums
     
     # facebook albums part
     @albums = nil
-    token = session[:token]
-    @user = User.find_by_id(user_id)
-    @user_name = User.find_by_id(user_id).name
-    if session[:token]
+    auth = Authorization.find(user_id)
+    if auth
+      token = Authorization.find(current_user).token
+    end
+    @user = User.find_by_id(current_user)
+    @user_name = User.find_by_id(current_user).name
+    if token
       result = @user.grap_facebook_albums(token)
       @albums = result
     else
@@ -27,12 +35,12 @@ class DashboardController < ApplicationController
     targetAlbum = Album.find(albumID)
     @album_name = targetAlbum.name
     @picture_list = targetAlbum.pictures
-    user_id = session[:user_id]
-    @user_name = User.find(user_id).name
+    #user_id = session[:user_id]
+    @user_name = User.find(current_user).name
   end
   
   def uploadPhotoToNew #create new album and upload photo to it
-    user_id = session[:user_id]
+    user_id = current_user
     @user = User.find(user_id)
     
     if request.post? #if the user clicked the "upload" button on the form
@@ -55,7 +63,7 @@ class DashboardController < ApplicationController
   end
   
   def uploadPhotoToExisting     #upload photo to existing album
-    user_id = session[:user_id]
+    user_id = current_user
     @user = User.find(user_id)
     
     if request.post? #if the user clicked the "upload" button on the form
@@ -77,7 +85,7 @@ class DashboardController < ApplicationController
   end
   
   def selectAlbum   
-    user_id = session[:user_id]
+    user_id = current_user
     user = User.find(user_id)
     albumList = user.albums
     @lol = [] #@lol is [[al.name,al.id],[al.name,al.id]]

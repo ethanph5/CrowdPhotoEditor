@@ -38,4 +38,6 @@ Crowd::Application.configure do
   config.active_support.deprecation = :stderr
   
   config.assets.compile = true
+  
+  OmniAuth.config.test_mode = true
 end

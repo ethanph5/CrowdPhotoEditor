@@ -17,8 +17,14 @@ module NavigationHelpers
       '/'
     when /^the welcome page$/
       '/'
-    when /^the signup page$/
-      '/account/signup'
+    when /^the Sign Up Error page$/
+      '/users'
+    when /^the Sign Up page$/
+      '/users/sign_up'
+    when /^the Sign In page$/
+      '/users/sign_in'
+    
+      
     when /^the dashboard page$/
       '/dashboard/index'
     when /^the select photo page$/

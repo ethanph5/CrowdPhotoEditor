@@ -6,7 +6,6 @@ class CreatePictures < ActiveRecord::Migration
       t.references :user  #user_id column
       t.references :album #album_id column
       t.timestamps
-      
     end
   end
 end

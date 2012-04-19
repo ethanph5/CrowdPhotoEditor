@@ -8,7 +8,6 @@ Background:
   Given I have signed up using name "Bieber",password "password",email "name@email.com"
   Given I have created an album "college"
   Given I have a picture "college_1.png" in the album "college" 
-  
   Given I have successfully logged in using email "name@email.com",password "password"
 
 Scenario: select the existing photo

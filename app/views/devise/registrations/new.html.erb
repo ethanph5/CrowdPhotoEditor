@@ -1,0 +1,33 @@
+<title><% @page_title = "Sign Up"%></title>
+<h3>Sign up on CommunityGuides manually -- OR -- or use one of your existing accounts</h3>
+
+<div id="remote"> 
+    <div id="services" class="box">
+    	<a href="/auth/facebook" class="services2"><%= image_tag "facebook.png", :size => "126x34",  :alt => "Facebook" %></a>
+    	<br/><br/>
+    </div>  
+</div>
+
+<div class = "box">
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :name %><br />
+  <%= f.text_field :name %></div>
+  
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+</div>
+
+
+
+<%= render "links" %>

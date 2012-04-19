@@ -1,3 +1,11 @@
+Given /the following users exist/ do |users_table|
+  users_table.hashes.each do |user|
+    # each returned element will be a hash whose key is the table header.
+    # you should arrange to add that movie to the database here.
+    User.create!(user)
+  end
+end
+
 Given /the following pictures exist/ do |pictures_table|
   pictures_table.hashes.each do |picture|
     # each returned element will be a hash whose key is the table header.
@@ -17,6 +25,7 @@ end
 #Given /^(?:|I )have signed in using "([^"]*)" and "([^"]*)"/ do |email, passwd|
   
 #end
+
 
 Then /^(?:|I )should see number "([^"]*)" in "([^"]*)"/ do |num, box_name|
   str = page.body
@@ -45,11 +54,11 @@ Given /^(?:|I )have a picture "([^"]*)" in the album "([^"]*)"/ do |picName,albu
 end
 
 Given /^(?:|I )have successfully logged in using email "([^"]*)",password "([^"]*)"/ do |email,pwd|
-  step %Q{I am on the welcome page}
-  step %Q{I fill in "email" with "#{email}"}
-  step %Q{I fill in "password" with "#{pwd}"}
-  step %Q{I press "Log In"}  
-  step %Q{I am on the dashboard page}
+  step %Q{I am on the Sign In page}
+  step %Q{I fill in "user_email" with "#{email}"}
+  step %Q{I fill in "user_password" with "#{pwd}"}
+  step %Q{I press "Sign in"}  
+  step %Q{I am on the home page}
 end
 
 Given /^(?:|I )have selected picture "([^"]*)" from album "([^"]*)"/ do |picture_name,album_name|
