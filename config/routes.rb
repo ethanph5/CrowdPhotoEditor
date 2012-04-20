@@ -25,6 +25,8 @@ Crowd::Application.routes.draw do
   match 'dashboard/reviewTask'
   
   match 'dashboard/uploadPhotoToExisting'
+  match 'dashboard/submit'
+  match 'mobilework/submit_task'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
