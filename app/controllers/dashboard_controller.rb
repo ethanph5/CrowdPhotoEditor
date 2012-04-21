@@ -42,7 +42,7 @@ class DashboardController < ApplicationController
   def uploadPhotoToNew #create new album and upload photo to it
     user_id = current_user.id
     @user = User.find(user_id)
-    debugger
+    
     if request.post? #if the user clicked the "upload" button on the form
       #start create new album,new picture, and upload the file.
       newAlbum = Album.create!(:name => params[:albumName], :user_id => user_id) 
