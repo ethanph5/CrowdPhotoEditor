@@ -8,7 +8,6 @@ gem 'rails', '3.1.0'
 # for Heroku deployment - as described in Ap. A of ELLS book
 
 group :development, :test do
-  gem 'devise'
   gem 'sqlite3'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'database_cleaner'
@@ -29,6 +28,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'devise'
   gem 'omniauth'
   gem 'omniauth-facebook'
   gem 'fb_graph'
