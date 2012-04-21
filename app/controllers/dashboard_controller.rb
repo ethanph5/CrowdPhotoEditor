@@ -109,4 +109,11 @@ class DashboardController < ApplicationController
     @specify_result = params[:results] || session[:results]
     session[:results] = @specify_result
   end
+  
+  def submit
+    @selected_pictures = session[:picture] #hashTable: key is pic id, value is 1
+    @taskTable = session[:tasks] #key is picture id, value is the task string
+    @resultTable = session[:results] #key is picture id, value is the # of result the user wants
+    redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :taskTable => @taskTable, :resultTable => @resultTable
+  end
 end

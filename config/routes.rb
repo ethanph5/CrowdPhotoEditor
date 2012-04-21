@@ -11,6 +11,8 @@ Crowd::Application.routes.draw do
   match 'dashboard/reviewTask'
   
   match 'dashboard/uploadPhotoToExisting'
+  match 'dashboard/submit'
+  match 'mobilework/submit_task'
   
   #Facebook Authentication route
   resources :authorizations, :only => [:index, :create, :destroy]
@@ -22,7 +24,7 @@ Crowd::Application.routes.draw do
   end
 
   root :to => "dashboard#welcome"
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
