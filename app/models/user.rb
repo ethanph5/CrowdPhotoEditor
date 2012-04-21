@@ -1,35 +1,26 @@
 class User < ActiveRecord::Base
-  validates :name, :password, :presence => true
-  validates :email, :presence => true, :uniqueness => true, :format => { :with => /.*@.*\..*/,
-    :message => "format incorrect." } #DEBUG: email reusing is not allowed?
-  
-  has_many :authorizations
-  has_many :pictures
-  has_many :albums
-  #has_and_belongs_to_many :facebook_accounts  #DEBUG: facebookAccounts or facebook_accounts??
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-  def add_provider(auth_hash)
-  # Check if the provider already exists, so we don't add it twice
-    unless authorizations.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"])
-      Authorization.create :user => self, :provider => auth_hash["provider"], :uid => auth_hash["uid"]
-    end
-  end
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   
-  def grap_facebook_albums(fb_token)
-    #user = FbGraph::User.me(fb_token)
-    #user = FbGraph::User.fetch(username)
-    #user.name
-    #user.albums
+  validates_presence_of :name, :email
+  validates_uniqueness_of :email, :case_sensitive => false
+  
+  has_many :authorizations, :dependent => :destroy
+  has_many :pictures, :dependent => :destroy
+  has_many :albums, :dependent => :destroy
+  
+  def grap_facebook_albums(token)
     facebook = authorizations.where(:provider => :facebook).first
-    #fb_user = ::FbGraph::User.fetch facebook.uid, :access_token => facebook.token
-    #fb_user = ::FbGraph::User.fetch(facebook.uid, :access_token => fb_token)
-    #fb_user = ::FbGraph::Album.fetch facebook.uid, :access_token => fb_token
-    user = ::FbGraph::User.fetch(facebook.uid, :access_token => fb_token)
+    user = ::FbGraph::User.fetch(facebook.uid, :access_token => token)
     #user = user.fetch
     user.albums
     #user.permissions
     #fb_token
     #fb_albums = fb_user.albums
   end
-  
 end

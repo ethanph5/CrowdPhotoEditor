@@ -25,7 +25,7 @@ Scenario: Sepcify the tasks and edit the tasks
   When I fill in "task box 1" with "remove red eye"
   And I fill in "result box 1" with "10"
 
-  When I press "Tasks Review"
+  When I press "Task Review"
   Then I should be on the review task page
   And I should see "college_1.png"
   And I should see "remove red eye" in "task box 1"
@@ -38,7 +38,7 @@ Scenario: Specify the task and number of results I want
   When I fill in "task box 1" with "remove red eye"
   And I fill in "result box 1" with "10"
 
-  When I press "Tasks Review"
+  When I press "Task Review"
   Then I should be on reviewTask
   And I should see "college_1.png"
 

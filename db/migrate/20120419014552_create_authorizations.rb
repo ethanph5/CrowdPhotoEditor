@@ -5,7 +5,7 @@ class CreateAuthorizations < ActiveRecord::Migration
       t.string :uid
       t.string :token
       t.references :user
-      t.timestamps      
+      t.timestamps
     end
   end
 end

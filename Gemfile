@@ -20,6 +20,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov', :require => false
   gem "rest-client", "~> 1.6.7"  #newly added to handle uploading photo to imgur
+  gem 'devise'
   gem 'omniauth'
   gem 'omniauth-facebook'
   gem 'fb_graph'

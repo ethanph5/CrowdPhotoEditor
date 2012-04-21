@@ -1,22 +1,8 @@
 Crowd::Application.routes.draw do
-  get "session/create"
-
-  get "session/failure"
+  devise_for :users
 
   get "dashboard/index"
   post "/dashboard/index"
-
-  get "account/signup"
-  
-  match "account/login"
-  match "account/signup"
-  match "account/logout"
-  match 'account/something'
-  match '/auth/:provider/callback', :to => 'account#create'
-  #match '/auth/facebook' => 'account#create'
-  match '/oauth/authorize' => 'account#create'
-
-  
   
   match 'dashboard/uploadPhotoToNew'
   match 'dashboard/selectPhoto'
@@ -25,9 +11,18 @@ Crowd::Application.routes.draw do
   match 'dashboard/reviewTask'
   
   match 'dashboard/uploadPhotoToExisting'
-  match 'dashboard/submit'
-  match 'mobilework/submit_task'
+  
+  #Facebook Authentication route
+  resources :authorizations, :only => [:index, :create, :destroy]
+  match '/auth/:provider/callback' => 'authorization#create'
+  
+  
+  authenticated :user do
+    root :to => 'dashboard#index'
+  end
 
+  root :to => "dashboard#welcome"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -84,5 +79,5 @@ Crowd::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
-  root :to => "account#welcome"
+  
 end
