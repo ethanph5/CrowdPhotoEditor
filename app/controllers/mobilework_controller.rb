@@ -20,7 +20,7 @@ class MobileworkController < ApplicationController
       internal_link = Picture.find(intID).internal_link #resource location
     
     
-      url = URI("https://sandbox.mobileworks.com/api/v2/tasks/")
+      url = URI("https://sandbox.mobileworks.com/api/v1/tasks/")
       http = Net::HTTP.new(url.host, 443)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -29,24 +29,22 @@ class MobileworkController < ApplicationController
         req = Net::HTTP::Post.new(url.path, headers)
         req.basic_auth('FelixXie','Phoenix1218118')
         query = {
-          "workflow" => "s"
-          #"question" => question,
-          #"resource" => internal_link,
-          #"answerType" => "t"
+          #"workflow" => "s"
+          "question" => question,
+          "resource" => internal_link,
+          "answerType" => "t"
           #"redundancyType" => "p"
         }
         req.body = query.to_json()
         response = http.request(req)
     
         if response.code == "201"
-            puts response["location"]
+            puts response["location"] #response["location"] is http://sandbox.mobileworks.com/api/v1/tasks/229/
         else
             puts "Error. Response code: " + response.code
         end
       }
-      
-      redirect_to :controller => :dashboard, :action => :index and return
     end
-    
+    redirect_to :controller => :dashboard, :action => :index and return
   end  
 end
