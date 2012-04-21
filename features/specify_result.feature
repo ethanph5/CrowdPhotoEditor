@@ -11,9 +11,9 @@ Background:
   
   Given I have successfully logged in using email "name@email.com",password "password"
 
-  Given I have selected picture "college_1.png" from album "college"
+  Given I have selected picture "picture[1]" from album "college"
 
-  When I press "Done selection"
+  When I press "Done Selection"
   Then I should be on the specify task page
   Then I should see "college_1.png"
   
@@ -22,28 +22,28 @@ Scenario: Go back to select more photos before sepcifying the tasks and number o
   Then I should be on the dashboard page
   
 Scenario: Sepcify the tasks and edit the tasks
-  When I fill in "task box 1" with "remove red eye"
-  And I fill in "result box 1" with "10"
+  When I fill in "tasks[1]" with "remove red eye"
+  And I fill in "results[1]" with "10"
 
   When I press "Tasks Review"
   Then I should be on the review task page
   And I should see "college_1.png"
-  And I should see "remove red eye" in "task box 1"
-  And I should see number "10" in "result box 1"
+  And I should see "remove red eye" in "task"
+  And I should see number "10" in "result"
 
   When I press "Edit"
   Then I should be on the specify task page
   
 Scenario: Specify the task and number of results I want
-  When I fill in "task box 1" with "remove red eye"
-  And I fill in "result box 1" with "10"
+  When I fill in "tasks[1]" with "remove red eye"
+  And I fill in "results[1]" with "10"
 
   When I press "Tasks Review"
-  Then I should be on reviewTask
+  Then I should be on the review task page
   And I should see "college_1.png"
 
-  And I should see "remove red eye" in "task box 1"
-  And I should see number "10" in "result box 1"
+  And I should see "remove red eye" in "task"
+  And I should see number "10" in "result"
   
   When I press "Submit"
   Then I should be on the dashboard page

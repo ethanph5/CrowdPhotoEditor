@@ -29,7 +29,7 @@ end
 
 Then /^(?:|I )should see number "([^"]*)" in "([^"]*)"/ do |num, box_name|
   str = page.body
-  if ((str =~ /#{box_name}(.*)#{num}/) == nil)
+  if ((str =~ /<td><label(.*)name="#{box_name}"(.*)>#{num}<\/label><\/td>/) == nil)
     assert false, "There is no specified quantity for results"
   end  
 end  
