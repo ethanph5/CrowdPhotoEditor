@@ -34,7 +34,7 @@
       </div> 
   <br/><br/><br/><br/><br/><br/><br/>
   <h4>Crowd Album:</h4>
-  <% Album.all.each do |item|%>
+  <% current_user.albums.each do |item|%>
     <li><%= link_to item.name, :action => "selectPhoto" , :album_id => item.id %></li>
   <% end %>
   </div>
