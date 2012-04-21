@@ -29,10 +29,11 @@ class MobileworkController < ApplicationController
         req = Net::HTTP::Post.new(url.path, headers)
         req.basic_auth('FelixXie','Phoenix1218118')
         query = {
-          "question" => question,
-          "resource" => internal_link,
-          "answerType" => "t",
-          "redundancyType" => "s"
+          "workflow" => "s"
+          #"question" => question,
+          #"resource" => internal_link,
+          #"answerType" => "t"
+          #"redundancyType" => "p"
         }
         req.body = query.to_json()
         response = http.request(req)
