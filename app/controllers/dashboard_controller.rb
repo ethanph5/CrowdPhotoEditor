@@ -45,21 +45,29 @@ class DashboardController < ApplicationController
     @user = User.find(user_id)
     
     if request.post? #if the user clicked the "upload" button on the form
-      #start create new album,new picture, and upload the file.
-      newAlbum = Album.create!(:name => params[:albumName], :user_id => user_id) 
       
-      #actually uploading photo
-      namePathList = Picture.handleUpload(params[:upload], user_id)
-      name = namePathList[0]
-      path = namePathList[1]
-      #render :text => "File has been uploaded successfully"
+      #first find if user already has album with that name
+      if Album.find_by_name_and_user_id(params[:albumName], user_id)==nil
       
-      #create new picture tuple
-      newPicture = Picture.create!(:name => name,:internal_link => path, :user_id => user_id, :album_id => newAlbum.id)
-           
-      redirect_to :action => "selectPhoto", :album_id => newAlbum.id
+        #start create new album,new picture, and upload the file.
+        newAlbum = Album.create!(:name => params[:albumName], :user_id => user_id) 
       
-      #should reder somewhere at the end
+        #actually uploading photo
+        namePathList = Picture.handleUpload(params[:upload], user_id)
+        name = namePathList[0]
+        path = namePathList[1]
+        #render :text => "File has been uploaded successfully"
+      
+        #create new picture tuple
+        newPicture = Picture.create!(:name => name,:internal_link => path, :user_id => user_id, :album_id => newAlbum.id)   
+        redirect_to :action => "selectPhoto", :album_id => newAlbum.id
+
+      else #if user already has album with same name
+        flash[:error] = "You already have an album named #{params[:albumName]}, please enter a new name!"
+        redirect_to :action => "uploadPhotoToNew"
+      end
+
+
     end
   end
   
