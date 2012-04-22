@@ -42,8 +42,8 @@ Scenario: Specify the task and number of results I want
   Then I should be on the review task page
   And I should see "college_1.png"
 
-  And I should see "remove red eye" in "task box 1"
-  And I should see number "10" in "result box 1"
+  And I should see "remove red eye" in "task"
+  And I should see number "10" in "result"
   
   When I press "Submit"
   Then I should be on the dashboard page
