@@ -114,6 +114,11 @@ class DashboardController < ApplicationController
   end
 
   def specifyTask
+    if session[:picture] == {}
+      flash[:error] = "Please Select Photo(s) Before Specifying Task(s)"
+      redirect_to :action => :index
+    end
+
     @selected_picture = session[:picture]
     @pictureSelected = Picture.find(@selected_picture.keys)
     @specify_task = params[:tasks] || session[:tasks] || {}

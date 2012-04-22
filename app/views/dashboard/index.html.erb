@@ -4,16 +4,37 @@
     <%=link_to "Upload New Photo", {:action => "uploadPhotoToNew"}, :class => "btn btn-success"%>
    	</div>
     <div class = "btn-group">
-    <%=link_to "Done Selection", {:action => "specifyTask"}, :class => "btn btn-danger"%>
+    <%=link_to "Done Selection", {:action => "specifyTask"}, :class => "btn btn-danger" %>
 	</div>
 	</div>
 	
     <h4 id="greet" >Hello, <%= @user_name%></h4><br/>
     
+    <% if params[:submission_notice] %>
+    	<% if params[:submission_notice] != [] %>
+    		<% params[:submission_notice].each do |msg| %>
+    		  <BLOCKQUOTE>
+    		  <li id="sub_notice"> <%= msg %> </li>
+    		  </BLOCKQUOTE>
+    		<% end %>
+    	<% end %>
+    <% end %>	
+    
+    <% if params[:submission_error] %>    
+	    <% if params[:submission_error] != [] %>
+	    	<% params[:submission_error].each do |err| %>
+	    	  <BLOCKQUOTE>
+	    	  <li id="sub_error"> <%= err %> </li>
+	    	  </BLOCKQUOTE>
+	    	<% end %>   	
+	    <% end %>
+	<% end %>    
+    
+    
     <div class= "picture-selection">     
       <BLOCKQUOTE>
       <h4 class="pic-selection-title">Picture Selection:</h4>
-      <% if @selected_picture == {} %>
+      <% if @selected_picture == {} or params[:submission_error] or params[:submission_notice] %>
         <h5><span class="badge">0</span>  picture selected</h5>
       <% else %>     
         <h5><span class="badge">0<%= @pictureSelected.length %></span>  picture(s) selected</h5>
