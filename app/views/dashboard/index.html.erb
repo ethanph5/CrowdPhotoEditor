@@ -1,55 +1,68 @@
-    
 <div class = "body">
-    <h3 id="greet" >Hello, <%= @user_name%></h3>
-    <div class= "picture-select">
-      <h4>Your Picture:</h4>
+	<div class="btn-toolbar">
+	<div class = "btn-group">
+    <%=link_to "Upload New Photo", {:action => "uploadPhotoToNew"}, :class => "btn btn-success"%>
+   	</div>
+    <div class = "btn-group">
+    <%=link_to "Done Selection", {:action => "specifyTask"}, :class => "btn btn-danger"%>
+	</div>
+	</div>
+	
+    <h4 id="greet" >Hello, <%= @user_name%></h4><br/>
+    
+    <div class= "picture-selection">     
       <BLOCKQUOTE>
+      <h4 class="pic-selection-title">Picture Selection:</h4>
       <% if @selected_picture == {} %>
-        <h5>0 Picture(s) selected</h5>
-      <% else %>
-        <h5><%= @pictureSelected.length %> Picture(s) selected</h5>
+        <h5><span class="badge">0</span>  picture selected</h5>
+      <% else %>     
+        <h5><span class="badge">0<%= @pictureSelected.length %></span>  picture(s) selected</h5>
         <% @pictureSelected.each do |pic| %>
           <li><%= pic.name %></li>
         <% end %>  
       <% end %>
-      <BLOCKQUOTE>
+      <BLOCKQUOTE>    	
     </div>
+    
+    
+    
     <div class= "albums-list">
-    	<h4 id="myAlbum">Facebook Album:</h4>	
-    	<div class="facebook-photos">
+    	<div class="albums-header">
+	    	<h4 class="album-list-title">Your Album(s):</h4>
+	    	<span id = "facebook-label" class="label">In Facebook</span>
+	    	<span class="label label-warning">In Crowd</span>	
+    	</div>
+    	
+    	<div class="facebook-albums">
       	<% if @albums.nil?%>
-      		<p>Welcome to Crowd Photo Editor</p>
+      	<p>Welcome to Crowd Photo Editor</p>
       	<% else%>
       	<% @albums.each do |album|%>
-      	<div class = "facebook-album">
+      	<div class = "singal-album">
       		<a href=<%= album.link%>>
-      		<img src=<%= album.picture%> alt=<%= album.name%> width="150" height="120" border="0" />
+      		<img src=<%= album.picture%> alt=<%= album.name%>>
       		</a>
+      		<br/>
       		<p><%= link_to album.name, album.link,  :class => "album-name"%></p>
-      		<p><%= album.count%> Photos</p><br/>  		
+      		<small><%= album.count%> Photos</small> 		
       	</div>
       	
       <%end%>
       <%end%>
-      </div> 
-  <br/><br/><br/><br/><br/><br/><br/>
-  <h4>Crowd Album:</h4>
-
-  <% current_user.albums.each do |item|%>
+      </div>
+   
+  <div class= "separat-line"><small><hr/></small></div>
+    
+  
+  <div class="crowd-albums">
+  	<% current_user.albums.each do |item|%>
+  	<div class="singal-album">
     <li><%= link_to item.name, :action => "selectPhoto" , :album_id => item.id %></li>
-  <% end %>
+    </div>
+  	<% end %>
+  </div>
+  
   </div>
 </div>
-<div class="foot">
-	<div class="upload-action">
-		  <form name="upload" action="/dashboard/uploadPhotoToNew">
-			Upload new photos:
-			<input type="submit" value="Upload" width="70px"/>
-		  </form>
-	</div>
-	<div class="doneSelection">
-	    <form name="done" action="specifyTask">
-	      <input type="submit" value="Done Selection" width="70px"/>
-	    </form>
-	</div>
-</div>
+
+
