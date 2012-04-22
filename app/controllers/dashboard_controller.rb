@@ -108,6 +108,8 @@ class DashboardController < ApplicationController
     @pictureSelected = Picture.find(@selected_picture.keys)
     @specify_task = params[:tasks] || session[:tasks] || {}
     @specify_result = params[:results] || session[:results] || {}
+    user_id = current_user.id
+    @user_name = User.find(current_user.id).name
   end
 
   def reviewTask
@@ -117,6 +119,8 @@ class DashboardController < ApplicationController
     session[:tasks] = @specify_task
     @specify_result = params[:results] || session[:results]
     session[:results] = @specify_result
+    user_id = current_user.id
+    @user_name = User.find(current_user.id).name
   end
   
   def submit
