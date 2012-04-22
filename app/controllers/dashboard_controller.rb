@@ -8,8 +8,19 @@ class DashboardController < ApplicationController
     session.delete(:tasks)
     session.delete(:results)
 
-    @selected_picture = params[:picture] || session[:picture] || {}
-    session[:picture] = @selected_picture
+    if session[:picture]==nil
+      session[:picture]=Hash.new
+    end
+
+    #@selected_picture = params[:picture] || session[:picture] || {}
+    if params[:picture] !=nil 
+      params[:picture].each do |key|
+        session[:picture][key[0]] = 1
+      end
+    end
+    @selected_picture=session[:picture] || {}
+    debugger
+    
     #user_id = session[:user_id]
     user_id = current_user.id
     # crowd albums part
