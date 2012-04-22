@@ -50,6 +50,6 @@ class MobileworkController < ApplicationController
         end
       }
     end
-    redirect_to :controller => :dashboard, :action => :index, :submission_notice => submission_notice, :submission_error => submission_error and return
+    redirect_to :controller => :dashboard, :action => :index, :submission_notice => submission_notice, :submission_error => submission_error, :selPic => true and return
   end  
 end

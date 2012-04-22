@@ -7,6 +7,9 @@ class DashboardController < ApplicationController
   def index  #displaying facebook albums
     session.delete(:tasks)
     session.delete(:results)
+    if params[:selPic] = true
+      session.delete(:picture)
+    end
 
     if session[:picture]==nil
       session[:picture]=Hash.new
