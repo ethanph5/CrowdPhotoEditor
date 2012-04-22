@@ -3,8 +3,41 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
- *= require_tree . 
+ *= require_tree
+ *= require bootstrap_and_overrides
 */
+
+.auth-input .btn{
+	width: 126px;
+}
+
+.auth-body{
+	width:300px;
+	margin: auto;
+}
+
+.nav {
+	position: fixed;
+	margin-right: 50px;
+}
+
+.picture-selection{
+	width: 500px;
+}
+
+.pic-selection-title, .album-list-title{
+	float: left;
+	margin-right: 5px;
+}
+
+.btn-toolbar{
+	position: absolute;
+	margin-left: 590px;
+}
+
+#facebook-label{
+	background: #3B5998; 	
+}
 
 #header-logo{
 	margin-right: 150px;
@@ -14,71 +47,20 @@
 	float:left;
 }
 
-.login{
-	background: black;
-	height: 80px;
-}
-
-#login-table{
-	position:fixed;
-	top:25px;
-	right:20px;
-	color: white;
-	font-size: 15px;
-	font-weight : bold;
-	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
-}
-
-.signup-square{
-	width: 450px;
-	height: 300px;
-	background: grey;
-	margin-top: 10px;
-	padding-top: 5px;
-	/*border: 1px solid blue;*/
-	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
-}
-
-.flash-message{
-	margin-left: 80px;
-}
-
-.signup{
-	display: block;
-	
-}
-
-.signup-button{
-	margin-left: 100px;
-	margin-right: 50px;
-	float: left;
-}
 
 label{
 	font-size: 16px;
-    width: 160px;
-    float: left;
-    margin: 2px 6px 6px 4px;
+	float: left;
     text-align: right;
 }
 
-.logout{
-	background: black;
-	height: 80px;
-}
-.logout-button{
-	position: absolute;
-	top:50px;
-	right:50px;
-}
-
-
-.facebook-photos{
+.facebook-albums{
 	background: #3B5998;
-  	padding-top: 50px;
+  	padding-top: 20px;
   	padding-right: 20px;
   	padding-left: 20px;
-  	margin-left: 100px;
+  	margin-top: 10px;
+  	margin-left: 50px;
   	width: 750px;
   	height: auto;
   	float: left;
@@ -86,17 +68,17 @@ label{
 }
 
 
-.facebook-album{
+.singal-album{
 	float: left;
   	width: 150px;
   	height: 220px;
   	margin: 5px 15px;
-  	font-size: 70%;
   	color: white;
-  	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 
-.facebook-album img{
+.singal-album img{
+	width: 150px;
+	height: 120px;
 	border: 3px solid white;
 	border-radius:5px;
 }
@@ -104,6 +86,24 @@ label{
 .album-name {
 	font-weight: bold;
 	color: white;
+}
+
+.separat-line{
+	clear: both;
+	width: 50px;
+	margin: auto;
+}
+
+.crowd-albums{	
+	background: #f89406;
+	padding-top: 20px;
+  	padding-right: 20px;
+  	padding-left: 20px;
+  	margin-left: 50px;
+  	width: 750px;
+  	height: auto;
+  	float: left;
+  	border-radius:10px;
 }
 
 div.upload-action{

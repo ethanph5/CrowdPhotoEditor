@@ -7,21 +7,43 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	
-	<div id="user_nav">
-	  <% if user_signed_in? %>
-	    Signed in as <%= current_user.email %>. Not you?
-	    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-	  <% else %>
-	    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
-	  <% end %>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</a>
+			
+			
+			<a class="brand" href="/">Crowd Photo Editor</a>
+			<div class="nav-collapse">
+			<ul class="nav pull-right">
+				<% if user_signed_in? %>
+				Signed in as <%= current_user.email %>. Not you?
+				<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+				<% else %>
+				<li><%= link_to "Sign up", new_user_registration_path %></li>
+				<li><%= link_to "Sign in", new_user_session_path %></li>
+				<% end %>	    	
+			</ul>
+			</div>	
+		</div>
 	</div>
-	
-	<%- flash.each do |name, msg| -%>
-	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-	<%- end -%>
+</div>
 
+<%- flash.each do |name, msg| -%>
+<% if msg.is_a?(String) and name == :notice%>
+<%= content_tag :div, msg, :class => "alert alert-success"%>
+<% else %>
+<%= content_tag :div, msg, :class => "alert alert-error"%>
+<% end %>
+<%- end -%>
+
+<div class= "container">
 <%= yield %>
+</div>
+
 
 </body>
 </html>

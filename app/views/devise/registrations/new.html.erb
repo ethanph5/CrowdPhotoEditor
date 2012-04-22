@@ -1,33 +1,37 @@
 <title><% @page_title = "Sign Up"%></title>
-<h3>Sign up on CommunityGuides manually -- OR -- or use one of your existing accounts</h3>
 
-<div id="remote"> 
-    <div id="services" class="box">
-    	<a href="/auth/facebook" class="services2"><%= image_tag "facebook.png", :size => "126x34",  :alt => "Facebook" %></a>
-    	<br/><br/>
-    </div>  
+<div class = "auth-body">
+
+<h3>Sign up via Facebook</h3>
+<div id="facebook">
+	<br/> 
+	<a href="/auth/facebook" class="services2"><%= image_tag "facebook.png", :size => "126x34",  :alt => "Facebook" %></a>
+    <br/>
 </div>
 
-<div class = "box">
+
+<small><hr/></small>
+
+<h3>Or create your free account</h3>
+<br/>
+<div class = "auth-input">
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name %></div>
+  <div><%= f.text_field :name, :placeholder => :Name %></div>
   
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <div><%= f.email_field :email, :placeholder => :Email %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div><%= f.password_field :password, :placeholder => :Password %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <div>
+  <%= f.password_field :password_confirmation, :placeholder => :Password_confirmation %></div>
 
-  <div><%= f.submit "Sign up" %></div>
+  <br/>
+  <div><%= f.submit "Sign up", :class => 'btn btn-danger btn-large' %></div>
 <% end %>
 </div>
 
-
-
 <%= render "links" %>
+</div>
+
