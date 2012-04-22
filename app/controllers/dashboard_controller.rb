@@ -19,7 +19,6 @@ class DashboardController < ApplicationController
       end
     end
     @selected_picture=session[:picture] || {}
-    debugger
     
     #user_id = session[:user_id]
     user_id = current_user.id
