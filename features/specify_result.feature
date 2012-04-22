@@ -47,5 +47,5 @@ Scenario: Specify the task and number of results I want
   
   When I press "Submit"
   Then I should be on the dashboard page
-  Then I should see "The task for college_1.png has been submitted successfuly."
+  Then I should see "The task for college_1.png has been submitted successfully."
   
