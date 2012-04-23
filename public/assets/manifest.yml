@@ -1,6 +1,14 @@
 --- 
+facebook.png: facebook-71ad21bcca1e4cc3a738a476ef3d0283.png
 rails.png: rails-e4b51606cd77fda2615e7439907bfc92.png
 jquery-ui.min.js: jquery-ui.min-4258e47b40673a02bedfda178628bfba.js
 jquery.min.js: jquery.min-cb533b9cbc690c97d859e01714bcc864.js
-application.js: application-4d0b2b02058bc24ec53ecd886d864478.js
-application.css: application-c405802cb617a86f73361fb5a1387d38.css
+fontawesome-webfont.eot: fontawesome-webfont-45c557cf62986c31b46066d36d4e79af.eot
+fontawesome-webfont.svg: fontawesome-webfont-3d022ced103bef04e1220cf5fbbf8467.svg
+fontawesome-webfont.svgz: fontawesome-webfont-cb7e668ca613edf21bd3714225125c2e.svgz
+fontawesome-webfont.ttf: fontawesome-webfont-93fbf8b10cfd7ccf9aceb24aa633b229.ttf
+fontawesome-webfont.woff: fontawesome-webfont-634f9c55e82f4bbe029932e96981f89b.woff
+twitter/bootstrap/glyphicons-halflings-white.png: twitter/bootstrap/glyphicons-halflings-white-33137abcd2c204b90921315632a32a69.png
+twitter/bootstrap/glyphicons-halflings.png: twitter/bootstrap/glyphicons-halflings-16cd9c1e6492843e6e32e0ab12967378.png
+application.js: application-44363ce6546538f61d772f3a2b7150b7.js
+application.css: application-d2de75fd57c0eabcf469e23bfb12bfc4.css
