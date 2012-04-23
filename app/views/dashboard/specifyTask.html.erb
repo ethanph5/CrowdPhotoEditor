@@ -4,22 +4,25 @@
   <div class="container">
     <div class="header">
       <h2 id="header-icon"></h2>
-      <h4 id="username_text">Hello, <%= @user_name %></h4>
+      <h4 id="username_text"><big><b>Hello, <%= @user_name %></b></big></h4>
     </div>
+    <br/>
     <div class="bottom">
-      <p id="inst">Here is a list of photo you selected. Please specify what task you want to request. You can also select how many results you want to get back.</p>
+      <p id="inst">Here are the photos you have selected. Please specify what tasks you want to request and how many results you want to get back. For example: </p>
+      <pre>A <b>Task</b> of <b>"remove red eyes"</b> and <b># Results</b> of <b>3</b> will allow three different workers to remove red eyes from your picture.</pre>
+      <p> Be precise with your task requests! Clear step-by-step instructions from you will help our workers perform the exact job you want. Also tell us where to send your results (we will store pictures on imm.io by default).
       <%= form_tag :action => 'reviewTask', :method => :get, :id => 'pictureTable' do %>
-        <table border="2" width="300" class="listPicture">
+        <table border="2" width="450" class="listPicture">
           <tr>
             <th>Picture</th>
             <th>Task</th>
-            <th># Results</th>
+            <th># Results</p></th>
           </tr>
           <% @pictureSelected.each do |pic| %>
             <tr>
-              <td height="100"><%= pic.name %></td>
+                <td height="100" ><%= pic.name %></td>
               <% if @specify_task == {} %>
-                <td height="100"><%= text_area_tag "tasks[#{pic.id}]", '', :size => '50x5' %></td>
+                <td height="100" > <%= text_area_tag "tasks[#{pic.id}]", '', :size => '50x5' %></td>
               <% else %>
                 <td height="100"><%= text_area_tag "tasks[#{pic.id}]", @specify_task["#{pic.id}"], :size => '50x5' %></td>
               <% end %>
@@ -31,7 +34,8 @@
             </tr>
           <% end %>
         </table>
-        <br/>
+        <br/><br/>
+
         <%= submit_tag 'Tasks Review', :id => "continueButton" %>
       <% end %>
       <br/><br/>
