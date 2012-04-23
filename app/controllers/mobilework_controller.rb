@@ -43,6 +43,7 @@ class MobileworkController < ApplicationController
     
         if response.code == "201"
           submission_notice << "The task for #{Picture.find(intID).name} has been submitted successfully." 
+          session.delete(:picture) #clear session[picture] here
             #puts response["location"] #response["location"] is http://sandbox.mobileworks.com/api/v1/tasks/229/
         else
           submission_error << "Sorry! The task for #{Picture.find(intID).name} has NOT been submitted successfully. Please try again!"   
@@ -50,6 +51,7 @@ class MobileworkController < ApplicationController
         end
       }
     end
+    
     redirect_to :controller => :dashboard, :action => :index, :submission_notice => submission_notice, :submission_error => submission_error, :selPic => true and return
   end  
 end
