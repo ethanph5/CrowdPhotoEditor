@@ -7,15 +7,11 @@ class DashboardController < ApplicationController
   def index  #displaying facebook albums
     session.delete(:tasks)
     session.delete(:results)
-    if params[:selPic] = true
-      session.delete(:picture)
-    end
 
     if session[:picture]==nil
       session[:picture]=Hash.new
     end
 
-    #@selected_picture = params[:picture] || session[:picture] || {}
     if params[:picture] !=nil 
       params[:picture].each do |key|
         session[:picture][key[0]] = 1
@@ -23,7 +19,6 @@ class DashboardController < ApplicationController
     end
     @selected_picture=session[:picture] || {}
     
-    #user_id = session[:user_id]
     user_id = current_user.id
     # crowd albums part
     @crowdAlbums = User.find_by_id(user_id).albums
@@ -62,7 +57,6 @@ class DashboardController < ApplicationController
     targetAlbum = Album.find(albumID)
     @album_name = targetAlbum.name
     @picture_list = targetAlbum.pictures
-    #user_id = session[:user_id]
     @user_name = User.find(current_user.id).name
   end
   
@@ -82,7 +76,6 @@ class DashboardController < ApplicationController
         namePathList = Picture.handleUpload(params[:upload], user_id)
         name = namePathList[0]
         path = namePathList[1]
-        #render :text => "File has been uploaded successfully"
       
         #create new picture tuple
         newPicture = Picture.create!(:name => name,:internal_link => path, :user_id => user_id, :album_id => newAlbum.id)   
