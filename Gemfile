@@ -23,7 +23,7 @@ group :development, :test do
   gem 'omniauth'
   gem 'omniauth-facebook'
   gem 'fb_graph'
-  gem 'factory_girl','2.2.0'
+  gem 'factory_girl', '2.2.0'
 end
 
 group :production do
@@ -37,11 +37,11 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'sass-rails', "~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
   gem 'therubyracer'
-  gem "twitter-bootstrap-rails"
+  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails'

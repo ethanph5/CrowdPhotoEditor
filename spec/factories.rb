@@ -1,6 +1,7 @@
 Factory.define :user do |u|
-  u.name 'Lisa'
+  u.name 'lisa'
   u.email 'sth@gmail.com'
-  u.password '123'
-  u.credit '100'
+  u.password '111111'
+  #u.credit '100'
+
 end

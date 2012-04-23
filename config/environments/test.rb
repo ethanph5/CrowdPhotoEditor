@@ -37,7 +37,11 @@ Crowd::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
   
+  
+  
   config.assets.compile = true
   
   OmniAuth.config.test_mode = true
+  #OmniAuth.config.add_mock(:provider => "facebook", :info => {:name => "lisa", :email => 'lol@gmail.com'}, :uid => '123456790')
+
 end

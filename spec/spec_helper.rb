@@ -4,7 +4,11 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'simplecov'
+require "omniauth"
+require 'factory_girl'
+FactoryGirl.find_definitions
 SimpleCov.start 'rails'
+
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -31,4 +35,12 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
+  
+  config.include Devise::TestHelpers, :type => :controller
+  
 end
+
+OmniAuth.config.test_mode = true 
+#OmniAuth.config.add_mock(:facebook, { 
+ # :info => {:name => "lisa", :email => 'lol@gmail.com'}, :uid => '123456790'}) 
+  
