@@ -149,3 +149,11 @@ div.upload-action{
 	padding-left: 20px;
 	
 }
+
+#sub_notice{
+	color: green;
+}
+
+#sub_error{
+	color: red;	
+}
