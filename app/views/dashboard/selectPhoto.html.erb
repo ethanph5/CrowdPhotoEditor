@@ -8,7 +8,6 @@
       <!--DEBUG: the following needs to be modify-->
       <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
         <% @picture_list.each do |picture| %>
-        <%= image_tag(picture.internal_link, :alt => picture.internal_link)%>
         <br/>
         <%= check_box_tag "picture[#{picture.id}]", 1 %> <!--"picture[#{picture.id}]"-->
         <%= picture.name %>

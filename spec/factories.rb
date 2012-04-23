@@ -1,3 +1,4 @@
+
 FactoryGirl.define do
   factory :user do
     name 'Lisa'
@@ -6,3 +7,4 @@ FactoryGirl.define do
     credit '100'
   end
 end 
+

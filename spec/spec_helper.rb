@@ -4,13 +4,21 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'simplecov'
+require "omniauth"
+require 'factory_girl'
+FactoryGirl.find_definitions
 SimpleCov.start 'rails'
+
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  def test_sign_in(user)
+    user.authenticate!
+    controller.sign_in(user)
+  end
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -33,7 +41,10 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   
   config.include Devise::TestHelpers, :type => :controller
-
-  
   
 end
+
+OmniAuth.config.test_mode = true 
+#OmniAuth.config.add_mock(:facebook, { 
+ # :info => {:name => "lisa", :email => 'lol@gmail.com'}, :uid => '123456790'}) 
+  
