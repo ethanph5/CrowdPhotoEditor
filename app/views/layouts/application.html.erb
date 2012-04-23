@@ -20,7 +20,10 @@
 			<div class="nav-collapse">
 			<ul class="nav pull-right">
 				<% if user_signed_in? %>
-				Signed in as <%= current_user.email %>. Not you?
+				<li><a href="/dashboard/uploadPhotoToNew">
+					<i class="icon-picture icon-white"></i> Upload New Photo</a></li>
+				<li><a href="/dashboard/specifyTask">
+					<i class="icon-ok-sign icon-white"></i> Done Selection</a></li>
 				<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
 				<% else %>
 				<li><%= link_to "Sign up", new_user_registration_path %></li>

@@ -13,7 +13,7 @@ Background:
 
   Given I have selected picture "picture[1]" from album "college"
 
-  When I press "Done Selection"
+  When I follow "Done Selection"
   Then I should be on the specify task page
   Then I should see "college_1.png"
   
@@ -47,5 +47,5 @@ Scenario: Specify the task and number of results I want
   
   When I press "Submit"
   Then I should be on the dashboard page
-  Then I should see "Task(s) submitted"
+  Then I should see "The task for college_1.png has been submitted successfully."
   

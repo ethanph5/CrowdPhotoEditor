@@ -9,7 +9,7 @@ Crowd::Application.routes.draw do
   match 'dashboard/selectAlbum'
   match 'dashboard/specifyTask'
   match 'dashboard/reviewTask'
-  
+  match 'dashboard/showPhoto'
   match 'dashboard/uploadPhotoToExisting'
   match 'dashboard/submit'
   match 'mobilework/submit_task'

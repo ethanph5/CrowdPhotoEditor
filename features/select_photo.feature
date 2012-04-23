@@ -19,12 +19,11 @@ Scenario: select the existing photo
 
   Then I press "Continue"
   Then I should be on the dashboard page
-  And I should see "1 Picture(s) selected"
-  And I should see "college_1.png"
+  And I should see "Picture Selection: 01 picture(s) selected"
   
   
 Scenario: Upload a new photo and add to an existing album  
-  When I press "Upload"
+  When I follow "Upload New Photo"
   Then I should be on the upload photo to new album page
   When I follow "add to an existing album"
   Then I should be on the select album page
@@ -39,7 +38,7 @@ Scenario: Upload a new photo and add to an existing album
   And I should see "college_2.png"
   
 Scenario: Upload a new photo to a new album
-  When I press "Upload"
+  When I follow "Upload New Photo"
   Then I should be on the upload photo to new album page
   When I fill in "albumName" with "Graduation Commencement"
 

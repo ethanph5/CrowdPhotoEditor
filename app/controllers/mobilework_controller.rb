@@ -11,6 +11,9 @@ class MobileworkController < ApplicationController
     taskTable = params[:taskTable] #key is picture id, value is the task string
     resultTable = params[:resultTable] #key is picture id, value is the # of result the user wants
     
+    submission_notice = []
+    submission_error = []
+    
     picIDlist.each do |id|
       intID = id.to_i
       task = taskTable[id]
@@ -39,12 +42,16 @@ class MobileworkController < ApplicationController
         response = http.request(req)
     
         if response.code == "201"
-            puts response["location"] #response["location"] is http://sandbox.mobileworks.com/api/v1/tasks/229/
+          submission_notice << "The task for #{Picture.find(intID).name} has been submitted successfully." 
+          session.delete(:picture) #clear session[picture] here
+            #puts response["location"] #response["location"] is http://sandbox.mobileworks.com/api/v1/tasks/229/
         else
-            puts "Error. Response code: " + response.code
+          submission_error << "Sorry! The task for #{Picture.find(intID).name} has NOT been submitted successfully. Please try again!"   
+            #puts "Error. Response code: " + response.code
         end
       }
     end
-    redirect_to :controller => :dashboard, :action => :index and return
+    
+    redirect_to :controller => :dashboard, :action => :index, :submission_notice => submission_notice, :submission_error => submission_error, :selPic => true and return
   end  
 end
