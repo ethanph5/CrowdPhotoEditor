@@ -80,10 +80,12 @@ class AuthorizationController < ApplicationController
           if !auth
             current_user.authorizations.create(:provider => provider, :uid => uid, :token => token)
             flash[:notice] = 'Sign in via ' + provider.capitalize + ' has been added to your account.'
-            redirect_to authorizations_path
+            #redirect_to authorizations_path
+            redirect_to :controller => :dashboard, :action => :index
           else
             flash[:notice] = authorization_route.capitalize + ' is already linked to your account.'
-            redirect_to authorizations_path
+            #redirect_to authorizations_path
+            redirect_to :controller => :dashboard, :action => :index 
           end  
         end  
       else

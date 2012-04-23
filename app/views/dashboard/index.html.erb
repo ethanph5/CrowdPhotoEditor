@@ -18,7 +18,7 @@
 	</div>
 	</div>
 	
-    <h4 id="greet" >Hello, <%= @user_name%></h4><br/>
+    <h4 id="greet" >Hello, <%= @user_name%>. Your current credit: <span class="badge badge-info">$<%=current_user.credit%></span></h4><br/>
     
     <% if params[:submission_notice] %>
     	<% if params[:submission_notice] != [] %>
