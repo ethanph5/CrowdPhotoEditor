@@ -66,7 +66,7 @@ class AuthorizationController < ApplicationController
                 #user.confirm!
   
                 # flash and sign in
-                flash[:myinfo] = 'Your account on CommunityGuides has been created via ' + provider.capitalize + '. In your profile you can change your personal information and add a local password.'
+                flash[:notice] = 'Your account has been created via ' + provider.capitalize + '. In your profile you can change your personal information and add a local password.'
                 sign_in_and_redirect(:user, user)
               end
             else

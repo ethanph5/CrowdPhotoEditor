@@ -39,29 +39,26 @@
 	    	<% end %>   	
 	    <% end %>
 	<% end %>    
-    
-    
+       
     <div class= "picture-selection">     
       <BLOCKQUOTE>
       <h4 class="pic-selection-title">Picture Selection:</h4>
       <% if @selected_picture == {} or params[:submission_error] or params[:submission_notice] %>
         <h5><span class="badge">0</span>  picture selected</h5>
       <% else %>     
-        <h5><span class="badge">0<%= @pictureSelected.length %></span>  picture(s) selected</h5>
+        <h5><span class="badge badge-success"><%= @pictureSelected.length %></span>  picture(s) selected</h5>
         <% @pictureSelected.each do |pic| %>
           <li><%= pic.name %></li>
         <% end %>  
       <% end %>
       <BLOCKQUOTE>    	
-    </div>
-    
-    
+    </div>  
     
     <div class= "albums-list">
     	<div class="albums-header">
 	    	<h4 class="album-list-title">Your Album(s):</h4>
-	    	<span id = "facebook-label" class="label">In Facebook</span>
-	    	<span class="label label-inverse">In Crowd</span>	
+	    	<% if not @albums.nil?%><span id = "facebook-label" class="label">In Facebook</span><%end%>
+	    	<% if not current_user.albums.empty? %><span class="label label-inverse">In Crowd</span><%end%>	
     	</div>
     	<br/>
     	<div class="facebook-area">
@@ -90,10 +87,13 @@
   
     <% if not current_user.albums.empty? %>
   	<div class="crowd-albums">
-  	<% current_user.albums.each do |item|%>
+  	<% current_user.albums.each do |album|%>
   	<div class="crowd-album">
+  	<div class="picture-frame">
+  	<%= link_to image_tag(album.pictures[0].internal_link, :alt => album.name), :action => :selectPhoto,  :album_id => album.id%>
+  	</div>
   	<div class="album-info">
-    <p><%= link_to item.name, {:action => "selectPhoto" , :album_id => item.id}, :class => "album-name" %></p>
+    <p><%= link_to album.name, {:action => "selectPhoto" , :album_id => album.id}, :class => "album-name" %></p>
     </div>
     </div>
   	<% end %>
