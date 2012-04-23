@@ -1,0 +1,14 @@
+<title><% @page_title = "Photo"%></title>
+<h3>Album: <span id = "facebook-label" class="label"><%= @fb_album_name%></span></h3>
+<br/>
+<div class="facebook-albums">
+<% @fb_pictures.each do |picture|%>
+<div class= "facebook-picture">
+<div class="picture-frame">
+<a href=<%= picture.source%>>
+<img src=<%= picture.source%> alt=<%= picture.name%>>
+</a>
+</div>
+</div>
+<%end%>
+</div>

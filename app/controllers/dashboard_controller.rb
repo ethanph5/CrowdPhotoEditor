@@ -29,6 +29,19 @@ class DashboardController < ApplicationController
     else
     end
     @pictureSelected = Picture.find(@selected_picture.keys) 
+    
+  end
+  
+  def showPhoto
+    fb_album_id = params[:fb_album_id]
+    token = Authorization.find(current_user.id).token
+    albums = current_user.grap_facebook_albums(token)
+    albums.each do |album|
+      if album.identifier == fb_album_id
+        @fb_pictures = album.photos
+        @fb_album_name = album.name
+      end
+    end
   end
   
   def selectPhoto  #checkboxes page
