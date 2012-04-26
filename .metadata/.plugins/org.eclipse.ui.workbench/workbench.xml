@@ -17,9 +17,10 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="84" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="com.aptana.editor.css" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="com.aptana.editor.text" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="com.aptana.editor.erb.html" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="com.aptana.editor.text" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="com.aptana.editor.erb.html" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="com.aptana.editor.ruby" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -33,31 +34,21 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
-<part id="3"/>
-<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="com.aptana.editor.ruby" name="routes.rb" partName="routes.rb" title="routes.rb" tooltip="/home/saasbook/CrowdPhotoEditor/config/routes.rb" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/saasbook/CrowdPhotoEditor/config/routes.rb"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="343" selectionTopPixel="0"/>
+<editor id="com.aptana.editor.text" name="check_notification.feature" partName="check_notification.feature" title="check_notification.feature" tooltip="/home/saasbook/CrowdPhotoEditor/features/check_notification.feature" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/saasbook/CrowdPhotoEditor/features/check_notification.feature"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1204" selectionTopPixel="144"/>
 </editor>
-<editor id="com.aptana.editor.ruby" name="mobilework_controller.rb" partName="mobilework_controller.rb" title="mobilework_controller.rb" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/mobilework_controller.rb" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/mobilework_controller.rb"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="772" selectionTopPixel="130"/>
+<editor id="com.aptana.editor.ruby" name="dashboard_steps.rb" partName="dashboard_steps.rb" title="dashboard_steps.rb" tooltip="/home/saasbook/CrowdPhotoEditor/features/step_definitions/dashboard_steps.rb" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/saasbook/CrowdPhotoEditor/features/step_definitions/dashboard_steps.rb"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2934" selectionTopPixel="977"/>
 </editor>
-<editor id="com.aptana.editor.erb.html" name="new.html.erb" partName="new.html.erb" title="new.html.erb" tooltip="/home/saasbook/CrowdPhotoEditor/app/views/devise/registrations/new.html.erb" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/saasbook/CrowdPhotoEditor/app/views/devise/registrations/new.html.erb"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="501" selectionTopPixel="0"/>
-</editor>
-<editor id="com.aptana.editor.ruby" name="application.rb" partName="application.rb" title="application.rb" tooltip="/home/saasbook/CrowdPhotoEditor/config/application.rb" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/saasbook/CrowdPhotoEditor/config/application.rb"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="84" selectionTopPixel="0"/>
-</editor>
-<editor activePart="true" focus="true" id="com.aptana.editor.ruby" name="Gemfile" partName="Gemfile" title="Gemfile" tooltip="/home/saasbook/CrowdPhotoEditor/Gemfile" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/saasbook/CrowdPhotoEditor/Gemfile"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="914" selectionTopPixel="113"/>
+<editor activePart="true" focus="true" id="com.aptana.editor.text" name="get_results.feature" partName="get_results.feature" title="get_results.feature" tooltip="/home/saasbook/CrowdPhotoEditor/features/get_results.feature" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/saasbook/CrowdPhotoEditor/features/get_results.feature"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1328" selectionTopPixel="331"/>
 </editor>
 </editors>
 <views>
@@ -75,7 +66,7 @@
 <viewState CommonNavigator.LINKING_ENABLED="0" GitChangedFilesFilterEnabled=""/>
 </view>
 </views>
-<perspectives activePart="com.aptana.editor.ruby" activePerspective="com.aptana.ui.WebPerspective">
+<perspectives activePart="com.aptana.editor.text" activePerspective="com.aptana.ui.WebPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="com.aptana.ui.internal.WebPerspectiveFactory" id="com.aptana.ui.WebPerspective" label="Web"/>
 <alwaysOnActionSet id="com.aptana.browser.actionSet"/>
@@ -142,7 +133,7 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.19983137" ratioLeft="237" ratioRight="949" relationship="2" relative="left"/>
+<info part="org.eclipse.ui.editorss" ratio="0.30038023" ratioLeft="237" ratioRight="552" relationship="2" relative="left"/>
 <info folder="true" part="terminalArea" ratio="0.74216026" ratioLeft="426" ratioRight="148" relationship="4" relative="org.eclipse.ui.editorss">
 <folder appearance="2" expanded="2">
 <page content="com.aptana.terminal.views.terminal" label="LabelNotFound"/>
@@ -167,173 +158,160 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/mobilework_controller.rb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" uri="file:/home/saasbook/CrowdPhotoEditor/app/views/dashboard/reviewTask.html.erb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/dashboard_controller.rb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" uri="file:/home/saasbook/CrowdPhotoEditor/app/views/account/welcome.html.erb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" uri="file:/home/saasbook/CrowdPhotoEditor/app/views/dashboard/index.html.erb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/Gemfile"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" uri="file:/home/saasbook/CrowdPhotoEditor/app/views/dashboard/specifyTask.html.erb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" uri="file:/home/saasbook/CrowdPhotoEditor/app/views/devise/registrations/edit.html.erb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" uri="file:/home/saasbook/CrowdPhotoEditor/app/views/devise/registrations/new.html.erb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" uri="file:/home/saasbook/CrowdPhotoEditor/app/views/devise/sessions/new.html.erb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/config/initializers/devise.rb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/config/routes.rb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/mobilework_controller.rb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/dashboard_controller.rb~"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.text" uri="file:/home/saasbook/CrowdPhotoEditor/features/specify_task.feature"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/config/application.rb"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/Gemfile"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.text" uri="file:/home/saasbook/CrowdPhotoEditor/features/check_notification.feature"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.text" uri="file:/home/saasbook/CrowdPhotoEditor/features/specify_result.feature"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" uri="file:/home/saasbook/CrowdPhotoEditor/features/step_definitions/dashboard_steps.rb"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.text" uri="file:/home/saasbook/CrowdPhotoEditor/features/get_results.feature"/>
 </editors>
-<item historyLabel="dashboard_controller.rb" index="2">
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="777" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="756" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="780" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2930" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="859" y="0"/>
+</item>
+<item historyLabel="specify_result.feature" index="1">
+<position info="not_deleted" x="758" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2930" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2530" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2574" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2628" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2150" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="862" y="0"/>
+</item>
+<item historyLabel="specify_result.feature" index="1">
+<position info="not_deleted" x="758" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2973" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="924" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="105" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="669" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1160" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="401" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1328" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="1140" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1163" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="1415" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1305" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="890" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1328" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="890" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="1072" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="1510" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1160" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="589" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1160" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="1204" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1160" y="0"/>
+</item>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="1204" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
 <position/>
 </item>
-<item historyLabel="mobilework_controller.rb" index="0">
-<position info="not_deleted" x="1077" y="0"/>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1163" y="0"/>
 </item>
-<item historyLabel="welcome.html.erb" index="3">
-<position info="not_deleted" x="511" y="0"/>
+<item historyLabel="check_notification.feature" index="0">
+<position info="not_deleted" x="1204" y="0"/>
 </item>
-<item historyLabel="index.html.erb" index="4">
+<item historyLabel="dashboard_steps.rb" index="2">
 <position/>
 </item>
-<item historyLabel="index.html.erb" index="4">
+<item historyLabel="get_results.feature" index="3">
 <position/>
 </item>
-<item historyLabel="dashboard_controller.rb" index="2">
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2935" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1160" y="0"/>
+</item>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2935" y="0"/>
+</item>
+<item historyLabel="get_results.feature" index="3">
 <position/>
 </item>
-<item historyLabel="mobilework_controller.rb" index="0">
-<position info="not_deleted" x="1077" y="0"/>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2935" y="0"/>
 </item>
-<item historyLabel="index.html.erb" index="4">
-<position/>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="849" y="0"/>
 </item>
-<item historyLabel="dashboard_controller.rb" index="2">
-<position/>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2935" y="0"/>
 </item>
-<item historyLabel="mobilework_controller.rb" index="0">
-<position info="not_deleted" x="1077" y="0"/>
+<item historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1157" y="0"/>
 </item>
-<item historyLabel="reviewTask.html.erb" index="1">
-<position info="not_deleted" x="365" y="0"/>
+<item historyLabel="dashboard_steps.rb" index="2">
+<position info="not_deleted" x="2934" y="0"/>
 </item>
-<item historyLabel="index.html.erb" index="4">
-<position/>
-</item>
-<item historyLabel="Gemfile" index="5">
-<position info="not_deleted" x="436" y="0"/>
-</item>
-<item historyLabel="index.html.erb" index="4">
-<position/>
-</item>
-<item historyLabel="reviewTask.html.erb" index="1">
-<position info="not_deleted" x="365" y="0"/>
-</item>
-<item historyLabel="specifyTask.html.erb" index="6">
-<position info="not_deleted" x="749" y="0"/>
-</item>
-<item historyLabel="edit.html.erb" index="7">
-<position/>
-</item>
-<item historyLabel="new.html.erb" index="8">
-<position info="not_deleted" x="1051" y="0"/>
-</item>
-<item historyLabel="edit.html.erb" index="7">
-<position/>
-</item>
-<item historyLabel="new.html.erb" index="9">
-<position info="not_deleted" x="678" y="0"/>
-</item>
-<item historyLabel="edit.html.erb" index="7">
-<position/>
-</item>
-<item historyLabel="specifyTask.html.erb" index="6">
-<position info="not_deleted" x="1271" y="0"/>
-</item>
-<item historyLabel="index.html.erb" index="4">
-<position info="not_deleted" x="1403" y="0"/>
-</item>
-<item historyLabel="edit.html.erb" index="7">
-<position info="not_deleted" x="815" y="0"/>
-</item>
-<item historyLabel="index.html.erb" index="4">
-<position info="not_deleted" x="1425" y="0"/>
-</item>
-<item historyLabel="devise.rb" index="10">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="routes.rb" index="11">
-<position info="not_deleted" x="588" y="0"/>
-</item>
-<item historyLabel="devise.rb" index="10">
-<position info="not_deleted" x="10417" y="0"/>
-</item>
-<item historyLabel="index.html.erb" index="4">
-<position info="not_deleted" x="1073" y="0"/>
-</item>
-<item historyLabel="specifyTask.html.erb" index="6">
-<position info="not_deleted" x="1271" y="0"/>
-</item>
-<item historyLabel="reviewTask.html.erb" index="1">
-<position info="not_deleted" x="365" y="0"/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="0">
-<position info="not_deleted" x="1077" y="0"/>
-</item>
-<item historyLabel="dashboard_controller.rb" index="2">
-<position/>
-</item>
-<item historyLabel="routes.rb" index="11">
-<position info="not_deleted" x="343" y="0"/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="12">
-<position info="not_deleted" x="510" y="0"/>
-</item>
-<item historyLabel="new.html.erb" index="8">
-<position info="not_deleted" x="501" y="0"/>
-</item>
-<item historyLabel="dashboard_controller.rb~" index="13">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="dashboard_controller.rb" index="2">
-<position info="not_deleted" x="1272" y="0"/>
-</item>
-<item historyLabel="new.html.erb" index="8">
-<position info="not_deleted" x="501" y="0"/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="12">
-<position info="not_deleted" x="1298" y="0"/>
-</item>
-<item historyLabel="specify_task.feature" index="14">
-<position info="not_deleted" x="687" y="0"/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="12">
-<position info="not_deleted" x="1298" y="0"/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="12">
-<position/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="12">
-<position/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="12">
-<position/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="12">
-<position/>
-</item>
-<item historyLabel="mobilework_controller.rb" index="12">
-<position info="not_deleted" x="772" y="0"/>
-</item>
-<item historyLabel="application.rb" index="15">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="application.rb" index="15">
-<position info="not_deleted" x="84" y="0"/>
-</item>
-<item active="true" historyLabel="Gemfile" index="16">
-<position info="not_deleted" x="0" y="0"/>
+<item active="true" historyLabel="get_results.feature" index="3">
+<position info="not_deleted" x="1157" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -353,50 +331,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="Gemfile" tooltip="/home/saasbook/CrowdPhotoEditor/Gemfile">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/Gemfile"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.text" name="get_results.feature" tooltip="/home/saasbook/CrowdPhotoEditor/features/get_results.feature">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/features/get_results.feature"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="application.rb" tooltip="/home/saasbook/CrowdPhotoEditor/config/application.rb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/config/application.rb"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="dashboard_steps.rb" tooltip="/home/saasbook/CrowdPhotoEditor/features/step_definitions/dashboard_steps.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/features/step_definitions/dashboard_steps.rb"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.text" name="specify_task.feature" tooltip="/home/saasbook/CrowdPhotoEditor/features/specify_task.feature">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/features/specify_task.feature"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.text" name="specify_result.feature" tooltip="/home/saasbook/CrowdPhotoEditor/features/specify_result.feature">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/features/specify_result.feature"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="dashboard_controller.rb" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/dashboard_controller.rb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/dashboard_controller.rb"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.text" name="check_notification.feature" tooltip="/home/saasbook/CrowdPhotoEditor/features/check_notification.feature">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/features/check_notification.feature"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="dashboard_controller.rb~" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/dashboard_controller.rb~">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/dashboard_controller.rb~"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="20120419004937_devise_create_users.rb" tooltip="/home/saasbook/CrowdPhotoEditor/db/migrate/20120419004937_devise_create_users.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/db/migrate/20120419004937_devise_create_users.rb"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" name="new.html.erb" tooltip="/home/saasbook/CrowdPhotoEditor/app/views/devise/registrations/new.html.erb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/views/devise/registrations/new.html.erb"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="spec_helper.rb" tooltip="/home/saasbook/CrowdPhotoEditor/spec/spec_helper.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/spec/spec_helper.rb"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="mobilework_controller.rb" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/mobilework_controller.rb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/mobilework_controller.rb"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="render_views.rb" tooltip="/home/saasbook/CrowdPhotoEditor/spec/support/render_views.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/spec/support/render_views.rb"/>
+</file>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="authorization_controller.rb" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/authorization_controller.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/authorization_controller.rb"/>
+</file>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="account_controller.rb" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/account_controller.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/account_controller.rb"/>
+</file>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="application_controller.rb" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/application_controller.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/application_controller.rb"/>
 </file>
 <file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="routes.rb" tooltip="/home/saasbook/CrowdPhotoEditor/config/routes.rb">
 <persistable uri="file:/home/saasbook/CrowdPhotoEditor/config/routes.rb"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="devise.rb" tooltip="/home/saasbook/CrowdPhotoEditor/config/initializers/devise.rb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/config/initializers/devise.rb"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="dashboard_controller.rb" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/dashboard_controller.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/dashboard_controller.rb"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" name="edit.html.erb" tooltip="/home/saasbook/CrowdPhotoEditor/app/views/devise/registrations/edit.html.erb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/views/devise/registrations/edit.html.erb"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="mobilework_controller.rb" tooltip="/home/saasbook/CrowdPhotoEditor/app/controllers/mobilework_controller.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/controllers/mobilework_controller.rb"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" name="index.html.erb" tooltip="/home/saasbook/CrowdPhotoEditor/app/views/dashboard/index.html.erb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/views/dashboard/index.html.erb"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="mobilework_controller_spec.rb" tooltip="/home/saasbook/CrowdPhotoEditor/spec/controllers/mobilework_controller_spec.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/spec/controllers/mobilework_controller_spec.rb"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" name="new.html.erb" tooltip="/home/saasbook/CrowdPhotoEditor/app/views/devise/sessions/new.html.erb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/views/devise/sessions/new.html.erb"/>
-</file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" name="welcome.html.erb" tooltip="/home/saasbook/CrowdPhotoEditor/app/views/account/welcome.html.erb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/views/account/welcome.html.erb"/>
-</file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.erb.html" name="selectPhoto.html.erb" tooltip="/home/saasbook/CrowdPhotoEditor/app/views/dashboard/selectPhoto.html.erb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/app/views/dashboard/selectPhoto.html.erb"/>
-</file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="schema.rb" tooltip="/home/saasbook/CrowdPhotoEditor/db/schema.rb">
-<persistable uri="file:/home/saasbook/CrowdPhotoEditor/db/schema.rb"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.aptana.editor.ruby" name="dashboard_controller_spec.rb" tooltip="/home/saasbook/CrowdPhotoEditor/spec/controllers/dashboard_controller_spec.rb">
+<persistable uri="file:/home/saasbook/CrowdPhotoEditor/spec/controllers/dashboard_controller_spec.rb"/>
 </file>
 </mruList>
 </workbench>

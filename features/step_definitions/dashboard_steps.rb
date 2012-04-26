@@ -57,7 +57,7 @@ Given /^(?:|I )have successfully logged in using email "([^"]*)",password "([^"]
   step %Q{I am on the Sign In page}
   step %Q{I fill in "user_email" with "#{email}"}
   step %Q{I fill in "user_password" with "#{pwd}"}
-  step %Q{I press "Sign in"}  
+  step %Q{I press "Sign in"}
   step %Q{I am on the home page}
 end
 
@@ -65,4 +65,25 @@ Given /^(?:|I )have selected picture "([^"]*)" from album "([^"]*)"/ do |picture
   step %Q{I follow "#{album_name}"}
   step %Q{I check "#{picture_name}"}
   step %Q{I press "Continue"}
+end
+
+
+Given /^(?:|I )have successfully submitted a task "([^"]*)" and number of result "([^"]*)" for "([^"]*)"/ do |task,numResult,pic_name|
+  step %Q{I fill in "tasks[1]" with "#{task}"}
+  step %Q{I fill in "results[1]" with "#{numResult}"}
+
+  step %Q{I press "Tasks Review"}
+  step %Q{I should be on the review task page}
+  step %Q{I should see "#{pic_name}"}
+
+  step %Q{I should see "#{task}" in "task"}
+  step %Q{I should see number "#{numResult}" in "result"}
+  
+  step %Q{I press "Submit"}
+  step %Q{I should be on the dashboard page}
+end
+
+
+Given /^(?:|I )see a callback alert/
+
 end
