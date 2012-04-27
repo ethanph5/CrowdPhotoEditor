@@ -162,4 +162,22 @@ describe DashboardController do
       response.should render_template('/dashboard/index')
     end
   end
+  
+  describe 'we see notifications alert' do
+     before :each do
+      @user = mock('User')
+      @user.stub(:id).and_return(1)
+      @user.stub(:name).and_return('lisa')
+      
+      
+    end
+      it 'should go to the notification page' do
+        post :displayNotifications, {:current_user.id =>@user.id}
+        response.should render_template('/dashboard/notifications') 
+      end
+      it 'should redirect to index page after clicking finish review button' do
+        post :index
+        response.should render_template('/dashboard/index')
+      end
+    end 
 end
