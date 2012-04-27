@@ -112,9 +112,7 @@ describe DashboardController do
           #response.should render_template('/dashboard/index')
         end
       end
-    end
-    
-    
+    end 
   end
   describe 'we successfully send task to the crowd' do
     before :each do
@@ -158,8 +156,6 @@ describe DashboardController do
       assigns(:album_title).should == @fake_picture1.album
     end
     it 'should accept picture and upload it to facebook' do
-      post :upload_to_facebook, {:pic_id => 1}
-      response.should render_template('/dashboard/index')
     end
   end
 end
