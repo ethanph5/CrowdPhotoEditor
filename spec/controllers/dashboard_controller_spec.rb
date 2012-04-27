@@ -112,6 +112,8 @@ describe DashboardController do
           #response.should render_template('/dashboard/index')
         end
       end
-    end 
+    end
+    
+    
   end
 end
