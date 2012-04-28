@@ -33,21 +33,6 @@
               <% end %>
             </tr>
           <% end %>
-          <% @picturefbSelected.each do |pic| %>
-            <tr>
-                <td height="100" ><%= pic %></td>
-              <% if @specify_task == {} %>
-                <td height="100" > <%= text_area_tag "tasks[#{pic}]", '', :size => '50x5' %></td>
-              <% else %>
-                <td height="100"><%= text_area_tag "tasks[#{pic}]", @specify_task["#{pic}"], :size => '50x5' %></td>
-              <% end %>
-              <% if @specify_result == {} %>
-                <td height="100"><%= text_field_tag "results[#{pic}]", '', :size => '10' %></td>
-              <% else %>
-                <td height="100"><%= text_field_tag "results[#{pic}]", @specify_result["#{pic}"], :size => '10' %></td>
-              <% end %>
-            </tr>
-          <% end %>
         </table>
         <br/><br/>
 

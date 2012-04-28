@@ -19,6 +19,17 @@ class DashboardController < ApplicationController
     end
     @selected_picture=session[:picture] || {}
     
+    if session[:picturefb]==nil
+      session[:picturefb]=Hash.new
+    end
+
+    if params[:picturefb] !=nil 
+      params[:picturefb].each do |key|
+        session[:picturefb][key[0]] = 1
+      end
+    end
+    @selected_picturefb=session[:picturefb] || {}
+    
     user_id = current_user.id
     # crowd albums part
     @crowdAlbums = User.find_by_id(user_id).albums
@@ -37,7 +48,7 @@ class DashboardController < ApplicationController
     else
     end
     @pictureSelected = Picture.find(@selected_picture.keys) 
-    
+    @picturefbSelected = @selected_picturefb.keys
   end
   
   def showPhoto
@@ -123,13 +134,15 @@ class DashboardController < ApplicationController
   end
 
   def specifyTask
-    if session[:picture] == {}
+    if session[:picture] == {} and session[:picturefb] == {}
       flash[:error] = "Please Select Photo(s) Before Specifying Task(s)"
       redirect_to :action => :index
     end
 
     @selected_picture = session[:picture]
+    @selected_picturefb = session[:picturefb]
     @pictureSelected = Picture.find(@selected_picture.keys)
+    @picturefbSelected = @selected_picturefb.keys
     @specify_task = params[:tasks] || session[:tasks] || {}
     @specify_result = params[:results] || session[:results] || {}
     user_id = current_user.id
@@ -138,7 +151,9 @@ class DashboardController < ApplicationController
 
   def reviewTask
     @selected_picture = session[:picture]
+    @selected_picturefb = session[:picturefb]
     @pictureSelected = Picture.find(@selected_picture.keys)
+    @picturefbSelected = @selected_picturefb.keys
     @specify_task = params[:tasks] || session[:tasks]
     session[:tasks] = @specify_task
     @specify_result = params[:results] || session[:results]
@@ -149,8 +164,9 @@ class DashboardController < ApplicationController
   
   def submit
     @selected_pictures = session[:picture] #hashTable: key is pic id, value is 1
+    @selected_picturesfb = session[:picturefb]
     @taskTable = session[:tasks] #key is picture id, value is the task string
     @resultTable = session[:results] #key is picture id, value is the # of result the user wants
-    redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :taskTable => @taskTable, :resultTable => @resultTable
+    redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :picfbTable => @selected_picturesfb, :taskTable => @taskTable, :resultTable => @resultTable
   end
 end

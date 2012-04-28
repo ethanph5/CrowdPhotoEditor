@@ -18,7 +18,7 @@
 	</div>
 	</div>
 	
-    <h4 id="greet" >Hello, <%= @user_name%>. Your current credit: <span class="badge badge-info">$<%=current_user.credit%></span></h4><br/>
+    <h4 id="greet" >Hello, <%= @user_name%></span></h4><br/>
     
     <% if params[:submission_notice] %>
     	<% if params[:submission_notice] != [] %>
@@ -43,13 +43,16 @@
     <div class= "picture-selection">     
       <BLOCKQUOTE>
       <h4 class="pic-selection-title">Picture Selection:</h4>
-      <% if @selected_picture == {} or params[:submission_error] or params[:submission_notice] %>
+      <% if (@selected_picture == {} and @selected_picturefb == {}) or params[:submission_error] or params[:submission_notice] %>
         <h5><span class="badge">0</span> picture selected</h5>
       <% else %>     
-        <h5><span class="badge badge-success"><%= @pictureSelected.length %></span>  picture(s) selected</h5>
+        <h5><span class="badge badge-success"><%= @pictureSelected.length+@picturefbSelected.length %></span>  picture(s) selected</h5>
         <% @pictureSelected.each do |pic| %>
           <li><%= pic.name %></li>
-        <% end %>  
+        <% end %>
+        <% @picturefbSelected.each do |pic| %>
+          <li><%= pic %></li>
+        <% end %>
       <% end %>
       <BLOCKQUOTE>    	
     </div>  

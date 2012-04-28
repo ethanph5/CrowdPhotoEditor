@@ -7,15 +7,11 @@ class DashboardController < ApplicationController
   def index  #displaying facebook albums
     session.delete(:tasks)
     session.delete(:results)
-    if params[:selPic] = 't'
-      session.delete(:picture)
-    end
 
     if session[:picture]==nil
       session[:picture]=Hash.new
     end
 
-    #@selected_picture = params[:picture] || session[:picture] || {}
     if params[:picture] !=nil 
       params[:picture].each do |key|
         session[:picture][key[0]] = 1
@@ -23,7 +19,17 @@ class DashboardController < ApplicationController
     end
     @selected_picture=session[:picture] || {}
     
-    #user_id = session[:user_id]
+    if session[:picturefb]==nil
+      session[:picturefb]=Hash.new
+    end
+
+    if params[:picturefb] !=nil 
+      params[:picturefb].each do |key|
+        session[:picturefb][key[0]] = 1
+      end
+    end
+    @selected_picturefb=session[:picturefb] || {}
+    
     user_id = current_user.id
     # crowd albums part
     @crowdAlbums = User.find_by_id(user_id).albums
@@ -42,6 +48,19 @@ class DashboardController < ApplicationController
     else
     end
     @pictureSelected = Picture.find(@selected_picture.keys) 
+    @picturefbSelected = @selected_picturefb.keys
+  end
+  
+  def showPhoto
+    fb_album_id = params[:fb_album_id]
+    token = Authorization.find(current_user.id).token
+    albums = current_user.grap_facebook_albums(token)
+    albums.each do |album|
+      if album.identifier == fb_album_id
+        @fb_pictures = album.photos
+        @fb_album_name = album.name
+      end
+    end
   end
   
   def selectPhoto  #checkboxes page
@@ -49,7 +68,6 @@ class DashboardController < ApplicationController
     targetAlbum = Album.find(albumID)
     @album_name = targetAlbum.name
     @picture_list = targetAlbum.pictures
-    #user_id = session[:user_id]
     @user_name = User.find(current_user.id).name
   end
   
@@ -69,7 +87,6 @@ class DashboardController < ApplicationController
         namePathList = Picture.handleUpload(params[:upload], user_id)
         name = namePathList[0]
         path = namePathList[1]
-        #render :text => "File has been uploaded successfully"
       
         #create new picture tuple
         newPicture = Picture.create!(:name => name,:internal_link => path, :user_id => user_id, :album_id => newAlbum.id)   
@@ -117,13 +134,15 @@ class DashboardController < ApplicationController
   end
 
   def specifyTask
-    if session[:picture] == {}
+    if session[:picture] == {} and session[:picturefb] == {}
       flash[:error] = "Please Select Photo(s) Before Specifying Task(s)"
       redirect_to :action => :index
     end
 
     @selected_picture = session[:picture]
+    @selected_picturefb = session[:picturefb]
     @pictureSelected = Picture.find(@selected_picture.keys)
+    @picturefbSelected = @selected_picturefb.keys
     @specify_task = params[:tasks] || session[:tasks] || {}
     @specify_result = params[:results] || session[:results] || {}
     user_id = current_user.id
@@ -132,7 +151,9 @@ class DashboardController < ApplicationController
 
   def reviewTask
     @selected_picture = session[:picture]
+    @selected_picturefb = session[:picturefb]
     @pictureSelected = Picture.find(@selected_picture.keys)
+    @picturefbSelected = @selected_picturefb.keys
     @specify_task = params[:tasks] || session[:tasks]
     session[:tasks] = @specify_task
     @specify_result = params[:results] || session[:results]
@@ -143,6 +164,7 @@ class DashboardController < ApplicationController
   
   def submit
     @selected_pictures = session[:picture] #hashTable: key is pic id, value is 1
+    @selected_picturesfb = session[:picturefb]
     @taskTable = session[:tasks] #key is picture id, value is the task string
     @resultTable = session[:results] #key is picture id, value is the # of result the user wants
     redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :taskTable => @taskTable, :resultTable => @resultTable

@@ -22,6 +22,13 @@
               <td height="100"><%= label_tag 'result', @specify_result["#{pic.id}"] %></td>
             </tr>
           <% end %>
+          <% @picturefbSelected.each do |pic| %>
+            <tr>
+              <td height="100"><%= pic %></td>
+              <td height="100"><%= label_tag 'task', @specify_task["#{pic}"] %></td>
+              <td height="100"><%= label_tag 'result', @specify_result["#{pic}"] %></td>
+            </tr>
+          <% end %>
         </table>
         <br/>
         <%= submit_tag 'Submit', :id => "continueButton" %>
