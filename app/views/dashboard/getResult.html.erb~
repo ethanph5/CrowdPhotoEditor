@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2 id="header-icon"></h2>
+      <h4 id="username_text"><big><b>Hello, <%= @user_name %></b></big></h4>
+    </div>
+    <br/>
+    <div class="bottom">
+    <h3>Finished Results:</h3>
+    <hr/>
+    <h3>Pending Results:</h3>
+    </div>    
+  </div>
+</body>
+</html>

@@ -1,3 +1,8 @@
+require "net/http"
+require "net/https"
+require "rubygems"
+require "json"
+
 class DashboardController < ApplicationController
   before_filter :authenticate_user!, :except => [:welcome] 
   
@@ -7,7 +12,43 @@ class DashboardController < ApplicationController
   def index  #displaying facebook albums
     session.delete(:tasks)
     session.delete(:results)
-
+    
+    queryList = Query.find_all_by_user_id(current_user.id)
+    pendingList = []
+    finishedList = []
+    queryList.each do |query|
+      
+      if query.result_link == ""
+        #ask the api if the task is finished or not
+        response = nil
+        url = URI(query.task_link)
+        http = Net::HTTP.new(url.host, 443)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.start do |http|
+          req = Net::HTTP::Get.new(url.path)
+          req.basic_auth("FelixXie","Phoenix1218118")
+          response = http.request(req)
+          #puts response.body
+        end
+        #debugger
+        parsed_json = ActiveSupport::JSON.decode(response.body)
+        
+        #if answer = "sth" # finished, update Query table, add it to finishedlist
+        if parsed_json["answer"] != ""
+          finishedList << query
+          query.result_link = parsed_json["answer"]
+          query.save
+        else #task not finished on api
+          pendingList << query
+        end
+      else #if result_link already exists in db
+        #dont ask the api, just add it to finished list, and do the counting  
+        finishedList << query
+      end
+    end
+    @len = finishedList.length
+#-------------------------------------------------------------
     if session[:picture]==nil
       session[:picture]=Hash.new
     end
@@ -167,6 +208,11 @@ class DashboardController < ApplicationController
     @selected_picturesfb = session[:picturefb]
     @taskTable = session[:tasks] #key is picture id, value is the task string
     @resultTable = session[:results] #key is picture id, value is the # of result the user wants
-    redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :taskTable => @taskTable, :resultTable => @resultTable
+    redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :picfbTable => @selected_picturesfb, :taskTable => @taskTable, :resultTable => @resultTable
+  end
+  
+  def getResult
+    user_id = current_user.id
+    @user_name = User.find(current_user.id).name
   end
 end
