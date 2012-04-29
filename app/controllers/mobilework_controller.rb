@@ -48,11 +48,14 @@ class MobileworkController < ApplicationController
           }
           req.body = query.to_json()
           response = http.request(req)
-    
+
           if response.code == "201"
             submission_notice << "The task for #{Picture.find(intID).name} has been submitted successfully." 
             session.delete(:picture) #clear session[picture] here
+            newResponse = response["location"] + "?format=json/"
             #puts response["location"] #response["location"] is http://sandbox.mobileworks.com/api/v1/tasks/229/
+            Query.create!(:user_id => current_user.id, :task_link => newResponse, :result_link => "")
+          
           else
             submission_error << "Sorry! The task for #{Picture.find(intID).name} has NOT been submitted successfully. Please try again!"   
             #puts "Error. Response code: " + response.code
@@ -61,6 +64,8 @@ class MobileworkController < ApplicationController
       end
     end
     
+    
+    #-------------------------------------- facebook part ----------------------------
     if params[:picfbTable] != nil
       picfblist.each do |id|
         counter = counter + 1
@@ -85,12 +90,15 @@ class MobileworkController < ApplicationController
             "answerType" => "t"
           }
           req.body = query.to_json()
-          response = http.request(req)
-    
+          response = http.request(req)    
+          
           if response.code == "201"
             submission_notice << "The task for photo Facebook #{counter} has been submitted successfully." 
             session.delete(:picturefb) #clear session[picture] here
+            newResponse = response["location"] + "?format=json/"
             #puts response["location"] #response["location"] is http://sandbox.mobileworks.com/api/v1/tasks/229/
+            Query.create!(:user_id => current_user.id, :task_link => newResponse, :result_link => "")
+            
           else
             submission_error << "Sorry! The task for photo Facebook #{counter} has NOT been submitted successfully. Please try again!"   
             #puts "Error. Response code: " + response.code
@@ -99,6 +107,12 @@ class MobileworkController < ApplicationController
       end
     end
     
-    redirect_to :controller => :dashboard, :action => :index, :submission_notice => submission_notice, :submission_error => submission_error, :selPic => true and return
+    #notice = "YOu have the following tasks: "
+    #Query.find_all_by_user_id(current_user.id).each do |query|
+     # notice << query.task_link
+    #end
+    #flash[:notice] = notice
+    
+    redirect_to :controller => :dashboard, :action => :index, :submission_notice => submission_notice, :submission_error => submission_error and return
   end  
 end

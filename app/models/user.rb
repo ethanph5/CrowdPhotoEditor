@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :authorizations, :dependent => :destroy
   has_many :pictures, :dependent => :destroy
   has_many :albums, :dependent => :destroy
+  has_many :queries, :dependent => :destroy
   
   def grap_facebook_albums(token)
     facebook = authorizations.where(:provider => :facebook).first

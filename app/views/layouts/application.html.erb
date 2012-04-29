@@ -21,7 +21,7 @@
 			<ul class="nav pull-right">
 				<% if user_signed_in? %>
 				<li><a href="/dashboard/getResult">
-				  <i class="icon-envelope icon-white"></i> Inbox</a></li> 
+				  <i class="icon-envelope icon-white"></i> Inbox(<%= @len %>)</a></li> 
 				<li><a href="/dashboard/uploadPhotoToNew">
 					<i class="icon-picture icon-white"></i> Upload New Photo</a></li>
 				<li><a href="/dashboard/specifyTask">
