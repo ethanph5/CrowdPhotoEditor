@@ -21,7 +21,7 @@
 	</div>
 	</div>
 	
-    <h4 id="greet" >Hello, <%= @user_name%></span></h4><br/>
+    <h4 id="greet" >Hello, <%= @user_name%></h4><br/>
     
     <% if params[:submission_notice] %>
     	<% if params[:submission_notice] != [] %>
@@ -42,8 +42,9 @@
 	    	<% end %>   	
 	    <% end %>
 	<% end %>    
-       
+       <h5><span class="badge">0</span> picture selected</h5>
     <div class= "picture-selection">     
+    	
       <BLOCKQUOTE>
       <h4 class="pic-selection-title">Picture Selection:</h4>
       <% if (@selected_picture == {} and @selected_picturefb == {}) or params[:submission_error] or params[:submission_notice] %>
@@ -95,13 +96,15 @@
    <div class="crowd-albums">
    <% current_user.albums.each do |album|%>
    <div class="crowd-album">
-   <div class="picture-frame">
-   <%= link_to image_tag(album.pictures[0].internal_link, :alt => album.name), :action => :selectPhoto, :album_id => album.id%>
+	   <div class="picture-frame">
+	   <%= link_to image_tag(album.pictures[0].internal_link, :alt => album.name), :action => :selectPhoto, :album_id => album.id%>
+	   </div>
+	   <br/>
+	   <div class="album-info">
+	   <p><%= link_to album.name, {:action => "selectPhoto" , :album_id => album.id}, :class => "album-name" %></p>
+	   <small><%= album.pictures.length%> Photos</small> 
+	   </div>
    </div>
-   <div class="album-info">
-    <p><%= link_to album.name, {:action => "selectPhoto" , :album_id => album.id}, :class => "album-name" %></p>
-    </div>
-    </div>
    <% end %>
    </div>
    <% end %>
