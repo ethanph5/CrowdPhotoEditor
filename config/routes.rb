@@ -4,6 +4,7 @@ Crowd::Application.routes.draw do
   get "dashboard/index"
   post "/dashboard/index"
   
+  match 'dashboard/uploadToAWS'
   match 'dashboard/uploadPhotoToNew'
   match 'dashboard/selectPhoto'
   match 'dashboard/selectAlbum'

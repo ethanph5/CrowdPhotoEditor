@@ -24,9 +24,11 @@ group :development, :test do
   gem 'omniauth-facebook'
   gem 'fb_graph'
   gem 'factory_girl', '2.2.0'
+  gem 'aws-sdk'
 end
 
 group :production do
+  gem 'aws-sdk'
   gem 'pg'
   gem 'devise'
   gem 'omniauth'

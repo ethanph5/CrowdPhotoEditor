@@ -7,6 +7,10 @@
    	</div>
 	<%end%>
 	<div class = "btn-group">
+		<a class = "btn btn-success" href="/dashboard/uploadToAWS">
+		<i class="icon-picture icon-white"></i> Upload To AWS</a>
+   	</div>
+	<div class = "btn-group">
 		<a class = "btn btn-success" href="/dashboard/uploadPhotoToNew">
 		<i class="icon-picture icon-white"></i> Upload New Photo</a>
    	</div>
@@ -86,23 +90,25 @@
       </div>
       </div>
    
-  	<div class= "separat"></div>
+	<div class= "separat"></div>
   
     <% if not current_user.albums.empty? %>
-  	<div class="crowd-albums">
-  	<% current_user.albums.each do |album|%>
-  	<div class="crowd-album">
-  	<div class="picture-frame">
-  	<%= link_to image_tag(album.pictures[0].internal_link, :alt => album.name), :action => :selectPhoto,  :album_id => album.id%>
-  	</div>
-  	<div class="album-info">
+   <div class="crowd-albums">
+   <% current_user.albums.each do |album|%>
+   <div class="crowd-album">
+   <div class="picture-frame">
+   <%= link_to image_tag(album.pictures[0].internal_link, :alt => album.name), :action => :selectPhoto, :album_id => album.id%>
+   </div>
+   <div class="album-info">
     <p><%= link_to album.name, {:action => "selectPhoto" , :album_id => album.id}, :class => "album-name" %></p>
     </div>
     </div>
-  	<% end %>
-  	</div>
-  	<% end %>
-  
+   <% end %>
+   </div>
+   <% end %>
+	
+	
+	
   </div>
 </div>
 

@@ -6,15 +6,19 @@
       
       <!--DEBUG: the following needs to be modify-->
       <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
-        <% @picture_list.each do |picture| %>
-        <br/>
-        <%= check_box_tag "picture[#{picture.id}]", 1 %> <!--"picture[#{picture.id}]"-->
-        <%= picture.name %>
-        <% end %>
-        <%= submit_tag 'Continue', :id => "pic_submit" %>
-      	<% end %>
-      <form name="goBack" action="index">
-        <input class="backButton" type="submit" value="Back" />
-      </form>
+      <% @pictures.each do |picture| %>
+      <div class= "facebook-picture">
+  	  <div class="picture-frame">
+  	  <%= check_box_tag "picture[#{picture.id}]", 1 %> <!--"picture[#{picture.id}]"-->
+      <%= image_tag picture.internal_link %>
+      
+      <%= picture.name %>
+     </div>
+     </div>
+      <% end %>
+      <br/>
+      <%= submit_tag 'Continue', :class => "btn btn-success", :id => "pic_submit" %>
+      <a class = "btn btn-warning" href="/">Cancel</a>
+      <% end %>   
     </div>
 </div>

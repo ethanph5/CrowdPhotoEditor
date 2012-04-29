@@ -1,6 +1,33 @@
 class DashboardController < ApplicationController
   before_filter :authenticate_user!, :except => [:welcome] 
   
+  def uploadToAWS
+    user_id = current_user.id
+    #@user = current.user
+    
+    if request.post? #if the user clicked the "upload" button on the form
+      
+      #first find if user already has album with that name
+      if Album.find_by_name(params[:album_name]).nil?
+      #if Album.find_by_name_and_user_id(params[:albumName], user_id)==nil
+      
+        #start create new album,new picture, and upload the file.
+        if params[:album_name] and not params[:album_id]
+          album = Album.create!(:name => params[:album_name], :user_id => user_id)
+        else
+          album = Album.find_by_id(params[:album_id]) 
+        end          
+        #actually uploading photo
+        new_photo = Picture.uploadToAWS(params[:upload], album)
+        redirect_to :action => "selectPhoto", :album_id => album.id
+
+      else #if user already has album with same name
+        flash[:error] = "You already have an album named #{params[:album_name]}, enter a new album name or add to the existing one!"
+        redirect_to :action => "uploadPhotoToNew"
+      end
+    end
+  end
+  
   def welcome
   end
   
@@ -64,11 +91,10 @@ class DashboardController < ApplicationController
   end
   
   def selectPhoto  #checkboxes page
-    albumID = params[:album_id]
-    targetAlbum = Album.find(albumID)
-    @album_name = targetAlbum.name
-    @picture_list = targetAlbum.pictures
-    @user_name = User.find(current_user.id).name
+    #album_id = params[:album_id]
+    album = Album.find_by_id(params[:album_id])
+    @album_name = album.name
+    @pictures = album.pictures
   end
   
   def uploadPhotoToNew #create new album and upload photo to it
@@ -169,4 +195,7 @@ class DashboardController < ApplicationController
     @resultTable = session[:results] #key is picture id, value is the # of result the user wants
     redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :picfbTable => @selected_picturesfb, :taskTable => @taskTable, :resultTable => @resultTable
   end
+  
+  
+  
 end

@@ -10,12 +10,11 @@
   <a href=<%= picture.source %>>
   <img src=<%= picture.source %> alt=<%= picture.name %>>
   </a>
-  </div>
+  </div> 
   </div>
   <%end%>
-  <%= submit_tag 'Continue', :id => "pic_submit" %>
 <% end %>
-<form name="goBack" action="index">
-  <input class="backButton" type="submit" value="Back" />
-</form>
 </div>
+<div class= "separat"></div>
+<%= submit_tag 'Continue',:class => "btn btn-success", :id => "pic_submit" %>
+<a class = "btn btn-warning" href="/">Cancel</a>
