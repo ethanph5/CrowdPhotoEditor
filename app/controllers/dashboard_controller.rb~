@@ -48,8 +48,6 @@ class DashboardController < ApplicationController
       end
     end
     @len = finishedList.length
-    session[:lengthFinishedList] = @len
-
 #-------------------------------------------------------------
     if session[:picture]==nil
       session[:picture]=Hash.new
@@ -216,6 +214,5 @@ class DashboardController < ApplicationController
   def getResult
     user_id = current_user.id
     @user_name = User.find(current_user.id).name
-    @len = session[:lengthFinishedList]
   end
 end
