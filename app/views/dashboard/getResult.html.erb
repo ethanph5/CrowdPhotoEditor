@@ -9,14 +9,21 @@
     <br/>
     <div class="bottom">
     <h3>Finished Results:</h3>
-      <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
-        <%= submit_tag 'Accept', :id => "pic_accept" %>
+      <% @finished_list.each do |finList| %>
+        <%= form_tag :action => 'getResult', :method => :get, :id => 'album_form' do %>
+          <%= image_tag finList.result_link, :size => '400x400'%>
+          <%= submit_tag 'Accept', :id => "pic_accept" %>
+        <% end %>
+        <form name="reject" action="getResult">
+          <input class="backButton" type="submit" value="Reject" />
+        </form>
       <% end %>
-      <form name="reject" action="index">
-        <input class="backButton" type="submit" value="Reject" />
-      </form>
     <hr/>
     <h3>Pending Results:</h3>
+      <p><%= @pending_list.length %> Picture(s) still in progress.</p>
+      <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
+        <%= submit_tag 'Back to Index', :id => "pic_accept" %>
+      <% end %>
     </div>    
   </div>
 </body>

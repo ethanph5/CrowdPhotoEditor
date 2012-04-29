@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
   before_filter :authenticate_user!, :except => [:welcome] 
   
   def uploadToAWS
+    @len = session[:lenFinish]
     user_id = current_user.id
     #@user = current.user
     
@@ -75,6 +76,9 @@ class DashboardController < ApplicationController
       end
     end
     @len = finishedList.length
+    session[:lenFinish] = finishedList.length
+    session[:finished_list] = finishedList
+    session[:pending_list] = pendingList
 #-------------------------------------------------------------
     if session[:picture]==nil
       session[:picture]=Hash.new
@@ -120,6 +124,7 @@ class DashboardController < ApplicationController
   end
   
   def showPhoto
+    @len = session[:lenFinish]
     fb_album_id = params[:fb_album_id]
     token = Authorization.find(current_user.id).token
     albums = current_user.grap_facebook_albums(token)
@@ -136,9 +141,11 @@ class DashboardController < ApplicationController
     album = Album.find_by_id(params[:album_id])
     @album_name = album.name
     @pictures = album.pictures
+    @len = session[:lenFinish]
   end
   
   def uploadPhotoToNew #create new album and upload photo to it
+    @len = session[:lenFinish]
     user_id = current_user.id
     @user = User.find(user_id)
     
@@ -169,6 +176,7 @@ class DashboardController < ApplicationController
   end
   
   def uploadPhotoToExisting     #upload photo to existing album
+    @len = session[:lenFinish]
     user_id = current_user.id
     @user = User.find(user_id)
     
@@ -190,7 +198,8 @@ class DashboardController < ApplicationController
     end
   end
   
-  def selectAlbum   
+  def selectAlbum
+    @len = session[:lenFinish]   
     user_id = current_user.id
     user = User.find(user_id)
     albumList = user.albums
@@ -201,6 +210,7 @@ class DashboardController < ApplicationController
   end
 
   def specifyTask
+    @len = session[:lenFinish]
     if session[:picture] == {} and session[:picturefb] == {}
       flash[:error] = "Please Select Photo(s) Before Specifying Task(s)"
       redirect_to :action => :index
@@ -217,6 +227,7 @@ class DashboardController < ApplicationController
   end
 
   def reviewTask
+    @len = session[:lenFinish]
     @selected_picture = session[:picture]
     @selected_picturefb = session[:picturefb]
     @pictureSelected = Picture.find(@selected_picture.keys)
@@ -230,6 +241,7 @@ class DashboardController < ApplicationController
   end
   
   def submit
+    @len = session[:lenFinish]
     @selected_pictures = session[:picture] #hashTable: key is pic id, value is 1
     @selected_picturesfb = session[:picturefb]
     @taskTable = session[:tasks] #key is picture id, value is the task string
@@ -240,6 +252,11 @@ class DashboardController < ApplicationController
   def getResult
     user_id = current_user.id
     @user_name = User.find(current_user.id).name
+    @len = session[:lenFinish]
+    @finished_list = session[:finished_list]
+    @pending_list = session[:pending_list]
+    acceptList = []
+    rejectList = []
   end
 
 end
