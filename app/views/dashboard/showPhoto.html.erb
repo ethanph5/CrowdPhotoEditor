@@ -1,20 +1,31 @@
-<title><% @page_title = "Photo"%></title>
-<h3>Album: <span id = "facebook-label" class="label"><%= @fb_album_name%></span></h3>
-<br/>
+<title><% @page_title = "Facebook Photo"%></title>
+
+<h2 class="album-name-title">Album: <span id = "facebook-label" class="label"><%= @fb_album_name%></span></h2>
+<h4 class="funny-click">Want something funny?  <i class ="icon-check"> to the crowd!</i></h4>
+<small><i class = "icon-exclamation-sign">You can choose photo(s) in the current album and send to the crowd.</i></small>
+<hr/>
+
 <div class="facebook-albums">
-<%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
-  <% @fb_pictures.each do |picture|%>
-  <div class= "facebook-picture">
-  <div class="picture-frame">
-  <%= check_box_tag "picturefb[#{picture.source}]", 1 %>
-  <a href=<%= picture.source %>>
-  <img src=<%= picture.source %> alt=<%= picture.name %>>
-  </a>
-  </div> 
-  </div>
-  <%end%>
-<% end %>
+	<%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
+	<% @fb_pictures.each do |picture|%>
+  	<div class= "facebook-picture">
+  	<div class="picture-frame">	
+  	<a href=<%= picture.source %>><img src=<%= picture.source %> alt=<%= picture.name %>></a>	
+  	</div>
+  	
+  	<div class = "check-box"> 
+  	<%= check_box_tag "picturefb[#{picture.source}]", 1 %>
+  	</div>
+  	<div class = "funny-check">
+  	<i class="icon-arrow-left">  </i><i class ="icon-check"></i>
+  	</div>
+  	</div>
+  	
+  	<% end %>
+  	<div class= "separat"></div>
+	<hr/>
+	<%= submit_tag 'Continue',:class => "btn btn-success", :id => "pic_submit" %>
+	<a class = "btn btn-warning" href="/">Cancel</a>
+	<% end %>
 </div>
-<div class= "separat"></div>
-<%= submit_tag 'Continue',:class => "btn btn-success", :id => "pic_submit" %>
-<a class = "btn btn-warning" href="/">Cancel</a>
+

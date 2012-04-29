@@ -28,7 +28,7 @@ class DashboardController < ApplicationController
 
       else #if user already has album with same name
         flash[:error] = "You already have an album named #{params[:album_name]}, enter a new album name or add to the existing one!"
-        redirect_to :action => "uploadPhotoToNew"
+        redirect_to :action => "uploadToAWS"
       end
     end
   end

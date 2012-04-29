@@ -3,7 +3,7 @@ class Picture < ActiveRecord::Base
   def self.uploadToAWS(upload, album)
     file_name = upload.original_filename
     user = User.find_by_id(album.user_id)
-    bucket_name = user.name.downcase.strip.gsub(/\s+/, "") + '_album_' + album.id.to_s
+    bucket_name = 'user' + user.id.to_s + '_album' + album.id.to_s
     s3 = AWS::S3.new(YAML.load_file('config/s3.yml'))
     if s3.buckets[bucket_name].exists?
       bucket = s3.buckets[bucket_name]

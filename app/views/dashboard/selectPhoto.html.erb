@@ -1,24 +1,33 @@
-<div class="container">
-    <div class="bottom">
-      <p id="inst">Instruction: You can choose one of the photos from the current album and click continue and specify the task, or just click back to go back to My Album page.</p>
-      <h2 id="myAlbum"><%= @album_name %></h2>
+<title><% @page_title = "Facebook Photo"%></title>
+
+<h2 class="album-name-title">Album: <span class="label label-inverse"><%= @album_name%></span></h2>
+<h4 class="funny-click">Want something funny?  <i class ="icon-check"> to the crowd!</i></h4>
+<small><i class = "icon-exclamation-sign">You can choose photo(s) in the current album and send to the crowd.</i></small>
+<hr/>
       
-      
+<div class="crowd-albums">     
       <!--DEBUG: the following needs to be modify-->
-      <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
-      <% @pictures.each do |picture| %>
-      <div class= "facebook-picture">
-  	  <div class="picture-frame">
-  	  <%= check_box_tag "picture[#{picture.id}]", 1 %> <!--"picture[#{picture.id}]"-->
-      <%= image_tag picture.internal_link %>
-      
-      <%= picture.name %>
-     </div>
-     </div>
-      <% end %>
-      <br/>
-      <%= submit_tag 'Continue', :class => "btn btn-success", :id => "pic_submit" %>
-      <a class = "btn btn-warning" href="/">Cancel</a>
-      <% end %>   
+	<%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
+    <% @pictures.each do |picture| %>
+    <div class= "crowd-picture">
+  	<div class="picture-frame">
+    <%= link_to (image_tag picture.internal_link), picture.internal_link %>
     </div>
+    
+    <div class = "check-box"> 
+  	<%= check_box_tag "picture[#{picture.id}]", 1 %>
+  	</div>
+  	<div class = "funny-check">
+  	<i class="icon-arrow-left">  </i><i class ="icon-check"></i>
+  	</div>
+  	
+  	</div>
+  	<% end %>
+  	<div class= "separat"></div>
+	<hr/>
+	<%= submit_tag 'Continue',:class => "btn btn-success", :id => "pic_submit" %>
+	<a class = "btn btn-warning" href="/">Cancel</a> 		
+    <% end %>
 </div>
+
+
