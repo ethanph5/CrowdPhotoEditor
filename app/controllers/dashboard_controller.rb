@@ -169,4 +169,9 @@ class DashboardController < ApplicationController
     @resultTable = session[:results] #key is picture id, value is the # of result the user wants
     redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :picfbTable => @selected_picturesfb, :taskTable => @taskTable, :resultTable => @resultTable
   end
+  
+  def getResult
+    user_id = current_user.id
+    @user_name = User.find(current_user.id).name
+  end 
 end

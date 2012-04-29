@@ -16,6 +16,9 @@
 		<i class="icon-ok-sign icon-white"></i> Done Selection</a>
 
 	</div>
+	<div class = "btn-group">
+	  <a class = "btn btn-success" href="/dashboard/index">Not Patient Enough?</a>
+	</div>
 	</div>
 	
     <h4 id="greet" >Hello, <%= @user_name%></span></h4><br/>
@@ -43,7 +46,7 @@
     <div class= "picture-selection">     
       <BLOCKQUOTE>
       <h4 class="pic-selection-title">Picture Selection:</h4>
-      <% if @selected_picture == {} or params[:submission_error] or params[:submission_notice] %>
+      <% if (@selected_picture == {} and @selected_picturefb == {}) or params[:submission_error] or params[:submission_notice] %>
         <h5><span class="badge">0</span> picture selected</h5>
       <% else %>     
         <h5><span class="badge badge-success"><%= @pictureSelected.length+@picturefbSelected.length %></span>  picture(s) selected</h5>
