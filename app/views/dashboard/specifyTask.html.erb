@@ -14,7 +14,7 @@
           </tr>
           <% @pictureSelected.each do |pic| %>
             <tr>
-                <td height="100" ><%= image_tag pic.internal_link, :size => '50x50'%><%= pic.name %></td>
+                <td height="100" ><%= image_tag pic.internal_link, :size => '100x100'%><%= pic.name %></td>
               <% if @specify_task == {} %>
                 <td height="100" > <%= text_area_tag "tasks[#{pic.id}]", '', :size => '50x5' %></td>
               <% else %>
@@ -29,7 +29,7 @@
           <% end %>
           <% @picturefbSelected.each do |pic| %>
             <tr>
-                <td height="100" ><%= pic %></td>
+                <td height="100" ><%= image_tag pic, :size => '100x100'%></td>
               <% if @specify_task == {} %>
                 <td height="100" > <%= text_area_tag "tasks[#{pic}]", '', :size => '50x5' %></td>
               <% else %>

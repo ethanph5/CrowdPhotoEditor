@@ -12,14 +12,14 @@
           </tr>
           <% @pictureSelected.each do |pic| %>
             <tr>
-              <td height="100"><%= image_tag pic.internal_link, :size => '50x50'%><br/><%= pic.name %></td>
+              <td height="100"><%= image_tag pic.internal_link, :size => '100x100'%><br/><%= pic.name %></td>
               <td height="100"><%= label_tag 'task', @specify_task["#{pic.id}"] %></td>
               <td height="100"><%= label_tag 'result', @specify_result["#{pic.id}"] %></td>
             </tr>
           <% end %>
           <% @picturefbSelected.each do |pic| %>
             <tr>
-              <td height="100"><%= pic %></td>
+              <td height="100"><%= image_tag pic, :size => '100x100'%></td>
               <td height="100"><%= label_tag 'task', @specify_task["#{pic}"] %></td>
               <td height="100"><%= label_tag 'result', @specify_result["#{pic}"] %></td>
             </tr>
