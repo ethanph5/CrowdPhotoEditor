@@ -2,10 +2,12 @@ require "net/http"
 require "net/https"
 require "rubygems"
 require "json"
+require 'open-uri'
 
 class DashboardController < ApplicationController
   before_filter :authenticate_user!, :except => [:welcome]
 
+  #replaced uploadToNew
   def uploadToAWS
     @len = session[:lenFinish]
     user_id = current_user.id
@@ -27,6 +29,9 @@ class DashboardController < ApplicationController
         end
         #actually uploading photo
         new_photo = Picture.uploadToAWS(params[:upload], album)
+        
+        debugger
+        
         redirect_to :action => "selectPhoto", :album_id => album.id
 
       else #if user already has album with same name
@@ -42,6 +47,32 @@ class DashboardController < ApplicationController
   def index  #displaying facebook albums
     session.delete(:tasks)
     session.delete(:results)
+    
+    #check if theres stuff the user accepted
+    if session[:acceptList].length != 0
+      session[:acceptList].each do |result|
+        #try to write from url to file; uses task_link as name
+        #see: http://stackoverflow.com/questions/2515931/i-want-to-download-a-file-from-a-url-to-save-it-any-rails-way-to-do-this-or-can
+        picFile = open("#{result.task_link}", 'wb') 
+        picFile << open("#{result.result_link}").read
+       
+        name = result.task_link
+        #try making an UploadFile using File; not sure if right
+        fakeUploadedFile = UploadedFile.new(:original_filename => name, :content_type => "image/jpeg", :tempfile => picFile)
+
+        #hopefully we can use ethans uploadToAWS now
+        Picture.uploadToAWS(fakeUploadFile, "you guys should insert album name here!")
+        
+        Query.destroy(result.id)
+      end
+    end
+    
+    #check if there's stuff the user rejected
+    if session[:rejectList].length != 0
+      session[:rejectList].each do |result|
+        Query.destroy(result.id) #just remove it from query
+      end
+    end
 
     queryList = Query.find_all_by_user_id(current_user.id)
     pendingList = []
@@ -61,7 +92,7 @@ class DashboardController < ApplicationController
           response = http.request(req)
           #puts response.body
         end
-        #debugger
+        
         parsed_json = ActiveSupport::JSON.decode(response.body)
 
         #if answer = "sth" # finished, update Query table, add it to finishedlist
@@ -161,7 +192,7 @@ class DashboardController < ApplicationController
       name = namePathList[0]
       path = namePathList[1]
 
-      #create new picture tuple
+      #create new picture tuple WARNING THIS MIGHT BE REDUNDANT CUZ OF ETHANS UPLOADTOAWS
       newPicture = Picture.create!(:name => name,:internal_link => path, :user_id => user_id, :album_id => album_id)
 
       redirect_to :action => "selectPhoto", :album_id => album_id
