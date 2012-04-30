@@ -4,25 +4,27 @@ require "rubygems"
 require "json"
 
 class DashboardController < ApplicationController
-  before_filter :authenticate_user!, :except => [:welcome] 
-  
+  before_filter :authenticate_user!, :except => [:welcome]
+
   def uploadToAWS
     @len = session[:lenFinish]
     user_id = current_user.id
     #@user = current.user
-    
+
     if request.post? #if the user clicked the "upload" button on the form
-      
+      if params[:album_name] == "" #a new album name is required
+        flash.now[:error] = "Please enter a new album name before uploading a picture." #show error msg is new album name is empty
+
       #first find if user already has album with that name
-      if Album.find_by_name(params[:album_name]).nil?
+      elsif Album.find_by_name(params[:album_name]).nil?
       #if Album.find_by_name_and_user_id(params[:albumName], user_id)==nil
-      
+
         #start create new album,new picture, and upload the file.
         if params[:album_name] and not params[:album_id]
           album = Album.create!(:name => params[:album_name], :user_id => user_id)
         else
-          album = Album.find_by_id(params[:album_id]) 
-        end          
+          album = Album.find_by_id(params[:album_id])
+        end
         #actually uploading photo
         new_photo = Picture.uploadToAWS(params[:upload], album)
         redirect_to :action => "selectPhoto", :album_id => album.id
@@ -33,19 +35,19 @@ class DashboardController < ApplicationController
       end
     end
   end
-  
+
   def welcome
   end
-  
+
   def index  #displaying facebook albums
     session.delete(:tasks)
     session.delete(:results)
-    
+
     queryList = Query.find_all_by_user_id(current_user.id)
     pendingList = []
     finishedList = []
     queryList.each do |query|
-      
+
       if query.result_link == ""
         #ask the api if the task is finished or not
         response = nil
@@ -61,7 +63,7 @@ class DashboardController < ApplicationController
         end
         #debugger
         parsed_json = ActiveSupport::JSON.decode(response.body)
-        
+
         #if answer = "sth" # finished, update Query table, add it to finishedlist
         if parsed_json["answer"] != ""
           finishedList << query
@@ -71,7 +73,7 @@ class DashboardController < ApplicationController
           pendingList << query
         end
       else #if result_link already exists in db
-        #dont ask the api, just add it to finished list, and do the counting  
+        #dont ask the api, just add it to finished list, and do the counting
         finishedList << query
       end
     end
@@ -84,28 +86,28 @@ class DashboardController < ApplicationController
       session[:picture]=Hash.new
     end
 
-    if params[:picture] !=nil 
+    if params[:picture] !=nil
       params[:picture].each do |key|
         session[:picture][key[0]] = 1
       end
     end
     @selected_picture=session[:picture] || {}
-    
+
     if session[:picturefb]==nil
       session[:picturefb]=Hash.new
     end
 
-    if params[:picturefb] !=nil 
+    if params[:picturefb] !=nil
       params[:picturefb].each do |key|
         session[:picturefb][key[0]] = 1
       end
     end
     @selected_picturefb=session[:picturefb] || {}
-    
+
     user_id = current_user.id
     # crowd albums part
     @crowdAlbums = User.find_by_id(user_id).albums
-    
+
     # facebook albums part
     @albums = nil
     auth = Authorization.find_by_user_id(user_id)
@@ -119,10 +121,10 @@ class DashboardController < ApplicationController
       @albums = result
     else
     end
-    @pictureSelected = Picture.find(@selected_picture.keys) 
+    @pictureSelected = Picture.find(@selected_picture.keys)
     @picturefbSelected = @selected_picturefb.keys
   end
-  
+
   def showPhoto
     @len = session[:lenFinish]
     fb_album_id = params[:fb_album_id]
@@ -135,7 +137,7 @@ class DashboardController < ApplicationController
       end
     end
   end
-  
+
   def selectPhoto  #checkboxes page
     #album_id = params[:album_id]
     album = Album.find_by_id(params[:album_id])
@@ -143,63 +145,33 @@ class DashboardController < ApplicationController
     @pictures = album.pictures
     @len = session[:lenFinish]
   end
-  
-  def uploadPhotoToNew #create new album and upload photo to it
-    @len = session[:lenFinish]
-    user_id = current_user.id
-    @user = User.find(user_id)
-    
-    if request.post? #if the user clicked the "upload" button on the form
-      
-      #first find if user already has album with that name
-      if Album.find_by_name_and_user_id(params[:albumName], user_id)==nil
-      
-        #start create new album,new picture, and upload the file.
-        newAlbum = Album.create!(:name => params[:albumName], :user_id => user_id) 
-      
-        #actually uploading photo
-        namePathList = Picture.handleUpload(params[:upload], user_id)
-        name = namePathList[0]
-        path = namePathList[1]
-      
-        #create new picture tuple
-        newPicture = Picture.create!(:name => name,:internal_link => path, :user_id => user_id, :album_id => newAlbum.id)   
-        redirect_to :action => "selectPhoto", :album_id => newAlbum.id
-
-      else #if user already has album with same name
-        flash[:error] = "You already have an album named #{params[:albumName]}, please enter a new name!"
-        redirect_to :action => "uploadPhotoToNew"
-      end
 
 
-    end
-  end
-  
   def uploadPhotoToExisting     #upload photo to existing album
     @len = session[:lenFinish]
     user_id = current_user.id
     @user = User.find(user_id)
-    
+
     if request.post? #if the user clicked the "upload" button on the form
       #start create new album,new picture, and upload the file.
       album_id = params[:album_id]
-      
+
       #actually uploading photo
       namePathList = Picture.handleUpload(params[:upload], user_id)
       name = namePathList[0]
       path = namePathList[1]
-      
+
       #create new picture tuple
       newPicture = Picture.create!(:name => name,:internal_link => path, :user_id => user_id, :album_id => album_id)
-     
+
       redirect_to :action => "selectPhoto", :album_id => album_id
-      
+
       #should reder somewhere at the end
     end
   end
-  
+
   def selectAlbum
-    @len = session[:lenFinish]   
+    @len = session[:lenFinish]
     user_id = current_user.id
     user = User.find(user_id)
     albumList = user.albums
@@ -239,7 +211,7 @@ class DashboardController < ApplicationController
     user_id = current_user.id
     @user_name = User.find(current_user.id).name
   end
-  
+
   def submit
     @len = session[:lenFinish]
     @selected_pictures = session[:picture] #hashTable: key is pic id, value is 1
@@ -248,7 +220,7 @@ class DashboardController < ApplicationController
     @resultTable = session[:results] #key is picture id, value is the # of result the user wants
     redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :picfbTable => @selected_picturesfb, :taskTable => @taskTable, :resultTable => @resultTable
   end
-  
+
   def getResult
     user_id = current_user.id
     @user_name = User.find(current_user.id).name
