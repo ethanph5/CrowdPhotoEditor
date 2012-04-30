@@ -11,7 +11,8 @@
     <h3>Finished Results:</h3>
       <% @finished_list.each do |finList| %>
         <%= form_tag :action => 'getResult', :method => :get, :id => 'album_form' do %>
-          <%= image_tag finList.result_link, :size => '400x400'%>
+          <%= link_to image_tag(finList.result_link, :size => '100x100'), finList.result_link %>
+          <%= finList.task %>
           <%= submit_tag 'Accept', :id => "pic_accept" %>
         <% end %>
         <form name="reject" action="getResult">
