@@ -3,8 +3,6 @@
 <body>
   <div class="container">
     <div class="header">
-      <h2 id="header-icon"></h2>
-      <h4 id="username_text"><big><b>Hello, <%= @user_name %></b></big></h4>
     </div>
     <br/>
     <div class="bottom">
