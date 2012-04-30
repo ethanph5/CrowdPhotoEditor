@@ -12,9 +12,11 @@ class DashboardController < ApplicationController
     #@user = current.user
 
     if request.post? #if the user clicked the "upload" button on the form
+      if params[:album_name] == "" #a new album name is required
+        flash.now[:error] = "Please enter a new album name before uploading a picture." #show error msg is new album name is empty
 
       #first find if user already has album with that name
-      if Album.find_by_name(params[:album_name]).nil?
+      elsif Album.find_by_name(params[:album_name]).nil?
       #if Album.find_by_name_and_user_id(params[:albumName], user_id)==nil
 
         #start create new album,new picture, and upload the file.
@@ -144,39 +146,6 @@ class DashboardController < ApplicationController
     @len = session[:lenFinish]
   end
 
-  def uploadPhotoToNew #create new album and upload photo to it
-    @len = session[:lenFinish]
-    user_id = current_user.id
-    @user = User.find(user_id)
-
-    if request.post? #if the user clicked the "upload" button on the form
-
-      if params[:albumName] == "" #-----------------------------------------------------------this line!!!---------------------------
-        flash.now[:error] = "Please enter a new album name before uploading a picture." #------this line!!!------------------
-
-      #first find if user already has album with that name
-      elsif Album.find_by_name_and_user_id(params[:albumName], user_id)==nil #---------------------this line!!---------------------
-
-        #start create new album,new picture, and upload the file.
-        newAlbum = Album.create!(:name => params[:albumName], :user_id => user_id)
-
-        #actually uploading photo
-        namePathList = Picture.handleUpload(params[:upload], user_id)
-        name = namePathList[0]
-        path = namePathList[1]
-
-        #create new picture tuple
-        newPicture = Picture.create!(:name => name,:internal_link => path, :user_id => user_id, :album_id => newAlbum.id)
-        redirect_to :action => "selectPhoto", :album_id => newAlbum.id
-
-      else #if user already has album with same name
-        flash[:error] = "You already have an album named #{params[:albumName]}, please enter a new name!"
-        redirect_to :action => "uploadPhotoToNew"
-      end
-
-
-    end
-  end
 
   def uploadPhotoToExisting     #upload photo to existing album
     @len = session[:lenFinish]
