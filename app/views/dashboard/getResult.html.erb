@@ -1,5 +1,36 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script type="text/javascript"
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".resultList #pic_accept").click(function(){
+  
+    $(this).parents(".resultList").hide("slow");
+    
+  });
+});
+  
+  
+$(document).ready(function(){
+  $(".resultList #pic_reject").click(function(){
+  
+    $(this).parents(".resultList").hide("slow");
+    
+    });   
+});
+
+
+</script>
+
+</head>
+
+
 <body>
   <div class="container">
     <div class="header">
@@ -7,23 +38,40 @@
     <br/>
     <div class="bottom">
     <h3>Finished Results:</h3>
-      <% @finished_list.each do |finList| %>
-        <%= form_tag :action => 'getResult', :method => :get, :id => 'album_form' do %>
-          <%= link_to image_tag(finList.result_link, :size => '100x100'), finList.result_link %>
+    
+    
+      <% @finished_list.each do |finQueryID| %>
+        <div class="resultList">
+          <% finQuery = Query.find_by_id(finQueryID) %>
+          <%= link_to image_tag(finQuery.result_link, :size => '100x100'), finQuery.result_link %>
           <h5>Task:</h5>
-          <%= finList.task %>
+          <%= finQuery.task %>
+          
+          <%= form_tag({:controller => "dashboard", :action => "acceptResult"}, :method => :post, :class => "acceptResult") do %>
+            <%= hidden_field_tag :accept_query, finQueryID %>
           <%= submit_tag 'Accept', :id => "pic_accept" %>
-        <% end %>
-        <form name="reject" action="getResult">
-          <input class="backButton" type="submit" value="Reject" />
-        </form>
+          <% end %>
+          
+          <%= form_tag({:controller => "dashboard", :action => "rejectResult"}, :method => :post, :class => "rejectResult") do %>
+            <%= hidden_field_tag :reject_query, finQueryID %>
+          <%= submit_tag 'Reject', :id => "pic_reject" %>
+          <% end %>
+        </div>  
       <% end %>
+      
+    
+      
     <hr/>
+    
     <h3>Pending Results:</h3>
-      <p><%= @pending_list.length %> Picture(s) still in progress.</p>
-      <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
-        <%= submit_tag 'Back to Index', :id => "pic_accept" %>
-      <% end %>
+    <p><%= @pending_list.length %> Picture(s) still in progress.</p>
+    
+   
+    <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
+    
+      <%= submit_tag 'Back to Dashboard', :id => "pic_accept" %>
+    <% end %>
+    
     </div>    
   </div>
 </body>

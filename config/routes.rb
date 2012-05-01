@@ -15,7 +15,11 @@ Crowd::Application.routes.draw do
   match 'dashboard/showPhoto'
   match 'dashboard/uploadPhotoToExisting'
   match 'dashboard/submit'
+  match 'dashboard/acceptResult'
+  match 'dashboard/rejectResult'
   match 'mobilework/submit_task'
+
+
   
   #Facebook Authentication route
   resources :authorizations, :only => [:index, :create, :destroy]
