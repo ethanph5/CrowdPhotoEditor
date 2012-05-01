@@ -30,7 +30,7 @@ class DashboardController < ApplicationController
         #actually uploading photo
         new_photo = Picture.uploadToAWS(params[:upload], album)
         
-        debugger
+        #debugger
         
         redirect_to :action => "selectPhoto", :album_id => album.id
 
@@ -48,8 +48,9 @@ class DashboardController < ApplicationController
     session.delete(:tasks)
     session.delete(:results)
     
+    
     #check if theres stuff the user accepted
-    if session[:acceptList].length != 0
+    if session[:acceptList] and session[:acceptList].length != 0
       session[:acceptList].each do |result|
         #try to write from url to file; uses task_link as name
         #see: http://stackoverflow.com/questions/2515931/i-want-to-download-a-file-from-a-url-to-save-it-any-rails-way-to-do-this-or-can
@@ -68,7 +69,7 @@ class DashboardController < ApplicationController
     end
     
     #check if there's stuff the user rejected
-    if session[:rejectList].length != 0
+    if session[:acceptList] and session[:rejectList].length != 0
       session[:rejectList].each do |result|
         Query.destroy(result.id) #just remove it from query
       end
@@ -135,18 +136,20 @@ class DashboardController < ApplicationController
     end
     @selected_picturefb=session[:picturefb] || {}
 
-    user_id = current_user.id
+    #user_id = current_user.id
     # crowd albums part
-    @crowdAlbums = User.find_by_id(user_id).albums
+    @crowdAlbums = User.find_by_id(current_user.id).albums
 
     # facebook albums part
     @albums = nil
-    auth = Authorization.find_by_user_id(user_id)
+    auth = Authorization.find_by_user_id(current_user.id)
     if auth
-      token = Authorization.find(current_user.id).token
+      token = auth.token
     end
-    @user = User.find_by_id(current_user.id)
-    @user_name = User.find_by_id(current_user.id).name
+    #@user = User.find_by_id(current_user.id)
+    @user = current_user
+    #@user_name = User.find_by_id(current_user.id).name
+    @user_name = current_user.name
     if token
       result = @user.grap_facebook_albums(token)
       @albums = result
@@ -159,7 +162,7 @@ class DashboardController < ApplicationController
   def showPhoto
     @len = session[:lenFinish]
     fb_album_id = params[:fb_album_id]
-    token = Authorization.find(current_user.id).token
+    token = Authorization.find_by_user_id(current_user.id).token
     albums = current_user.grap_facebook_albums(token)
     albums.each do |album|
       if album.identifier == fb_album_id

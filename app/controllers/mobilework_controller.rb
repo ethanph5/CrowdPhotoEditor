@@ -84,7 +84,7 @@ class MobileworkController < ApplicationController
         task = taskTable[id]
         numResult = resultTable[id] 
         internal_link = id #resource location
-        question = "<h3>Tasks:</h3><blockquote>"+task+"</blockquote> <h3>Resource:</h3><blockquote>"+internal_link+"</blockquote>
+        question = "<h3>Tasks:</h3><blockquote>"+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
 <h3>Instruction:</h3><blockquote><li>Instruction1</li><li>Instruction2</li></blockquote>"
         #question = task + " I want " + numResult + " different versions. Thank you!"
         
