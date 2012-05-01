@@ -50,31 +50,31 @@ class DashboardController < ApplicationController
     
     
     #check if theres stuff the user accepted
-    if session[:acceptList] and session[:acceptList].length != 0
-      session[:acceptList].each do |result|
-        #try to write from url to file; uses task_link as name
-        #see: http://stackoverflow.com/questions/2515931/i-want-to-download-a-file-from-a-url-to-save-it-any-rails-way-to-do-this-or-can
-        picFile = open("#{result.task_link}", 'wb') 
-        picFile << open("#{result.result_link}").read
-       
-        name = result.task_link
-        #try making an UploadFile using File; not sure if right
-        fakeUploadedFile = UploadedFile.new(:original_filename => name, :content_type => "image/jpeg", :tempfile => picFile)
-
-        #hopefully we can use ethans uploadToAWS now
-        Picture.uploadToAWS(fakeUploadFile, "you guys should insert album name here!")
-        
-        Query.destroy(result.id)
+    if session[:acceptList] != [] and session[:acceptList]
+      acceptPicID = session[:acceptList]  #a list of query ids
+      
+      acceptPicID.each do |id|
+        #acceptPic = Query.find_by_id(id)
+        #file = open("test.png", 'wb')
+        #file << open(acceptPic.result_link).read
+        #name = result.task_link
+        #fakeUploadedFile = UploadedFile.new(:original_filename => name, :content_type => "image/jpeg", :tempfile => picFile)
+        #debugger
+        #Picture.uploadToAWS(file, "Result")
+        Query.destroy(id)
       end
     end
-    
+ 
     #check if there's stuff the user rejected
-    if session[:acceptList] and session[:rejectList].length != 0
-      session[:rejectList].each do |result|
-        Query.destroy(result.id) #just remove it from query
+    if session[:rejectList] != [] and session[:rejectList]
+      rejectPicID = session[:rejectList]
+      #debugger
+      rejectPicID.each do |id|
+        Query.destroy(id)
       end
     end
 
+  #---------------------check notification--------------------- Felix refactor the following------
     queryList = Query.find_all_by_user_id(current_user.id)
     pendingList = []
     finishedList = []
@@ -98,23 +98,27 @@ class DashboardController < ApplicationController
 
         #if answer = "sth" # finished, update Query table, add it to finishedlist
         if parsed_json["answer"] != ""
-          finishedList << query
+          finishedList << query.id #-----------------DEBUG------------------
           query.result_link = parsed_json["answer"]
           query.save
         else #task not finished on api
-          pendingList << query
+          pendingList << query.id #----------------DEBUG----------------
         end
       else #if result_link already exists in db
         #dont ask the api, just add it to finished list, and do the counting
-        finishedList << query
+        finishedList << query.id #------------------DEBUG----------------
       end
     end
     @len = finishedList.length
     session[:lenFinish] = finishedList.length
-    session[:finished_list] = finishedList
-    session[:pending_list] = pendingList
-    
+
 #-------------------------------------------------------------
+
+    session[:finished_list] = finishedList #a list of query ids
+    session[:pending_list] = pendingList #a list of query ids
+#-------------------------------------------------check notification ends here------------
+
+
     if session[:picture]==nil
       session[:picture]=Hash.new
     end
@@ -257,13 +261,58 @@ class DashboardController < ApplicationController
   end
 
   def getResult
-    user_id = current_user.id
-    @user_name = User.find(current_user.id).name
-    @len = session[:lenFinish]
-    @finished_list = session[:finished_list]
+    if params[:remaining_finished_list_after_accept]
+      @finished_list = params[:remaining_finished_list_after_accept] 
+      #debugger         
+    elsif params[:remaining_finished_list_after_reject]
+      @finished_list = params[:remaining_finished_list_after_reject]
+    else #first time loading getResult page
+      #session[:intermediate_finished_list] = session[:finished_list]  #only query ids
+                                               #I need session[:intermediate_finished_list] because if the user doesn't accept/reject any pictures
+      @finished_list = session[:finished_list]
+      
+      session[:acceptList] = [] #will only store the accepted query ids
+      session[:rejectList] = []
+      #debugger
+    end
+    #debugger
     @pending_list = session[:pending_list]
-    acceptList = []
-    rejectList = []
+  end  
+  
+  def acceptResult
+    accept_query_id = params[:accept_query].to_i #params[:accept_query] is a string
+    #temp_finished_list = session[:intermediate_finished_list] #we remove sth from session[:intermediate_finished_list]
+    temp_finished_list = session[:finished_list]
+    temp_finished_list.delete(accept_query_id)
+    session[:finished_list] = temp_finished_list #stores int
+    remaining_finished_list = temp_finished_list #stores int
+    #debugger
+    #pending_list = session[:pending_list]
+     
+      
+    temp_accept_list = session[:acceptList]
+    temp_accept_list << accept_query_id
+    session[:acceptList] = temp_accept_list #only contains list of accepted query ids
+    
+    redirect_to :action => :getResult, :remaining_finished_list_after_accept => remaining_finished_list and return
+    #debugger 
   end
-
+  
+  def rejectResult
+    reject_query_id = params[:reject_query].to_i
+    #temp_finished_list = session[:intermediate_finished_list]
+    temp_finished_list = session[:finished_list]
+    temp_finished_list.delete(reject_query_id)
+    session[:finished_list] = temp_finished_list
+    remaining_finished_list = temp_finished_list
+    #@pending_list = session[:pending_list]
+    
+    
+    temp_reject_list = session[:rejectList]
+    temp_reject_list << reject_query_id
+    session[:rejectList] = temp_reject_list  #only cantains list of rejected query ids
+    
+    redirect_to :action => :getResult, :remaining_finished_list_after_reject => remaining_finished_list and return
+    #debugger      
+  end
 end
