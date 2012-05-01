@@ -113,6 +113,7 @@ class DashboardController < ApplicationController
     session[:lenFinish] = finishedList.length
     session[:finished_list] = finishedList
     session[:pending_list] = pendingList
+    
 #-------------------------------------------------------------
     if session[:picture]==nil
       session[:picture]=Hash.new
