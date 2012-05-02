@@ -9,7 +9,8 @@ class DashboardController < ApplicationController
 
   #replaced uploadToNew
   def uploadToAWS
-    @len = session[:lenFinish]
+  
+    @len = session[:finished_list].length #1st time user, session[:finished_list] is [] DEBUG
     user_id = current_user.id
     #@user = current.user
 
@@ -47,39 +48,13 @@ class DashboardController < ApplicationController
   def index  #displaying facebook albums
     session.delete(:tasks)
     session.delete(:results)
-    
-    
-    #check if theres stuff the user accepted
-    if session[:acceptList] != [] and session[:acceptList]
-      acceptPicID = session[:acceptList]  #a list of query ids
-      
-      acceptPicID.each do |id|
-        #acceptPic = Query.find_by_id(id)
-        #file = open("test.png", 'wb')
-        #file << open(acceptPic.result_link).read
-        #name = result.task_link
-        #fakeUploadedFile = UploadedFile.new(:original_filename => name, :content_type => "image/jpeg", :tempfile => picFile)
-        #debugger
-        #Picture.uploadToAWS(file, "Result")
-        Query.destroy(id)
-      end
-    end
- 
-    #check if there's stuff the user rejected
-    if session[:rejectList] != [] and session[:rejectList]
-      rejectPicID = session[:rejectList]
-      #debugger
-      rejectPicID.each do |id|
-        Query.destroy(id)
-      end
-    end
 
-  #---------------------check notification--------------------- Felix refactor the following------
-    queryList = Query.find_all_by_user_id(current_user.id)
+  #---------------------check notification---------------------------
+    queryList = Query.find_all_by_user_id(current_user.id) #DEBUG: is it possible that the 1st time user's queryList is nil?
     pendingList = []
     finishedList = []
+    
     queryList.each do |query|
-
       if query.result_link == ""
         #ask the api if the task is finished or not
         response = nil
@@ -98,22 +73,24 @@ class DashboardController < ApplicationController
 
         #if answer = "sth" # finished, update Query table, add it to finishedlist
         if parsed_json["answer"] != ""
-          finishedList << query.id #-----------------DEBUG------------------
+          finishedList << query.id
           query.result_link = parsed_json["answer"]
           query.save
         else #task not finished on api
-          pendingList << query.id #----------------DEBUG----------------
+          pendingList << query.id
         end
       else #if result_link already exists in db
         #dont ask the api, just add it to finished list, and do the counting
-        finishedList << query.id #------------------DEBUG----------------
+        finishedList << query.id
       end
     end
-    @len = finishedList.length
-    session[:lenFinish] = finishedList.length
-    session[:finished_list] = finishedList #a list of query ids
-    session[:pending_list] = pendingList #a list of query ids
-#-------------------------------------------------check notification ends here------------
+    @len = finishedList.length #for 1st time user, it is 0, finishedList is []; @len in other function will directly use session[:finished_list] to update the value
+    #session[:lenFinish] = finishedList.length #DEBUG
+
+    session[:finished_list] = finishedList #a list of query ids; 1st time user will be []
+    session[:pending_list] = pendingList #a list of query ids; 1st time user will be []
+#----------------------------check notification ends here------------
+
 
     if session[:picture]==nil
       session[:picture]=Hash.new
@@ -161,7 +138,7 @@ class DashboardController < ApplicationController
   end
 
   def showPhoto
-    @len = session[:lenFinish]
+    @len = session[:finished_list].length #DEBUG
     fb_album_id = params[:fb_album_id]
     token = Authorization.find_by_user_id(current_user.id).token
     albums = current_user.grap_facebook_albums(token)
@@ -178,12 +155,12 @@ class DashboardController < ApplicationController
     album = Album.find_by_id(params[:album_id])
     @album_name = album.name
     @pictures = album.pictures
-    @len = session[:lenFinish]
+    @len = session[:finished_list].length
   end
 
 
   def uploadPhotoToExisting     #upload photo to existing album
-    @len = session[:lenFinish]
+    @len = session[:finished_list].length
     user_id = current_user.id
     @user = User.find(user_id)
 
@@ -206,7 +183,7 @@ class DashboardController < ApplicationController
   end
 
   def selectAlbum
-    @len = session[:lenFinish]
+    @len = session[:finished_list].length
     user_id = current_user.id
     user = User.find(user_id)
     albumList = user.albums
@@ -217,7 +194,7 @@ class DashboardController < ApplicationController
   end
 
   def specifyTask
-    @len = session[:lenFinish]
+    @len = session[:finished_list].length
     if session[:picture] == {} and session[:picturefb] == {}
       flash[:error] = "Please Select Photo(s) Before Specifying Task(s)"
       redirect_to :action => :index
@@ -234,7 +211,7 @@ class DashboardController < ApplicationController
   end
 
   def reviewTask
-    @len = session[:lenFinish]
+    @len = session[:finished_list].length
     @selected_picture = session[:picture]
     @selected_picturefb = session[:picturefb]
     @pictureSelected = Picture.find(@selected_picture.keys)
@@ -248,7 +225,7 @@ class DashboardController < ApplicationController
   end
 
   def submit
-    @len = session[:lenFinish]
+    @len = session[:finished_list].length
     @selected_pictures = session[:picture] #hashTable: key is pic id, value is 1
     @selected_picturesfb = session[:picturefb]
     @taskTable = session[:tasks] #key is picture id, value is the task string
@@ -257,19 +234,15 @@ class DashboardController < ApplicationController
   end
 
   def getResult
-    if params[:remaining_finished_list_after_accept]
-      @finished_list = params[:remaining_finished_list_after_accept] 
+    @len = session[:finished_list].length
+    if params[:remaining_after_accept]
+      @finished_list = params[:remaining_after_accept] 
       #debugger         
-    elsif params[:remaining_finished_list_after_reject]
-      @finished_list = params[:remaining_finished_list_after_reject]
+    elsif params[:remaining_after_reject]
+      @finished_list = params[:remaining_after_reject]
     else #first time loading getResult page
-      #session[:intermediate_finished_list] = session[:finished_list]  #only query ids
-                                               #I need session[:intermediate_finished_list] because if the user doesn't accept/reject any pictures
       @finished_list = session[:finished_list]
       
-      session[:acceptList] = [] #will only store the accepted query ids
-      session[:rejectList] = []
-      #debugger
     end
     #debugger
     @pending_list = session[:pending_list]
@@ -277,38 +250,29 @@ class DashboardController < ApplicationController
   
   def acceptResult
     accept_query_id = params[:accept_query].to_i #params[:accept_query] is a string
-    #temp_finished_list = session[:intermediate_finished_list] #we remove sth from session[:intermediate_finished_list]
+    
+    Query.destroy(accept_query_id)
+    
+    
     temp_finished_list = session[:finished_list]
     temp_finished_list.delete(accept_query_id)
     session[:finished_list] = temp_finished_list #stores int
-    remaining_finished_list = temp_finished_list #stores int
-    #debugger
-    #pending_list = session[:pending_list]
-     
-      
-    temp_accept_list = session[:acceptList]
-    temp_accept_list << accept_query_id
-    session[:acceptList] = temp_accept_list #only contains list of accepted query ids
     
-    redirect_to :action => :getResult, :remaining_finished_list_after_accept => remaining_finished_list and return
+    redirect_to :action => :getResult, :remaining_after_accept => temp_finished_list and return
     #debugger 
   end
   
   def rejectResult
     reject_query_id = params[:reject_query].to_i
-    #temp_finished_list = session[:intermediate_finished_list]
+    
+    Query.destroy(reject_query_id) #DEBUG: id data type? need save! ?? Has performed action, remove from query table
+    
+    
     temp_finished_list = session[:finished_list]
     temp_finished_list.delete(reject_query_id)
-    session[:finished_list] = temp_finished_list
-    remaining_finished_list = temp_finished_list
-    #@pending_list = session[:pending_list]
-    
-    
-    temp_reject_list = session[:rejectList]
-    temp_reject_list << reject_query_id
-    session[:rejectList] = temp_reject_list  #only cantains list of rejected query ids
-    
-    redirect_to :action => :getResult, :remaining_finished_list_after_reject => remaining_finished_list and return
+    session[:finished_list] = temp_finished_list  #session[:finished_list] will actually update itself in index;do this to ensure the inbox number
+                                                  #is correct if the user goes from getResult page to other pages like Uploadtoaws
+    redirect_to :action => :getResult, :remaining_after_reject => temp_finished_list and return
     #debugger      
   end
 end
