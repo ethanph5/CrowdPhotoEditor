@@ -18,7 +18,7 @@ Crowd::Application.routes.draw do
   match 'dashboard/acceptResult'
   match 'dashboard/rejectResult'
   match 'mobilework/submit_task'
-
+  #match 'dashboard/download'
 
   
   #Facebook Authentication route

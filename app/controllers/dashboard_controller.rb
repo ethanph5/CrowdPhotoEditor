@@ -250,15 +250,19 @@ class DashboardController < ApplicationController
   
   def acceptResult
     accept_query_id = params[:accept_query].to_i #params[:accept_query] is a string
-    
+    query = Query.find_by_id(accept_query_id)
+    query.result_link =~ /.*(\/)(.*)/
+    name = $2
+    data = open(query.result_link).read
+    send_data(data, :filename => name)
     Query.destroy(accept_query_id)
-    
     
     temp_finished_list = session[:finished_list]
     temp_finished_list.delete(accept_query_id)
     session[:finished_list] = temp_finished_list #stores int
+    @len = session[:finished_list].length
     
-    redirect_to :action => :getResult, :remaining_after_accept => temp_finished_list and return
+    #redirect_to :action => :getResult, :remaining_after_accept => temp_finished_list and return
     #debugger 
   end
   

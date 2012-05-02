@@ -11,8 +11,7 @@ src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
 $(document).ready(function(){
   $(".resultList #pic_accept").click(function(){
   
-    $(this).parents(".resultList").hide("slow");
-    
+    $(this).parents(".resultList").hide("slow");    
   });
 });
   
@@ -47,12 +46,12 @@ $(document).ready(function(){
           <h5>Task:</h5>
           <%= finQuery.task %>
           
-          <%= form_tag({:controller => "dashboard", :action => "acceptResult"}, :method => :post, :class => "getResult") do %>
+          <%= form_tag({:controller => "dashboard", :action => "acceptResult"}, :method => :post, :class => "acceptResult") do %>
             <%= hidden_field_tag :accept_query, finQueryID %>
           <%= submit_tag 'Accept', :id => "pic_accept" %>
           <% end %>
           
-          <%= form_tag({:controller => "dashboard", :action => "rejectResult"}, :method => :post, :class => "getResult") do %>
+          <%= form_tag({:controller => "dashboard", :action => "rejectResult"}, :method => :post, :class => "rejectResult") do %>
             <%= hidden_field_tag :reject_query, finQueryID %>
           <%= submit_tag 'Reject', :id => "pic_reject" %>
           <% end %>
