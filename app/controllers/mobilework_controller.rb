@@ -37,8 +37,9 @@ class MobileworkController < ApplicationController
         task = taskTable[id]
         numResult = resultTable[id]
         internal_link = Picture.find(intID).internal_link #resource location
-        question = "<h3>Tasks:</h3><blockquote>"+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
-<h3>Instruction:</h3><blockquote><li>Instruction1</li><li>Instruction2</li></blockquote>" 
+        question = "<h3>Tasks:</h3><blockquote>"+
+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
+<h3>Instruction:</h3><blockquote><li>Save the picture in given link to your computer</li><li>Use http://pixlr.com/editor/ or another photo-editor of your choice</li><li>Perform specified tasks, make sure you do everything specified!</li><li>(If instructions are overly vague, simply decline the task)</li><li>Upload the photo to http://imm.io and return the link to your picture in the Answer Box</li><li>We only accept JPG files!</li></blockquote>" 
         #question = task + " I want " + numResult + " different versions. Thank you!"
         
         success_check = 1
@@ -50,7 +51,7 @@ class MobileworkController < ApplicationController
           http.start {|http|
             headers = {"Content-Type" => "application/json"}
             req = Net::HTTP::Post.new(url.path, headers)
-            req.basic_auth('FelixXie','Phoenix1218118')
+            req.basic_auth('ethanph5','dxlf1314')
             query = {
               "question" => question,
               #"resource" => internal_link, #maybe discard this resource
@@ -94,9 +95,10 @@ class MobileworkController < ApplicationController
         internal_link = fb_picture_link(fb_user, id) 
         #debugger
         #internal_link = id #resource location
-        question = "<h3>Tasks:</h3><blockquote>"+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
-<h3>Instruction:</h3><blockquote><li>Instruction1</li><li>Instruction2</li></blockquote>"
-        #question = task + " I want " + numResult + " different versions. Thank you!"
+        question = "<h3>Tasks:</h3><blockquote>"+
+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
+<h3>Instruction:</h3><blockquote><li>Save the picture in given link to your computer</li><li>Use http://pixlr.com/editor/ or another photo-editor of your choice</li><li>Perform specified tasks, make sure you do everything specified!</li><li>(If instructions are overly vague, simply decline the task)</li><li>Upload the photo to http://imm.io and return the link to your picture in the Answer Box</li><li>We only accept JPG files!</li></blockquote>"
+        
         
         success_check = 1
         1.upto(numResult.to_i) {          
@@ -107,7 +109,7 @@ class MobileworkController < ApplicationController
           http.start {|http|
             headers = {"Content-Type" => "application/json"}
             req = Net::HTTP::Post.new(url.path, headers)
-            req.basic_auth('FelixXie','Phoenix1218118')
+            req.basic_auth('ethanph5','dxlf1314')
             query = {
               "question" => question,
               #"resource" => internal_link,
