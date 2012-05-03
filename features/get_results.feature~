@@ -1,7 +1,8 @@
-Feature: check notification for a specific result of a task sumitted previously 
+Feature: accept some processed photos passed back from the crowd and/or 
+directly upload them to facebook
   As an app user
   When I receive a notification
-  I can check the processed photo passed back from the crowd
+  I can choose to accept some photos and/or upload them to facebook
 
 Background:
   Given I have signed up using name "Bieber",password "password",email "name@email.com"
@@ -17,12 +18,20 @@ Background:
   Then I should see "college_1.png"
 
   Given I have successfully submitted a task "remove red eye" and number of result "3" for "college_1.png"
-   
-Scenario: Check task status
+  
   Given I follow "Inbox(0)"
   Then I should be on the get result page
-
-Scenario: Go back to dashboard and handle the notification later
-  Given I am on the get result page 
+  
+Scenario: Accepting some photos from the list by pressing accept
+  When I press "Accept"
+  Then I should be on the get result page
+  
   When I press "Back to Dashboard"
-  Then I should be on dashboard page
+  Then I should be on the dashboard page
+  
+Scenario: Rejecting some photos from the list by pressing reject
+  When I press "Reject"
+  Then I should be on the get result page
+  
+  When I press "Back to Dashboard"
+  Then I should be on the dashboard page

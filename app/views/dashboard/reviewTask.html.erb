@@ -19,11 +19,13 @@
               <td height="100" ><%= label_tag 'result', @specify_result["#{pic.id}"] %></td>
             </tr>
           <% end %>
-          <% @picturefbSelected.each do |pic| %>
+          <% @picturefbSelected.each do |pid, link| %>
             <tr>
-              <td height="100" ><%= image_tag pic, :size => '120x100'%></td>
-              <td height="100" ><%= label_tag 'task', @specify_task["#{pic}"] %></td>
-              <td height="100" ><%= label_tag 'result', @specify_result["#{pic}"] %></td>
+
+              <td height="100"><%= image_tag link, :size => '120x100'%></td>
+              <td height="100"><%= label_tag 'task', @specify_task["#{pid}"] %></td>
+              <td height="100"><%= label_tag 'result', @specify_result["#{pid}"] %></td>
+
             </tr>
           <% end %>
         </table>

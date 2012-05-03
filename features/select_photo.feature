@@ -13,19 +13,15 @@ Background:
 Scenario: select the existing photo
   When I follow "college"
   Then I should be on the select photo page
-  Then I should see "college_1.png"
-
   When I check "picture[1]"
 
   Then I press "Continue"
   Then I should be on the dashboard page
-  And I should see "Picture Selection: 01 picture(s) selected"
-  
   
 Scenario: Upload a new photo and add to an existing album  
   When I follow "Upload New Photo"
-  Then I should be on the upload photo to new album page
-  When I follow "add to an existing album"
+  Then I should be on the upload photo to aws page
+  When I follow "Add to an existing album"
   Then I should be on the select album page
   When I select "college" from "album_id"
   
@@ -35,16 +31,14 @@ Scenario: Upload a new photo and add to an existing album
   
   Then I should be on the select photo page
   And I should see "college"  
-  And I should see "college_2.png"
   
 Scenario: Upload a new photo to a new album
   When I follow "Upload New Photo"
-  Then I should be on the upload photo to new album page
-  When I fill in "albumName" with "Graduation Commencement"
+  Then I should be on the upload photo to aws page
+  When I fill in "album_name" with "Graduation Commencement"
 
   When I attach the file "college_2.png" to "selectPhotoButton"
   And I press "Upload"
   
   Then I should be on the select photo page
   And I should see "Graduation Commencement"  
-  And I should see "college_2.png"

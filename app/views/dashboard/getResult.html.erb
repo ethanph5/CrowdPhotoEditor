@@ -43,19 +43,21 @@ $(document).ready(function(){
       <% @finished_list.each do |finQueryID| %>
         <div class="resultList">
           <% finQuery = Query.find_by_id(finQueryID) %>
-          <%= link_to image_tag(finQuery.result_link, :size => '100x100'), finQuery.result_link %>
-          <h5>Task:</h5>
-          <%= finQuery.task %>
-          
-          <%= form_tag({:controller => "dashboard", :action => "acceptResult"}, :method => :post, :class => "acceptResult") do %>
-            <%= hidden_field_tag :accept_query, finQueryID %>
-          <%= submit_tag 'Accept', :id => "pic_accept" %>
-          <% end %>
-          
-          <%= form_tag({:controller => "dashboard", :action => "rejectResult"}, :method => :post, :class => "rejectResult") do %>
-            <%= hidden_field_tag :reject_query, finQueryID %>
-          <%= submit_tag 'Reject', :id => "pic_reject" %>
-          <% end %>
+          <% if finQuery %>
+            <%= link_to image_tag(finQuery.result_link, :size => '100x100'), finQuery.result_link %>
+            <h5>Task:</h5>
+            <%= finQuery.task %>
+            
+            <%= form_tag({:controller => "dashboard", :action => "acceptResult"}, :method => :post, :class => "acceptResult") do %>
+              <%= hidden_field_tag :accept_query, finQueryID %>
+            <%= submit_tag 'Accept', :id => "pic_accept" %>
+            <% end %>
+            
+            <%= form_tag({:controller => "dashboard", :action => "rejectResult"}, :method => :post, :class => "rejectResult") do %>
+              <%= hidden_field_tag :reject_query, finQueryID %>
+            <%= submit_tag 'Reject', :id => "pic_reject" %>
+            <% end %>
+          <% end %>  
         </div>  
       <% end %>
       
@@ -66,7 +68,11 @@ $(document).ready(function(){
     <h3>Pending Results:</h3>
     <p><%= @pending_list.length %> Picture(s) still in progress.</p>
     
-   
+    <%= form_tag :action => 'download', :method => :get, :id => 'download_form' do %>
+    
+      <%= submit_tag 'Download the Accepted Photo(s)', :id => "download" %>
+    <% end %>
+      
     <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
     
       <%= submit_tag 'Back to Dashboard', :class => "btn btn-success", :id => "pic_accept" %>

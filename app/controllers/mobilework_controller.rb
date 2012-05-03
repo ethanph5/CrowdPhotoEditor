@@ -7,31 +7,39 @@ class MobileworkController < ApplicationController
   def submit_task
     counter = 0
     
-    if params[:picTable] != nil
-      picTable = params[:picTable] #picTable: key is pic id(string), value is 1
-      picIDlist = picTable.keys #unfortunately, ids are string, not integer
-    end
+    
+    picIDlist = session[:picture].keys if session[:picture]
+    picfblist = session[:picturefb].keys if session[:picturefb]
+    taskTable = session[:tasks] if session[:tasks]
+    resultTable = session[:results] if session[:results]
+    #debugger
+    #if params[:picTable] != nil
+      #picTable = params[:picTable] #picTable: key is pic id(string), value is 1
+      #picIDlist = picTable.keys #unfortunately, ids are string, not integer
+    #end
 
-    if params[:picfbTable] != nil    
-      picfbTable = params[:picfbTable]
-      picfblist = picfbTable.keys
-    end
+    #if params[:picfbTable] != nil    
+      #picfbTable = params[:picfbTable]
+      #picfblist = picfbTable.keys
+    #end
     
-    taskTable = params[:taskTable] #key is picture id, value is the task string
-    resultTable = params[:resultTable] #key is picture id, value is the # of result the user wants
-    
+    #taskTable = params[:taskTable] #key is picture id, value is the task string
+    #resultTable = params[:resultTable] #key is picture id, value is the # of result the user wants
+    #debugger
     submission_notice = []
     submission_error = []
     
-    if params[:picTable] != nil
+    
+    #if params[:picTable] != nil
+    if not picIDlist.empty?
       picIDlist.each { |id|
-        
         intID = id.to_i
         task = taskTable[id]
         numResult = resultTable[id]
         internal_link = Picture.find(intID).internal_link #resource location
-        question = "<h3>Tasks:</h3><blockquote>"+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
-<h3>Instruction:</h3><blockquote><li>Instruction1</li><li>Instruction2</li></blockquote>" 
+        question = "<h3>Tasks:</h3><blockquote>"+
+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
+<h3>Instruction:</h3><blockquote><li>Save the picture in given link to your computer</li><li>Use http://pixlr.com/editor/ or another photo-editor of your choice</li><li>Perform specified tasks, make sure you do everything specified!</li><li>(If instructions are overly vague, simply decline the task)</li><li>Upload the photo to http://imm.io and return the link to your picture in the Answer Box</li><li>We only accept JPG files!</li></blockquote>" 
         #question = task + " I want " + numResult + " different versions. Thank you!"
         
         success_check = 1
@@ -43,7 +51,7 @@ class MobileworkController < ApplicationController
           http.start {|http|
             headers = {"Content-Type" => "application/json"}
             req = Net::HTTP::Post.new(url.path, headers)
-            req.basic_auth('FelixXie','Phoenix1218118')
+            req.basic_auth('ethanph5','dxlf1314')
             query = {
               "question" => question,
               #"resource" => internal_link, #maybe discard this resource
@@ -78,15 +86,19 @@ class MobileworkController < ApplicationController
     
     
     #-------------------------------------- facebook part ----------------------------
-    if params[:picfbTable] != nil
+    if not picfblist.empty?
+      fb_user = current_user.fb_user     
       picfblist.each { |id|
         counter = counter + 1
         task = taskTable[id]
-        numResult = resultTable[id] 
-        internal_link = id #resource location
-        question = "<h3>Tasks:</h3><blockquote>"+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
-<h3>Instruction:</h3><blockquote><li>Instruction1</li><li>Instruction2</li></blockquote>"
-        #question = task + " I want " + numResult + " different versions. Thank you!"
+        numResult = resultTable[id]
+        internal_link = fb_picture_link(fb_user, id) 
+        #debugger
+        #internal_link = id #resource location
+        question = "<h3>Tasks:</h3><blockquote>"+
+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
+<h3>Instruction:</h3><blockquote><li>Save the picture in given link to your computer</li><li>Use http://pixlr.com/editor/ or another photo-editor of your choice</li><li>Perform specified tasks, make sure you do everything specified!</li><li>(If instructions are overly vague, simply decline the task)</li><li>Upload the photo to http://imm.io and return the link to your picture in the Answer Box</li><li>We only accept JPG files!</li></blockquote>"
+        
         
         success_check = 1
         1.upto(numResult.to_i) {          
@@ -97,7 +109,7 @@ class MobileworkController < ApplicationController
           http.start {|http|
             headers = {"Content-Type" => "application/json"}
             req = Net::HTTP::Post.new(url.path, headers)
-            req.basic_auth('FelixXie','Phoenix1218118')
+            req.basic_auth('ethanph5','dxlf1314')
             query = {
               "question" => question,
               #"resource" => internal_link,
@@ -134,4 +146,17 @@ class MobileworkController < ApplicationController
     
     redirect_to :controller => :dashboard, :action => :index, :submission_notice => submission_notice, :submission_error => submission_error and return
   end  
+  
+  def fb_picture_link(fb_user, picture_id)
+    albums = fb_user.albums
+    albums.each do |album|
+      album.photos.each do |photo|
+        #debugger     
+        if photo.identifier == picture_id
+          return photo.source
+        end
+      end
+    end
+  end
+  
 end

@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<body>
+<title><% @page_title = "Specify Task"%></title>
   <div class="container">
-    <div class="header">
-      <h2 id="header-icon"></h2>
-      <h4 id="username_text"><big><b>Hello, <%= @user_name %></b></big></h4>
-    </div>
     <br/>
     <div class="bottom">
       <p id="inst">Here are the photos you have selected. Please specify what tasks you want to request and how many results you want to get back. For example: </p>
@@ -20,7 +14,7 @@
           </tr>
           <% @pictureSelected.each do |pic| %>
             <tr>
-                <td height="100" ><%= pic.name %></td>
+                <td height="100" ><%= image_tag pic.internal_link, :size => '100x100'%><%= pic.name %></td>
               <% if @specify_task == {} %>
                 <td height="100" > <%= text_area_tag "tasks[#{pic.id}]", '', :size => '50x5' %></td>
               <% else %>
@@ -33,16 +27,27 @@
               <% end %>
             </tr>
           <% end %>
+          <% @picturefbSelected.each do |pic| %>
+            <tr>
+                <td height="100" ><%= image_tag pic, :size => '100x100'%></td>
+              <% if @specify_task == {} %>
+                <td height="100" > <%= text_area_tag "tasks[#{pic}]", '', :size => '50x5' %></td>
+              <% else %>
+                <td height="100"><%= text_area_tag "tasks[#{pic}]", @specify_task["#{pic}"], :size => '50x5' %></td>
+              <% end %>
+              <% if @specify_result == {} %>
+                <td height="100"><%= text_field_tag "results[#{pic}]", '', :size => '10' %></td>
+              <% else %>
+                <td height="100"><%= text_field_tag "results[#{pic}]", @specify_result["#{pic}"], :size => '10' %></td>
+              <% end %>
+            </tr>
+          <% end %>
         </table>
-        <br/><br/>
-
-        <%= submit_tag 'Tasks Review', :id => "continueButton" %>
+        <br/>
+        <%= submit_tag 'Review Task',:class => "btn btn-danger", :id => "pic_submit" %>
+		<a class = "btn btn-warning" href="/">Cancel</a>
       <% end %>
-      <br/><br/>
-      <form name="goBack" action="index">
-        <input class="backButton" type="submit" value="Go Back to Select Photo" />
-      </form>
+      
     </div>
   </div>
-</body>
-</html>
+

@@ -17,6 +17,7 @@ Crowd::Application.routes.draw do
   match 'dashboard/submit'
   match 'dashboard/acceptResult'
   match 'dashboard/rejectResult'
+  match 'dashboard/download'
   match 'mobilework/submit_task'
 
   
