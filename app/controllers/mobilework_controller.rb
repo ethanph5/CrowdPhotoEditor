@@ -31,7 +31,7 @@ class MobileworkController < ApplicationController
     
     
     #if params[:picTable] != nil
-    if picIDlist
+    if not picIDlist.empty?
       picIDlist.each { |id|
         intID = id.to_i
         task = taskTable[id]
@@ -85,7 +85,7 @@ class MobileworkController < ApplicationController
     
     
     #-------------------------------------- facebook part ----------------------------
-    if picfblist
+    if not picfblist.empty?
       fb_user = current_user.fb_user     
       picfblist.each { |id|
         counter = counter + 1

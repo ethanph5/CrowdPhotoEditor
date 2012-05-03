@@ -201,7 +201,7 @@ class DashboardController < ApplicationController
     
     @selected_picture = session[:picture] || Hash.new
     #@selected_picturefb = session[:picturefb] || Hash.new
-    if session[:picturefb]
+    if not session[:picturefb].empty?
       fb_user = current_user.fb_user 
       @selected_picturefb = Hash.new
       session[:picturefb].keys.each do |pid|
@@ -224,7 +224,7 @@ class DashboardController < ApplicationController
 
     @selected_picture = session[:picture]
     #@selected_picturefb = session[:picturefb]
-    if session[:picturefb]
+    if not session[:picturefb].empty?
       fb_user = current_user.fb_user
       @selected_picturefb = Hash.new
       session[:picturefb].keys.each do |pid|
