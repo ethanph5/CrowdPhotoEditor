@@ -15,7 +15,7 @@ describe AuthorizationController do
   it 'should have a current_user' do 
 
     subject.current_user.should_not be_nil
-    subject.current_user.name.should == "Lisa"
+    subject.current_user.name.should == "lisa"
     
   end
   

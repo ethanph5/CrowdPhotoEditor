@@ -48,14 +48,14 @@ $(document).ready(function(){
             <%= form_tag({:controller => "dashboard", :action => "acceptResult"}, :method => :post) do %>
             <%= hidden_field_tag :accept_query, finQueryID %>
             <div class = "btn-group">
-            <%= submit_tag 'Like It', :class => "btn btn-success", :id => "pic_accept" %>
+            <%= submit_tag 'Accept It', :class => "btn btn-success", :id => "pic_accept" %>
            	<% end %>
            	
            
             <%= form_tag({:controller => "dashboard", :action => "rejectResult"}, :method => :post) do %>
             <%= hidden_field_tag :reject_query, finQueryID %> 
             
-            <%= submit_tag 'Drop It', :class => "btn btn-danger", :id => "pic_reject" %>
+            <%= submit_tag 'Reject It', :class => "btn btn-danger", :id => "pic_reject" %>
             <% end %>
             </div>
           <% end %>  
