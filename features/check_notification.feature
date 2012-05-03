@@ -19,14 +19,12 @@ Background:
   Given I have successfully submitted a task "remove red eye" and number of result "3" for "college_1.png"
    
 Scenario: Check task status
-  Given I follow "Inbox(1)"
+  Given I follow "Inbox(0)"
   Then I should be on get result page
-  Then I should see "college_1.png"
-  Then I should see "Task: Remove red eye"
+  Then I should see "Task:Remove red eye"
 
 Scenario: Go back to dashboard and handle the notification later
   Given I am on get result page 
-  Then I should see "college_1.png"
-  Then I should see "Task: Remove red eye"
+  Then I should see "Task:Remove red eye"
   When I press "Back to Index"
   Then I should be on dashboard page
