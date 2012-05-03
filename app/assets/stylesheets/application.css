@@ -12,9 +12,16 @@
 }
 
 .auth-body{
-	width:300px;
+	
+	padding-top: 20px;
+	width:420px;
 	margin: auto;
+	border: 1px solid;
+	-moz-box-shadow: 0 0 5px 5px #888;
+	-webkit-box-shadow: 0 0 5px 5px#888;
+	box-shadow: 0 0 5px 5px #888;
 }
+
 
 .nav {
 	position: fixed;
@@ -57,18 +64,7 @@ label{
     text-align: right;
 }
 
-/*
-.facebook-albums{
-	background: #3B5998;
-  	padding: 10px 20px;
-  	margin-top: 10px;
-  	margin-left: 50px;
-  	width: 730px;
-  	height: auto;
-  	float: left;
-  	border-radius:10px;
-}
-*/
+
 
 .facebook-album{
 	float: left;
@@ -166,6 +162,7 @@ div.upload-action{
 	padding-left: 20px;
 	
 }
+
 
 #sub_notice{
 	color: green;

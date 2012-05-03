@@ -1,6 +1,7 @@
 <title><% @page_title = "Sign In"%></title>
 
-<div class = "auth-body">
+<br/>
+<div class = "auth-body" align="center">
 <h3>Sign in with Facebook</h3>
 <div class="facebook">
 	<br/> 
@@ -17,13 +18,11 @@
 
   <div><%= f.password_field :password, :placeholder => :Password %></div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
   <br/>
   <div><%= f.submit "Sign in", :class => 'btn btn-success btn-large' %></div>
 <% end %>
 </div>
 
 <%= render "links" %>
+<br/>
 </div>
