@@ -7,25 +7,32 @@ class MobileworkController < ApplicationController
   def submit_task
     counter = 0
     
-    if params[:picTable] != nil
-      picTable = params[:picTable] #picTable: key is pic id(string), value is 1
-      picIDlist = picTable.keys #unfortunately, ids are string, not integer
-    end
+    
+    picIDlist = session[:picture].keys if session[:picture]
+    picfblist = session[:picturefb].keys if session[:picturefb]
+    taskTable = session[:tasks] if session[:tasks]
+    resultTable = session[:results] if session[:results]
+    #debugger
+    #if params[:picTable] != nil
+      #picTable = params[:picTable] #picTable: key is pic id(string), value is 1
+      #picIDlist = picTable.keys #unfortunately, ids are string, not integer
+    #end
 
-    if params[:picfbTable] != nil    
-      picfbTable = params[:picfbTable]
-      picfblist = picfbTable.keys
-    end
+    #if params[:picfbTable] != nil    
+      #picfbTable = params[:picfbTable]
+      #picfblist = picfbTable.keys
+    #end
     
-    taskTable = params[:taskTable] #key is picture id, value is the task string
-    resultTable = params[:resultTable] #key is picture id, value is the # of result the user wants
-    
+    #taskTable = params[:taskTable] #key is picture id, value is the task string
+    #resultTable = params[:resultTable] #key is picture id, value is the # of result the user wants
+    #debugger
     submission_notice = []
     submission_error = []
     
-    if params[:picTable] != nil
+    
+    #if params[:picTable] != nil
+    if picIDlist
       picIDlist.each { |id|
-        
         intID = id.to_i
         task = taskTable[id]
         numResult = resultTable[id]
@@ -78,12 +85,15 @@ class MobileworkController < ApplicationController
     
     
     #-------------------------------------- facebook part ----------------------------
-    if params[:picfbTable] != nil
+    if picfblist
+      fb_user = current_user.fb_user     
       picfblist.each { |id|
         counter = counter + 1
         task = taskTable[id]
-        numResult = resultTable[id] 
-        internal_link = id #resource location
+        numResult = resultTable[id]
+        internal_link = fb_picture_link(fb_user, id) 
+        #debugger
+        #internal_link = id #resource location
         question = "<h3>Tasks:</h3><blockquote>"+task+"</blockquote> <h3>Resource:</h3><blockquote>"+"<a href="+internal_link+">"+internal_link+"</a></blockquote>
 <h3>Instruction:</h3><blockquote><li>Instruction1</li><li>Instruction2</li></blockquote>"
         #question = task + " I want " + numResult + " different versions. Thank you!"
@@ -134,4 +144,17 @@ class MobileworkController < ApplicationController
     
     redirect_to :controller => :dashboard, :action => :index, :submission_notice => submission_notice, :submission_error => submission_error and return
   end  
+  
+  def fb_picture_link(fb_user, picture_id)
+    albums = fb_user.albums
+    albums.each do |album|
+      album.photos.each do |photo|
+        #debugger     
+        if photo.identifier == picture_id
+          return photo.source
+        end
+      end
+    end
+  end
+  
 end

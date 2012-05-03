@@ -24,4 +24,11 @@ class User < ActiveRecord::Base
     #fb_token
     #fb_albums = fb_user.albums
   end
+  
+  def fb_user
+    facebook = authorizations.where(:provider => :facebook).first
+    user = ::FbGraph::User.fetch(facebook.uid, :access_token => facebook.token)
+    user
+  end
+  
 end

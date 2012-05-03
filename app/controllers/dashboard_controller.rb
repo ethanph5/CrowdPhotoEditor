@@ -119,46 +119,43 @@ class DashboardController < ApplicationController
 #-------------------------------------------------check notification ends here------------
 
 
-    if session[:picture]==nil
-      session[:picture]=Hash.new
+    if not session[:picture]
+      session[:picture] = Hash.new
     end
-
-    if params[:picture] !=nil
-      params[:picture].each do |key|
-        session[:picture][key[0]] = 1
+    if params[:picture]       
+      params[:picture].each do |key, value|
+        session[:picture][key] = value
       end
     end
-    @selected_picture=session[:picture] || {}
+    @selected_picture = session[:picture]
 
-    if session[:picturefb]==nil
-      session[:picturefb]=Hash.new
-    end
-
-    if params[:picturefb] !=nil
-      params[:picturefb].each do |key|
-        session[:picturefb][key[0]] = 1
+    if not session[:picturefb]
+      session[:picturefb] = Hash.new
+    end  
+    if params[:picturefb]
+      params[:picturefb].each do |key, value|
+        session[:picturefb][key] = value
       end
     end
-    @selected_picturefb=session[:picturefb] || {}
+    @selected_picturefb = session[:picturefb]
 
-    #user_id = current_user.id
+    
     # crowd albums part
     @crowdAlbums = User.find_by_id(current_user.id).albums
 
     # facebook albums part
-    @albums = nil
+    
     auth = Authorization.find_by_user_id(current_user.id)
     if auth
       token = auth.token
     end
-    #@user = User.find_by_id(current_user.id)
     @user = current_user
-    #@user_name = User.find_by_id(current_user.id).name
     @user_name = current_user.name
     if token
-      result = @user.grap_facebook_albums(token)
-      @albums = result
+      @albums = @user.grap_facebook_albums(token)
+      #@albums = result
     else
+      @albums = nil
     end
     @pictureSelected = Picture.find(@selected_picture.keys)
     @picturefbSelected = @selected_picturefb.keys
@@ -221,43 +218,65 @@ class DashboardController < ApplicationController
   end
 
   def specifyTask
+    
     @len = session[:lenFinish]
     if session[:picture] == {} and session[:picturefb] == {}
       flash[:error] = "Please Select Photo(s) Before Specifying Task(s)"
       redirect_to :action => :index
     end
-
-    @selected_picture = session[:picture]
-    @selected_picturefb = session[:picturefb]
+    
+    @selected_picture = session[:picture] || Hash.new
+    #@selected_picturefb = session[:picturefb] || Hash.new
+    if session[:picturefb]
+      fb_user = current_user.fb_user 
+      @selected_picturefb = Hash.new
+      session[:picturefb].keys.each do |pid|
+        @selected_picturefb[pid] = fb_picture_link(fb_user, pid)
+      end
+    else
+      @selected_picturefb = Hash.new
+    end
     @pictureSelected = Picture.find(@selected_picture.keys)
-    @picturefbSelected = @selected_picturefb.keys
-    @specify_task = params[:tasks] || session[:tasks] || {}
-    @specify_result = params[:results] || session[:results] || {}
+    #@picturefbSelected = @selected_picturefb.keys
+    @picturefbSelected = @selected_picturefb
+    @specify_task = session[:tasks] || Hash.new 
+    @specify_result = session[:results] || Hash.new
     user_id = current_user.id
     @user_name = User.find(current_user.id).name
   end
 
   def reviewTask
+     
     @len = session[:lenFinish]
     @selected_picture = session[:picture]
-    @selected_picturefb = session[:picturefb]
+    #@selected_picturefb = session[:picturefb]
+    if session[:picturefb]
+      fb_user = current_user.fb_user
+      @selected_picturefb = Hash.new
+      session[:picturefb].keys.each do |pid|
+        @selected_picturefb[pid] = fb_picture_link(fb_user, pid)
+      end
+    else
+      @selected_picturefb = Hash.new
+    end
     @pictureSelected = Picture.find(@selected_picture.keys)
-    @picturefbSelected = @selected_picturefb.keys
+    #@picturefbSelected = @selected_picturefb.keys
+    @picturefbSelected = @selected_picturefb
     @specify_task = params[:tasks] || session[:tasks]
     session[:tasks] = @specify_task
     @specify_result = params[:results] || session[:results]
     session[:results] = @specify_result
-    user_id = current_user.id
     @user_name = User.find(current_user.id).name
   end
 
   def submit
-    @len = session[:lenFinish]
-    @selected_pictures = session[:picture] #hashTable: key is pic id, value is 1
-    @selected_picturesfb = session[:picturefb]
-    @taskTable = session[:tasks] #key is picture id, value is the task string
-    @resultTable = session[:results] #key is picture id, value is the # of result the user wants
-    redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :picfbTable => @selected_picturesfb, :taskTable => @taskTable, :resultTable => @resultTable
+    #@len = session[:lenFinish]
+    #@selected_pictures = session[:picture] #hashTable: key is pic id, value is 1
+    #@selected_picturesfb = session[:picturefb]
+    #@taskTable = session[:tasks] #key is picture id, value is the task string
+    #@resultTable = session[:results] #key is picture id, value is the # of result the user wants
+    redirect_to :controller => :mobilework, :action => :submit_task
+    #redirect_to :controller => :mobilework, :action => :submit_task, :picTable => @selected_pictures, :picfbTable => @selected_picturesfb, :taskTable => @taskTable, :resultTable => @resultTable
   end
 
   def getResult
@@ -315,4 +334,16 @@ class DashboardController < ApplicationController
     redirect_to :action => :getResult, :remaining_finished_list_after_reject => remaining_finished_list and return
     #debugger      
   end
+  
+  def fb_picture_link(fb_user, picture_id)
+    albums = fb_user.albums
+    albums.each do |album|
+      album.photos.each do |photo|     
+        if photo.identifier == picture_id
+          return photo.source
+        end
+      end
+    end
+  end
+  
 end

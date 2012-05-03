@@ -27,18 +27,18 @@
               <% end %>
             </tr>
           <% end %>
-          <% @picturefbSelected.each do |pic| %>
+          <% @picturefbSelected.each do |pid, link| %>
             <tr>
-                <td height="100" ><%= image_tag pic, :size => '100x100'%></td>
+                <td height="100" ><%= image_tag link, :size => '100x100'%></td>
               <% if @specify_task == {} %>
-                <td height="100" > <%= text_area_tag "tasks[#{pic}]", '', :size => '50x5' %></td>
+                <td height="100" > <%= text_area_tag "tasks[#{pid}]", '', :size => '50x5' %></td>
               <% else %>
-                <td height="100"><%= text_area_tag "tasks[#{pic}]", @specify_task["#{pic}"], :size => '50x5' %></td>
+                <td height="100"><%= text_area_tag "tasks[#{pid}]", @specify_task["#{pid}"], :size => '50x5' %></td>
               <% end %>
               <% if @specify_result == {} %>
-                <td height="100"><%= text_field_tag "results[#{pic}]", '', :size => '10' %></td>
+                <td height="100"><%= text_field_tag "results[#{pid}]", '', :size => '10' %></td>
               <% else %>
-                <td height="100"><%= text_field_tag "results[#{pic}]", @specify_result["#{pic}"], :size => '10' %></td>
+                <td height="100"><%= text_field_tag "results[#{pid}]", @specify_result["#{pid}"], :size => '10' %></td>
               <% end %>
             </tr>
           <% end %>
