@@ -6,9 +6,9 @@ Feature: Create a new account
   
 Background: 
   Given the following users exist:
-  |name       |password     |email              |
-  |Rocky      |countdown    |rocky@houston.com  |
-  |Batman     |iLoveJoker   |batman@nowhere.com |
+  |name       |password     |credit |email              |
+  |Rocky      |countdown    |100    |rocky@houston.com  |
+  |Batman     |iLoveJoker   |250    |batman@nowhere.com |
   And I am on the welcome page
 
 Scenario: new user sign up on home page

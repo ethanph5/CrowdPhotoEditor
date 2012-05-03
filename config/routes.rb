@@ -19,7 +19,6 @@ Crowd::Application.routes.draw do
   match 'dashboard/rejectResult'
   match 'mobilework/submit_task'
 
-
   
   #Facebook Authentication route
   resources :authorizations, :only => [:index, :create, :destroy]

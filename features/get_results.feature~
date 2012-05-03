@@ -19,6 +19,8 @@ Background:
 
   Given I have successfully submitted a task "remove red eye" and number of result "3" for "college_1.png"
   
+  Given I see a callback alert
+  
   Given I press "Notification"
   Then I should be on notification page
   Then I should see "Remove red eye in college_1.png with 3 results"
