@@ -7,6 +7,13 @@
  *= require bootstrap_and_overrides
 */
 
+.resultList .btn-group{
+	margin-left: 0px;
+}
+
+.bottom .btn-toolbar{
+	margin-left: -150px;
+}
 
 .auth-input .btn{
 	width: 126px;
