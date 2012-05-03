@@ -37,6 +37,8 @@ module NavigationHelpers
       '/dashboard/uploadToAWS'
     when /^the select album page$/
       '/dashboard/selectAlbum'
+    when /^the get result page$/
+      '/dashboard/getResult'
       
       
       

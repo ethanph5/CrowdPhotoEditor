@@ -20,11 +20,9 @@ Background:
    
 Scenario: Check task status
   Given I follow "Inbox(0)"
-  Then I should be on get result page
-  Then I should see "Task:Remove red eye"
+  Then I should be on the get result page
 
 Scenario: Go back to dashboard and handle the notification later
-  Given I am on get result page 
-  Then I should see "Task:Remove red eye"
-  When I press "Back to Index"
-  Then I should be on dashboard page
+  Given I am on the get result page 
+  When I press "Back to Dashboard"
+  Then I should be on the dashboard page

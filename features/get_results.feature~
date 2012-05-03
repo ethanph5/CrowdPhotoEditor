@@ -19,33 +19,19 @@ Background:
 
   Given I have successfully submitted a task "remove red eye" and number of result "3" for "college_1.png"
   
-  Given I see a callback alert
+  Given I follow "Inbox(0)"
+  Then I should be on the get result page
   
-  Given I press "Notification"
-  Then I should be on notification page
-  Then I should see "Remove red eye in college_1.png with 3 results"
-  Then I should see "Status: finished"
-  When I follow "finished"
-  Then I should be on the processed task page
-  Then I should see "Here are 3 results for college_1.png"  
-
+Scenario: Accepting some photos from the list by pressing accept
+  When I press "Accept"
+  Then I should be on the get result page
   
-Scenario: select some photos from the list and press accept
-  When I select "college_1_version1.png"
-  When I select "college_2_version2.png"
-  And I press "Accept"
+  When I press "Back to Dashboard"
+  Then I should be on the dashboard page
   
-  Then I should be on Albums Creation page
-  And I should see a time-stamp as the album name
-  And I should see "college_1_version1.png"
-  And I should see ""college_1_version2.png"
-
-Scenario: select some photos from the list and press accept and upload to facebook
-  When I select "college_1_version1.png"
-  When I select "college_1_version2.png"
-  And I follow "Accept and upload to facebook"
+Scenario: Rejecting some photos from the list by pressing reject
+  When I press "Reject"
+  Then I should be on the get result page
   
-  Then I should be on Albums Creation page on facebook
-  And I should see a time-stamp as the album name
-  And I should see "college_1_version1.png"
-  And I should see "college_1_version2.png"
+  When I press "Back to Dashboard"
+  Then I should be on the dashboard page
