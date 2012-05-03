@@ -72,7 +72,7 @@ Given /^(?:|I )have successfully submitted a task "([^"]*)" and number of result
   step %Q{I fill in "tasks[1]" with "#{task}"}
   step %Q{I fill in "results[1]" with "#{numResult}"}
 
-  step %Q{I press "Tasks Review"}
+  step %Q{I press "Review Task"}
   step %Q{I should be on the review task page}
   step %Q{I should see "#{pic_name}"}
 
@@ -81,9 +81,4 @@ Given /^(?:|I )have successfully submitted a task "([^"]*)" and number of result
   
   step %Q{I press "Submit"}
   step %Q{I should be on the dashboard page}
-end
-
-
-Given /^(?:|I )see a callback alert/
-
 end

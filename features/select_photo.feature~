@@ -3,59 +3,44 @@ Feature: Select photo from existing album or Upload a new photo
   I can select the photo from my existing album on the app's page or on Facebook
   I can upload a new photo
 
-Background: I already authenticate via Facebook and can see the photos on Facebook
-  Given the following albums and photos exist:
-  | Album        | Photo               | 
-  | College      | college_1.png       |
-  | College      | college_2.png       |
-  | College      | college_3.png       |
-  | College      | college_4.png       |
-  | Vacation     | vacation_1.png      |
-  | Vacation     | vacation_2.png      |
-  | Vacation     | vacation_3.png      |
-  | Vacation     | vacation_4.png      |
+Background:
 
-  And I am on the dashboard page
+  Given I have signed up using name "Bieber",password "password",email "name@email.com"
+  Given I have created an album "college"
+  Given I have a picture "college_1.png" in the album "college" 
+  Given I have successfully logged in using email "name@email.com",password "password"
 
 Scenario: select the existing photo
-  And I should see "0 photo selected"
-  When I select the "College" Album
-  Then I should be on the photo page of College Album
-  Then I should see "college_1.png"
-  Then I should see "college_2.png"
-  Then I should see "college_3.png"
-  Then I should see "college_4.png"
-  When I select "college_1.png"
-  When I select "college_2.png"
+  When I follow "college"
+  Then I should be on the select photo page
+  When I check "picture[1]"
+
   Then I press "Continue"
   Then I should be on the dashboard page
-  Then I should see "2 photos selected"
+  And I should see "Picture Selection: 01 picture(s) selected"
+  
   
 Scenario: Upload a new photo and add to an existing album  
-  And I should see "0 photo selected"
-  When I press "Upload"
-  Then I should be on Upload Photo page
-  When I follow "add to an existing album"
-  Then I should be on Select an album page
-  When I select the "Vacation" from the drop down list
-  When I press "Select Photos from your computer"
-  Then I see a pop-up window
-  And I upload the file "hawaii.png"
+  When I follow "Upload New Photo"
+  Then I should be on the upload photo to aws page
+  When I follow "Add to an existing album"
+  Then I should be on the select album page
+  When I select "college" from "album_id"
   
-  Then I should be on Select Photo page
-  And I should see "Vacation"  
-  And I should see "hawaii.png"
+
+  When I attach the file "college_2.png" to "selectPhotoButton"
+  And I press "Upload"
+  
+  Then I should be on the select photo page
+  And I should see "college"  
   
 Scenario: Upload a new photo to a new album
-  And I should see "0 photo selected"
-  When I press "Upload"
-  Then I should be on Upload Photo page
-  When I fill in "New Album Name" with "Graduation Commencement"
-  When I press "Select Photos from your computer"
-  Then I see a pop-up window
-  And I upload the file "commencement.png"
+  When I follow "Upload New Photo"
+  Then I should be on the upload photo to aws page
+  When I fill in "album_name" with "Graduation Commencement"
+
+  When I attach the file "college_2.png" to "selectPhotoButton"
+  And I press "Upload"
   
-  Then I should be on Select Photo page
+  Then I should be on the select photo page
   And I should see "Graduation Commencement"  
-  And I should see "commencement.png"
-    
