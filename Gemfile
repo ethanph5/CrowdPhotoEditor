@@ -29,6 +29,7 @@ group :development, :test do
 end
 
 group :production do
+  gem 'rubyzip' #newly added
   gem 'aws-sdk'
   gem 'pg'
   gem 'devise'
