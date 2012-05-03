@@ -3,7 +3,11 @@
 <head>
   <title><%= @page_title%></title>
   <!--[if lt IE 9]>
+<<<<<<< HEAD
     <script src=" http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+=======
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+>>>>>>> 48b98b33c0d4639d2a993b380993f975771991db
   <![endif]-->
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>

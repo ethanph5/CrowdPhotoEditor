@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
 <head>
 <script type="text/javascript"
 src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
@@ -33,9 +32,6 @@ $(document).ready(function(){
 
 <body>
   <div class="container">
-    <div class="header">
-    </div>
-    <br/>
     <div class="bottom">
     <h3>Finished Results:</h3>
     
@@ -48,15 +44,20 @@ $(document).ready(function(){
             <h5>Task:</h5>
             <%= finQuery.task %>
             
-            <%= form_tag({:controller => "dashboard", :action => "acceptResult"}, :method => :post, :class => "acceptResult") do %>
-              <%= hidden_field_tag :accept_query, finQueryID %>
-            <%= submit_tag 'Accept', :id => "pic_accept" %>
-            <% end %>
             
-            <%= form_tag({:controller => "dashboard", :action => "rejectResult"}, :method => :post, :class => "rejectResult") do %>
-              <%= hidden_field_tag :reject_query, finQueryID %>
-            <%= submit_tag 'Reject', :id => "pic_reject" %>
+            <%= form_tag({:controller => "dashboard", :action => "acceptResult"}, :method => :post) do %>
+            <%= hidden_field_tag :accept_query, finQueryID %>
+            <div class = "btn-group">
+            <%= submit_tag 'Like It', :class => "btn btn-success", :id => "pic_accept" %>
+           	<% end %>
+           	
+           
+            <%= form_tag({:controller => "dashboard", :action => "rejectResult"}, :method => :post) do %>
+            <%= hidden_field_tag :reject_query, finQueryID %> 
+            
+            <%= submit_tag 'Drop It', :class => "btn btn-danger", :id => "pic_reject" %>
             <% end %>
+            </div>
           <% end %>  
         </div>  
       <% end %>
@@ -68,17 +69,21 @@ $(document).ready(function(){
     <h3>Pending Results:</h3>
     <p><%= @pending_list.length %> Picture(s) still in progress.</p>
     
-    <%= form_tag :action => 'download', :method => :get, :id => 'download_form' do %>
-    
-      <%= submit_tag 'Download the Accepted Photo(s)', :id => "download" %>
+    <div class="btn-toolbar">
+    <div class = "btn-group">
+    <%= form_tag :action => 'download', :method => :get, :id => 'download_form' do %>  
+    <%= submit_tag 'Download the Accepted Photo(s)', :class => "btn btn-info", :id => "download-all" %>
     <% end %>
-      
+    </div> 
+     
+    <div class = "btn-group">
     <%= form_tag :action => 'index', :method => :get, :id => 'album_form' do %>
-    
-      <%= submit_tag 'Back to Dashboard', :class => "btn btn-success", :id => "pic_accept" %>
+    <%= submit_tag 'Back to Dashboard', :class => "btn btn-warning", :id => "pic_accept" %>
     <% end %>
+    </div>
+    </div>
+    
     
     </div>    
   </div>
-</body>
-</html>
+
