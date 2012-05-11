@@ -1,0 +1,30 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+li.purpose {
+  margin-left: 38px; //38px
+  font-size: 20px;
+}
+
+.btn-group {
+	float: left;
+	display: inline;
+  margin-left: 150px; //150px
+}
+
+.bottom{
+  margin: auto;
+
+}
+
+.listPicture{
+  -moz-box-shadow: -5px -5px 5px #888;
+  -webkit-box-shadow: -5px -5px 5px #888;
+  box-shadow: -5px -5px 5px #888;
+  
+}
+
+.inst{
+  font-size:14px; //14px
+  font-weight:bold;
+}

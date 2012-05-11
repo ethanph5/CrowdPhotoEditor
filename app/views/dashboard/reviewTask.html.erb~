@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html>
-<body>
+<title><% @page_title = "Review Task"%></title>
   <div class="container">
-    <div class="header">
-      <h2 id="header-icon"></h2>
-      <h4 id="username_text">Hello, <%= @user_name %></h4>
-    </div>
-    <div class="bottom">
-      <p id="inst">Here is a list of task you specified. Click Edit to go back to specify tasks page to make changes, or click Submit to send out your request.</p>
+  	<br/>
+    <p class="inst"><center>Here are the tasks you have specified. Click Edit to make changes or click Submit to send out your request to the Crowd!</center></p>
+    <br/>
+    <div class="bottom" align="center" style="font-size: 15px;">
+      
       <%= form_tag :action => 'submit', :method => :get, :id => 'pictureTable' do %>
-        <table border="2" width="300" class="listPicture">
+        <table style="width: 700px;" class="table table-striped table-bordered listPicture">
           <tr>
             <th>Picture</th>
             <th>Task</th>
@@ -17,27 +14,28 @@
           </tr>
           <% @pictureSelected.each do |pic| %>
             <tr>
-              <td height="100"><%= pic.name %></td>
-              <td height="100"><%= label_tag 'task', @specify_task["#{pic.id}"] %></td>
-              <td height="100"><%= label_tag 'result', @specify_result["#{pic.id}"] %></td>
+              <td height="100" ><%= image_tag pic.internal_link, :size => '120x100'%><br/><%= pic.name %></td>
+              <td height="100" ><%= label_tag 'task', @specify_task["#{pic.id}"] %></td>
+              <td height="100" ><%= label_tag 'result', @specify_result["#{pic.id}"] %></td>
             </tr>
           <% end %>
-          <% @picturefbSelected.each do |pic| %>
+          <% @picturefbSelected.each do |pid, link| %>
             <tr>
-              <td height="100"><%= pic %></td>
-              <td height="100"><%= label_tag 'task', @specify_task["#{pic}"] %></td>
-              <td height="100"><%= label_tag 'result', @specify_result["#{pic}"] %></td>
+
+              <td height="100"><%= image_tag link, :size => '120x100'%></td>
+              <td height="100"><%= label_tag 'task', @specify_task["#{pid}"] %></td>
+              <td height="100"><%= label_tag 'result', @specify_result["#{pid}"] %></td>
+
             </tr>
           <% end %>
         </table>
         <br/>
-        <%= submit_tag 'Submit', :id => "continueButton" %>
+        <%= submit_tag 'Submit',:class => "btn btn-success" %>
+        <a class = "btn btn-danger" href="/dashboard/specifyTask">
+		<i class="icon-ok-pencil icon-white"></i>Edit Task</a>
+        <a class = "btn btn-warning" href="/">Cancel</a>
       <% end %>
-      <br/><br/>
-      <form name="goBack" action="specifyTask">
-        <input class="backButton" type="submit" value="Edit" />
-      </form>
+      
     </div>
   </div>
-</body>
-</html>
+

@@ -26,7 +26,7 @@
   <div><%= f.password_field :password, :placeholder => :Password %></div>
 
   <div>
-  <%= f.password_field :password_confirmation, :placeholder => "Re-enter Password" %></div>
+  <%= f.password_field :password_confirmation, :placeholder => :Re-enter Password %></div>
 
   <br/>
   <div><%= f.submit "Sign up", :class => 'btn btn-danger btn-large' %></div>

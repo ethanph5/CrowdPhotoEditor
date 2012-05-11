@@ -1,147 +1,184 @@
 /*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
- * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
- * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
- *= require_tree
- *= require bootstrap_and_overrides
+* This is a manifest file that'll automatically include all the stylesheets available in this directory
+* and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+* the top of the compiled file, but it's generally better to create a new file per style scope.
+*= require_self
+*= require_tree
+*= require bootstrap_and_overrides
 */
 
+.resultList .btn-group{
+margin-left: 0px;
+}
+
+.bottom .btn-toolbar{
+margin-left: -150px;
+}
+
 .auth-input .btn{
-	width: 126px;
+width: 126px;
 }
 
 .auth-body{
-	width:300px;
-	margin: auto;
+
+padding-top: 20px;
+width:420px;
+margin: auto;
+border: 1px solid;
+-moz-box-shadow: 0 0 5px 5px #888;
+-webkit-box-shadow: 0 0 5px 5px#888;
+box-shadow: 0 0 5px 5px #888;
 }
 
+
 .nav {
-	position: fixed;
-	margin-right: 50px;
+position: fixed;
+margin-right: 50px;
 }
 
 
 .picture-selection{
-	width: 500px;
+width: 500px;
 }
 
 .pic-selection-title, .album-list-title{
-	float: left;
-	margin-right: 5px;
+float: left;
+margin-right: 5px;
 }
 
 .btn-toolbar{
-	position: absolute;
-	margin-left: 600px;
-	margin-right: auto;
-	width: 700px;
+position: absolute;
+margin-left: 600px;
+margin-right: auto;
+width: 700px;
 }
 
 #facebook-label{
-	background: #3B5998; 	
+background: #3B5998;
 }
 
 #header-logo{
-	margin-right: 150px;
-	width: auto;
-	height: 80px;
-	background: black;
-	float:left;
+margin-right: 150px;
+width: auto;
+height: 80px;
+background: black;
+float:left;
 }
 
 
 label{
-	font-size: 16px;
-	float: left;
+font-size: 16px;
+float: left;
     text-align: right;
 }
 
-/*
-.facebook-albums{
-	background: #3B5998;
-  	padding: 10px 20px;
-  	margin-top: 10px;
-  	margin-left: 50px;
-  	width: 730px;
-  	height: auto;
-  	float: left;
-  	border-radius:10px;
-}
-*/
+
 
 .facebook-album{
-	float: left;
-	background: #3B5998;
-	padding-top: 5px;
-  	width: 150px;
-  	height: 200px;
-  	margin: 5px 15px;
-  	border-radius:5px;
+float: left;
+background: #3B5998;
+padding-top: 5px;
+   width: 150px;
+   height: 200px;
+   margin: 5px 15px;
+   border-radius:5px;
 }
 
 .crowd-album{
-	float: left;
-	background: #222;
-	padding-top: 5px;
-  	width: 150px;
-  	height: 200px;
-  	margin: 5px 15px;
-  	border-radius:5px;
+float: left;
+background: #222;
+padding-top: 5px;
+   width: 150px;
+   height: 200px;
+   margin: 5px 15px;
+   border-radius:5px;
 }
 
 .facebook-picture{
-	float: left;
-	background: #3B5998;
-	padding-top: 5px;
-  	width: 145px;
-  	height: 110px;
-  	margin: 5px 15px;
-  	border-radius:5px;
+float: left;
+background: #3B5998;
+padding-top: 5px;
+   width: 145px;
+   height: 135px;
+   margin: 5px 15px;
+   border-radius:5px;
+}
+
+.crowd-picture{
+float: left;
+background: #222;
+padding-top: 5px;
+   width: 145px;
+   height: 135px;
+   margin: 5px 15px;
+   border-radius:5px;
 }
 
 .picture-frame{
-	overflow: hidden;
-	margin: auto;
-	width: 130px;
-	height:100px;
-	border: 2px solid white;
-	border-radius:5px;
+overflow: hidden;
+margin: auto;
+width: 130px;
+height:100px;
+border: 2px solid white;
+border-radius:5px;
 }
+
+.check-box{
+float: left;
+margin-left: 10px;
+margin-right: 5px;
+margin-top: 5px;
+}
+.funny-check{
+margin-top: 7px;
+color: white;
+}
+
 
 
 .picture-frame img{
-	width: 150px;
+width: 150px;
 }
 
+h2.album-name-title{
+float: left;
+margin-right: 80px;
+}
+h4.funny-click{
+padding-top: 6px;
+}
 
 .album-info {
-	margin-left: 7px;	
+margin-left: 7px;
 }
 
 .album-name{
-	color: white;
+color: white;
 }
 
 .separat{
-	clear: both;
-	height: 10px;
-	margin: auto;
+clear: both;
+height: 10px;
+margin: auto;
 }
 
 
 
 div.upload-action{
-	clear: both;
-	padding-top: 15px;
-	padding-left: 20px;
-	
+clear: both;
+padding-top: 15px;
+padding-left: 20px;
+
+}
+
+#crowd{
+  color: gray;
 }
 
 #sub_notice{
-	color: green;
+color: green;
 }
 
 #sub_error{
-	color: red;	
+color: red;
 }

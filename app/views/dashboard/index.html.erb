@@ -83,7 +83,7 @@
       		<br/>
       		<div class="album-info">
       		<p><%= link_to album.name, {:action => :showPhoto,  :fb_album_id => album.identifier}, :class => "album-name"%></p>
-      		<small><%= album.count%> Photos</small> 
+      		<small><<%= album.count%> Photos</small> 
       		</div>		
       	</div>
       	
@@ -104,7 +104,7 @@
 	   <br/>
 	   <div class="album-info">
 	   <p><%= link_to album.name, {:action => "selectPhoto" , :album_id => album.id}, :class => "album-name" %></p>
-	   <small><%= album.pictures.length%> Photos</small> 
+	   <small id="crowd"><%= album.pictures.length%> Photos</small> 
 	   </div>
    </div>
    <% end %>

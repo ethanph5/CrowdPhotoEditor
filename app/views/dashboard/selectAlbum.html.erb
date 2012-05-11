@@ -28,7 +28,7 @@
 	      
 	      <%= form_tag({:controller => "dashboard", :action => "uploadToAWS"}, :method => :post, :class => "uploadPhoto", :multipart => true) do %>
 	      		      	
-          <%= select_tag(:album_id, options_for_select(@lol)) %> or <%= link_to "create a new album", :controller => "dashboard", :action => "uploadToAWS" %>
+          <%= select_tag(:album_id, options_for_select(@lol)) %> or <%= link_to "Add to a new album", :controller => "dashboard", :action => "uploadToAWS" %>
    		  <hr />
 		  <h4 id="selectPhotoGuide"><i class="icon-folder-open"></i> Select photos from your computer: </h4><br />
     	  <%= file_field_tag :upload, :class => "btn", :id => "selectPhotoButton" %>

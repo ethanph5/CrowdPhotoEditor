@@ -11,6 +11,8 @@
 	margin-left: 0px;
 }
 
+
+
 .bottom .btn-toolbar{
 	margin-left: -150px;
 }
@@ -47,10 +49,10 @@
 }
 
 .btn-toolbar{
-	position: absolute;
-	margin-left: 600px;
+  position: absolute;
+	margin-left: 30%;
 	margin-right: auto;
-	width: 700px;
+	width: 100%;
 }
 
 #facebook-label{
@@ -171,6 +173,9 @@ div.upload-action{
 	
 }
 
+#crowd{
+  color: grey;
+}
 
 #sub_notice{
 	color: green;

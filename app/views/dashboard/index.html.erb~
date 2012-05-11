@@ -1,4 +1,5 @@
 <title><% @page_title = "Crowd Photo Editor"%></title>
+
 <div class = "album-body">
 	<div class="btn-toolbar">
 	<% if current_user.authorizations.empty?%>
@@ -7,7 +8,7 @@
    	</div>
 	<%end%>
 	<div class = "btn-group">
-		<a class = "btn btn-success" href="/dashboard/uploadPhotoToNew">
+		<a class = "btn btn-success" href="/dashboard/uploadToAWS">
 		<i class="icon-picture icon-white"></i> Upload New Photo</a>
    	</div>
     <div class = "btn-group">
@@ -17,11 +18,12 @@
 
 	</div>
 	<div class = "btn-group">
-	  <a class = "btn btn-success" href="/dashboard/index">Not Patient Enough?</a>
+	  	<a class = "btn btn-inverse" href="/dashboard/index">
+	  	<i class="icon-refresh icon-white"></i> Any Luck?</a>
 	</div>
 	</div>
 	
-    <h4 id="greet" >Hello, <%= @user_name%></span></h4><br/>
+    <h4 id="greet" >Hello, <%= @user_name%></h4><br/>
     
     <% if params[:submission_notice] %>
     	<% if params[:submission_notice] != [] %>
@@ -44,6 +46,7 @@
 	<% end %>    
        
     <div class= "picture-selection">     
+    	
       <BLOCKQUOTE>
       <h4 class="pic-selection-title">Picture Selection:</h4>
       <% if (@selected_picture == {} and @selected_picturefb == {}) or params[:submission_error] or params[:submission_notice] %>
@@ -80,7 +83,7 @@
       		<br/>
       		<div class="album-info">
       		<p><%= link_to album.name, {:action => :showPhoto,  :fb_album_id => album.identifier}, :class => "album-name"%></p>
-      		<small><%= album.count%> Photos</small> 
+      		<small><<%= album.count%> Photos</small> 
       		</div>		
       	</div>
       	
@@ -89,23 +92,27 @@
       </div>
       </div>
    
-  	<div class= "separat"></div>
+	<div class= "separat"></div>
   
     <% if not current_user.albums.empty? %>
-  	<div class="crowd-albums">
-  	<% current_user.albums.each do |album|%>
-  	<div class="crowd-album">
-  	<div class="picture-frame">
-  	<%= link_to image_tag(album.pictures[0].internal_link, :alt => album.name), :action => :selectPhoto,  :album_id => album.id%>
-  	</div>
-  	<div class="album-info">
-    <p><%= link_to album.name, {:action => "selectPhoto" , :album_id => album.id}, :class => "album-name" %></p>
-    </div>
-    </div>
-  	<% end %>
-  	</div>
-  	<% end %>
-  
+   <div class="crowd-albums">
+   <% current_user.albums.each do |album|%>
+   <div class="crowd-album">
+	   <div class="picture-frame">
+	   <%= link_to image_tag(album.pictures[0].internal_link, :alt => album.name), :action => :selectPhoto, :album_id => album.id%>
+	   </div>
+	   <br/>
+	   <div class="album-info">
+	   <p><%= link_to album.name, {:action => "selectPhoto" , :album_id => album.id}, :class => "album-name" %></p>
+	   <small><%= album.pictures.length%> Photos</small> 
+	   </div>
+   </div>
+   <% end %>
+   </div>
+   <% end %>
+	
+	
+	
   </div>
 </div>
 
